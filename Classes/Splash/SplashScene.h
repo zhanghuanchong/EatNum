@@ -1,22 +1,18 @@
-#pragma once
+#ifndef __SPLASH_SCENE_H__
+#define __SPLASH_SCENE_H__
 
 #include "Util.h"
 
-/**********************************************************************************************//**
- * @class	SplashScene
- *
- * @brief	A splash scene.
- *
- * @author	Huanchong
- * @date	11/24/2013
- **************************************************************************************************/
-
-class SplashScene :
-	public CCScene
+class SplashScene : public Scene
 {
 public:
-    CREATE_FUNC(SplashScene)
-
-	virtual bool init();
-
+    virtual bool init();  
+    
+    // a selector callback
+    void menuCloseCallback(cocos2d::Ref* pSender);
+    
+    // implement the "static create()" method manually
+    CREATE_FUNC(SplashScene);
 };
+
+#endif // __SPLASH_SCENE_H__

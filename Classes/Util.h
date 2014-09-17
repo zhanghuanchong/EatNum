@@ -1,40 +1,32 @@
 #pragma once
 
-#include "CrazyIQ.h"
-#include "Common/TransitionExtension.h"
-#include "Common/ActionEaseExtension.h"
+#include "Global.h"
 
-class Util :
-	public cocos2d::CCObject
+class Util
 {
 public:
-	static CCDirector *director;
-	static CCSize size;
-	static CCPoint origin;
-	static CCNotificationCenter *notificationCenter;
-	static CCSpriteFrameCache *spriteFrameCache;
+	static Director *director;
+	static Size size;
+	static Point origin;
+	static SpriteFrameCache *spriteFrameCache;
 	static SimpleAudioEngine *audioEngine;
-	static CCUserDefault *userDefault;
+	static UserDefault *userDefault;
 
-	static CCDictionary *lang;
+	static Dictionary *lang;
 	static const char *fontName;
-	static CCSize designResolutionSize;
+	static Size designResolutionSize;
 	static bool isEffectEnabled;
-
-private:
-	static CCArray *woodSceneStack;
 
 public:
 	static void init();
 
-	static const char *text(const char *key);
-	static CCSize p(float x, float y);
+	static const char *t(const char *key);
+	static Size p(float x, float y);
 
-	static CCLabelTTF *createLabelTTF(const char *text, float fontSize = 35);
-
-	static void pushWoodScene(CCScene *scene);
-	static CCScene* popWoodScene();
+	static Label *label(const char *text, float fontSize = 35);
 
 	static void playEffect(const char *effect);
 };
+
+typedef Util U;
 

@@ -1,7 +1,6 @@
 #include "AppDelegate.h"
-#include "HomeScene.h"
-
-USING_NS_CC;
+#include "Util.h"
+#include "Splash/SplashScene.h"
 
 AppDelegate::AppDelegate() {
 
@@ -16,9 +15,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("My Game");
-        director->setOpenGLView(glview);
-    }
+        glview = GLView::createWithRect("My Game", Rect(0, 0, 640, 960), 0.7F);
+		director->setOpenGLView(glview);
+		glview->setDesignResolutionSize(640, 960, ResolutionPolicy::FIXED_WIDTH);
+	}
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -26,8 +26,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
+	Util::init();
+
     // create a scene. it's an autorelease object
-	auto scene = HomeScene::create();
+	auto scene = SplashScene::create();
 
     // run
     director->runWithScene(scene);

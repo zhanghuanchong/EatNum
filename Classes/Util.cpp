@@ -1,89 +1,57 @@
 #include "Util.h"
 
-CCDirector* Util::director;
-CCSize Util::size = CCSizeZero;
-CCPoint Util::origin = CCPointZero;
-CCNotificationCenter* Util::notificationCenter;
-CCSpriteFrameCache* Util::spriteFrameCache;
+Director* Util::director;
+Size Util::size = Size(0, 0);
+Point Util::origin = Point(0, 0);
+SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
-CCUserDefault *Util::userDefault;
-CCDictionary* Util::lang;
-CCArray *Util::woodSceneStack;
+UserDefault *Util::userDefault;
+Dictionary* Util::lang;
 const char * Util::fontName;
-CCSize Util::designResolutionSize = cocos2d::CCSizeMake(640, 960);
+Size Util::designResolutionSize = Size(640, 960);
 bool Util::isEffectEnabled = true;
 
 void Util::init()
 {
-	Util::director = CCDirector::sharedDirector();
-	Util::notificationCenter = CCNotificationCenter::sharedNotificationCenter();
-	Util::spriteFrameCache = CCSpriteFrameCache::sharedSpriteFrameCache();
-	Util::audioEngine = SimpleAudioEngine::sharedEngine();
-	Util::userDefault = CCUserDefault::sharedUserDefault();
+	Util::director = Director::getInstance();
+	Util::spriteFrameCache = SpriteFrameCache::getInstance();
+	Util::audioEngine = SimpleAudioEngine::getInstance();
+	Util::userDefault = UserDefault::getInstance();
 
 	Util::size = Util::director->getVisibleSize();
 	Util::origin = Util::director->getVisibleOrigin();
-
-	Util::woodSceneStack = CCArray::create();
-	Util::woodSceneStack->retain();
 	
-	Util::lang = CCDictionary::createWithContentsOfFile("i18n/zh-CN.xml");
+	Util::lang = Dictionary::createWithContentsOfFile("i18n/zh-CN.xml");
 	Util::lang->retain();
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	Util::fontName = "HOPE";
-#else
-	Util::fontName = "HOPE.ttf";
-#endif
+	Util::fontName = "fonts/calibrib.ttf"; // "fonts/HOPE.ttf";
 
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
 }
 
-void Util::pushWoodScene(CCScene *scene)
+const char * Util::t( const char *key )
 {
-	CCScene *oldScene = Util::director->getRunningScene();
-	Util::woodSceneStack->addObject(oldScene);
-	CCScene *newScene = CCTransitionMoveInBackR::create(0.5f, scene);
-	Util::director->replaceScene(newScene);
-}
-
-cocos2d::CCScene* Util::popWoodScene()
-{
-	CCArray *stack = Util::woodSceneStack;
-	if (stack->count() <= 0)
+	if (Util::lang)
 	{
-		return NULL;
-	}
-	CCScene *oldScene = Util::director->getRunningScene();
-
-	CCScene *scene = (CCScene *)stack->lastObject();
-	CCTransitionScene *transitionScene = CCTransitionMoveOutBackR::create(0.5f, scene);
-	Util::director->replaceScene(transitionScene);
-
-	Util::woodSceneStack->removeLastObject(false);
-
-	return oldScene;
-}
-
-const char * Util::text( const char *key )
-{
-	CCString *c = (CCString *)Util::lang->objectForKey(key);
-	if (c)
-	{
-		return c->getCString();
+		String *c = (String *)Util::lang->objectForKey(key);
+		if (c)
+		{
+			return c->getCString();
+		}
 	}
 	return key;
 }
 
-cocos2d::CCSize Util::p( float x, float y )
+cocos2d::Size Util::p( float x, float y )
 {
-	CCPoint o = Util::origin;
-	return ccp(o.x + x, o.y + y);
+	Point o = Util::origin;
+	return Size(o.x + x, o.y + y);
 }
 
-CCLabelTTF *Util::createLabelTTF(const char *text, float fontSize)
+Label *Util::label(const char *text, float fontSize)
 {
-	CCLabelTTF *label = CCLabelTTF::create(Util::text(text), Util::fontName, fontSize);
+	vector<string> paths = FileUtils::getInstance()->getSearchPaths();
+	auto label = Label::createWithTTF(U::t(text), Util::fontName, fontSize);
 	return label;
 }
 
