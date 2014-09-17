@@ -7,9 +7,7 @@ class SplashScene : public Scene
 {
 public:
     virtual bool init();  
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
+	virtual void onEnter();
     
     // implement the "static create()" method manually
     CREATE_FUNC(SplashScene);

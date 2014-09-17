@@ -2,13 +2,17 @@
 
 Director* Util::director;
 Size Util::size = Size(0, 0);
+float Util::width;
+float Util::height;
+float Util::cx;
+float Util::cy;
 Point Util::origin = Point(0, 0);
+Point Util::center = Point(0, 0);
 SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
 Dictionary* Util::lang;
-const char * Util::fontName;
-Size Util::designResolutionSize = Size(640, 960);
+vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 
 void Util::init()
@@ -19,12 +23,18 @@ void Util::init()
 	Util::userDefault = UserDefault::getInstance();
 
 	Util::size = Util::director->getVisibleSize();
+	Util::width = size.width;
+	Util::height = size.height;
 	Util::origin = Util::director->getVisibleOrigin();
+	Util::cx = Util::origin.x + Util::width / 2;
+	Util::cy = Util::origin.y + Util::height / 2;
+	Util::center = Point(cx, cy);
 	
 	Util::lang = Dictionary::createWithContentsOfFile("i18n/zh-CN.xml");
 	Util::lang->retain();
 
-	Util::fontName = "fonts/calibrib.ttf"; // "fonts/HOPE.ttf";
+	Util::fonts.push_back("fonts/calibrib.ttf");
+	Util::fonts.push_back("fonts/HOPE.ttf");
 
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
 }
@@ -48,10 +58,10 @@ cocos2d::Size Util::p( float x, float y )
 	return Size(o.x + x, o.y + y);
 }
 
-Label *Util::label(const char *text, float fontSize)
+Label *Util::label(const char *text, float fontSize, int fontIndex)
 {
 	vector<string> paths = FileUtils::getInstance()->getSearchPaths();
-	auto label = Label::createWithTTF(U::t(text), Util::fontName, fontSize);
+	auto label = Label::createWithTTF(U::t(text), Util::fonts.at(fontIndex), fontSize);
 	return label;
 }
 

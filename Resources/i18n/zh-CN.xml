@@ -19,6 +19,10 @@
     <string>程序： Hans Zhang</string>
     <key>Designer: Ruth Wu</key>
     <string>美术： Ruth Wu</string>
-    <key>Composer: Frank Meacham</key>
-    <string>音乐： Frank Meacham</string>
+    <key>NOM</key>
+    <string>吞噬</string>
+    <key>NUM</key>
+    <string>数字</string>
+    <key>Num Nom</key>
+    <string>吞噬数字</string>
 </dict>
