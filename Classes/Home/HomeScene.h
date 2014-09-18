@@ -6,13 +6,10 @@
 class HomeScene : public Scene
 {
 public:
-    virtual bool init();  
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
+    virtual bool init();
     
     // implement the "static create()" method manually
-    CREATE_FUNC(SplashScene);
+    CREATE_FUNC(HomeScene);
 };
 
 #endif // __HOME_SCENE_H__

@@ -37,6 +37,19 @@ void Util::init()
 	Util::fonts.push_back("fonts/HOPE.ttf");
 
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
+	
+	Util::spriteFrameCache->addSpriteFramesWithFile("image/common.plist");
+
+	/*Util::audioEngine->preloadBackgroundMusic("sound/bg.mp3");
+	const char *effects[] = {
+	"on.mp3",
+	"off.mp3",
+	"click.mp3"
+	};
+	for (int i = 0; i < 3; i++)
+	{
+	Util::audioEngine->preloadEffect(effects[i]);
+	}*/
 }
 
 const char * Util::t( const char *key )
@@ -70,5 +83,13 @@ void Util::playEffect(const char *effect)
 	if (Util::isEffectEnabled)
 	{
 		Util::audioEngine->playEffect(effect);
+	}
+}
+
+void Util::playBackgroundMusic(const char *file)
+{
+	if (Util::userDefault->getBoolForKey(kConfigMusic, true))
+	{
+		Util::audioEngine->playBackgroundMusic(file);
 	}
 }

@@ -10,6 +10,4 @@ using namespace std;
 static const char *kConfigMusic = "Music";
 static const char *kConfigEffect = "Effect";
 
-static const char *kFileBgMusic = "bg.mp3";
-
 static const Color3B ccBrown = {79, 57, 30};

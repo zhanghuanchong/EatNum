@@ -136,6 +136,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Home\HomeScene.cpp" />
     <ClCompile Include="..\Classes\Splash\SplashScene.cpp" />
     <ClCompile Include="..\Classes\Util.cpp" />
     <ClCompile Include="main.cpp" />
@@ -143,6 +144,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Global.h" />
+    <ClInclude Include="..\Classes\Home\HomeScene.h" />
     <ClInclude Include="..\Classes\Splash\SplashScene.h" />
     <ClInclude Include="..\Classes\Util.h" />
     <ClInclude Include="main.h" />
@@ -161,6 +163,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

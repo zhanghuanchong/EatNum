@@ -1,4 +1,5 @@
 #include "SplashScene.h"
+#include "../Home/HomeScene.h"
 
 bool SplashScene::init()
 {
@@ -7,21 +8,39 @@ bool SplashScene::init()
         return false;
     }
     
-	auto bgLayer = LayerColor::create(Color4B(195, 75, 134, 255));
+	auto bgLayer = LayerColor::create(Color4B(0, 136, 203, 255));
 	this->addChild(bgLayer);
 
-	auto labelNom = U::label("NOM", 120, 1);
-	labelNom->setPosition(U::cx - 20, U::cy + 70);
-	this->addChild(labelNom);
-
-	auto labelNum = U::label("NUM", 120, 1);
-	labelNum->setPosition(U::cx + 20, U::cy - 70);
-	this->addChild(labelNum);
+	m_pLogo = Sprite::create("image/logoMobile.png");
+	m_pLogo->setScale(0.1f);
+	m_pLogo->setPosition(U::cx, U::height * .6);
+	this->addChild(m_pLogo);
     
+	m_pMotto = Util::label("Mobile Education Game Expert", 45, 1);
+	m_pMotto->setPosition(U::cx, - m_pMotto->getContentSize().height);
+	this->addChild(m_pMotto);
+
     return true;
 }
 
-void SplashScene::onEnter()
+void SplashScene::onEnterTransitionDidFinish()
 {
+	ScaleTo *scaleAction = ScaleTo::create(0.5f, 0.8f);
+	m_pLogo->runAction(EaseBounceOut::create(scaleAction));
 
+	MoveTo *moveAction = MoveTo::create(0.3f, Vec2(U::cx, U::height * 0.1));
+	Sequence *sequence = Sequence::create(
+		DelayTime::create(0.5),
+		EaseBounceOut::create(moveAction),
+		DelayTime::create(1),
+		CallFunc::create(CC_CALLBACK_0(SplashScene::onDidFinishEnter, this)),
+		NULL
+	);
+	m_pMotto->runAction(sequence);
+}
+
+void SplashScene::onDidFinishEnter()
+{
+	Util::playBackgroundMusic();
+	Util::director->replaceScene(CCTransitionFade::create(1, HomeScene::create()));
 }
