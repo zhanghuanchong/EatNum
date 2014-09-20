@@ -1,5 +1,4 @@
-#ifndef __HOME_SCENE_H__
-#define __HOME_SCENE_H__
+#pragma once
 
 #include "Util.h"
 
@@ -19,4 +18,3 @@ private:
 	void menuItemPlayCallback(Ref *pSender);
 };
 
-#endif // __HOME_SCENE_H__

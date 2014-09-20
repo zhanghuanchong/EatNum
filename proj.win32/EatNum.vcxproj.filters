@@ -19,6 +19,9 @@
     <Filter Include="Classes\Splash">
       <UniqueIdentifier>{3be6e0ed-2d4e-4b20-9dc3-d9f6b767b951}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Levels">
+      <UniqueIdentifier>{fa9ee270-e1c8-47b5-a1d3-df14beb24356}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,6 +38,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Home\HomeScene.cpp">
       <Filter>Classes\Home</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Levels\LevelsScene.cpp">
+      <Filter>Classes\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Levels\ChapterScene.cpp">
+      <Filter>Classes\Levels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Home\HomeScene.h">
       <Filter>Classes\Home</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Levels\LevelsScene.h">
+      <Filter>Classes\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Levels\ChapterScene.h">
+      <Filter>Classes\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

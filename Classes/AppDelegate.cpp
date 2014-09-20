@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "Util.h"
 #include "Splash/SplashScene.h"
+#include "Levels/ChapterScene.h"
 
 AppDelegate::AppDelegate() {
 
@@ -29,7 +30,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	Util::init();
 
     // create a scene. it's an autorelease object
-	auto scene = SplashScene::create();
+	auto scene = ChapterScene::create();
 
     // run
     director->runWithScene(scene);

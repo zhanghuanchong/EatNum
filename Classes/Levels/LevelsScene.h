@@ -2,17 +2,13 @@
 
 #include "Util.h"
 
-class SplashScene : public Scene
+class LevelsScene : public Scene
 {
-private:
-	Sprite *m_pLogo;
-	Label *m_pMotto;
-
 public:
     virtual bool init();
 	virtual void onEnterTransitionDidFinish();
     
     // implement the "static create()" method manually
-    CREATE_FUNC(SplashScene);
+	CREATE_FUNC(LevelsScene);
 };
 
