@@ -29,18 +29,16 @@ void SplashScene::onEnterTransitionDidFinish()
 	m_pLogo->runAction(EaseBounceOut::create(scaleAction));
 
 	MoveTo *moveAction = MoveTo::create(0.3f, Vec2(U::cx, U::height * 0.1));
+	auto callback = [&](){
+		Util::playBackgroundMusic();
+		Util::director->replaceScene(CCTransitionFade::create(1, HomeScene::create()));
+	};
 	Sequence *sequence = Sequence::create(
 		DelayTime::create(0.5),
 		EaseBounceOut::create(moveAction),
 		DelayTime::create(1),
-		CallFunc::create(CC_CALLBACK_0(SplashScene::onDidFinishEnter, this)),
+		CallFunc::create(callback),
 		NULL
 	);
 	m_pMotto->runAction(sequence);
-}
-
-void SplashScene::onDidFinishEnter()
-{
-	Util::playBackgroundMusic();
-	Util::director->replaceScene(CCTransitionFade::create(1, HomeScene::create()));
 }

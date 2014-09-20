@@ -12,8 +12,6 @@ private:
 public:
     virtual bool init();
 	virtual void onEnterTransitionDidFinish();
-
-	void onDidFinishEnter();
     
     // implement the "static create()" method manually
     CREATE_FUNC(SplashScene);

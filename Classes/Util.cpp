@@ -30,6 +30,13 @@ void Util::init()
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = Point(cx, cy);
 
+	vector<string> paths;
+	paths.push_back("fonts");
+	paths.push_back("i18n");
+	paths.push_back("sound");
+	paths.push_back("image");
+	FileUtils::getInstance()->setSearchResolutionsOrder(paths);
+
 	Util::lang = FileUtils::getInstance()->getValueMapFromFile("i18n/zh-CN.plist");
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
