@@ -1,6 +1,4 @@
 #include "Util.h"
-#include "json/rapidjson.h"
-#include "json/document.h"
 
 Director* Util::director;
 Size Util::size = Size(0, 0);
@@ -31,24 +29,8 @@ void Util::init()
 	Util::cx = Util::origin.x + Util::width / 2;
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = Point(cx, cy);
-	
-	string str = FileUtils::getInstance()->getStringFromFile("i18n/zh-CN.json");
-	CCLOG("%s\n", str);
 
-	rapidjson::Document d;
-	d.Parse<0>(str.c_str());
-	if (d.HasParseError())
-	{
-		CCLOG("GetParseError %s\n", d.GetParseError());
-	}
-	if (d.IsObject()) 
-	{
-		for (rapidjson::Value::ConstMemberIterator itr = d.MemberonBegin();
-			itr != d.MemberonEnd(); ++itr)
-		{
-			Util::lang[itr->name.GetString()] = Value(itr->value.GetString());
-		}
-	}
+	Util::lang = FileUtils::getInstance()->getValueMapFromFile("i18n/zh-CN.plist");
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
 	Util::fonts.push_back("fonts/HOPE.ttf");
