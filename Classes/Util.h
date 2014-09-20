@@ -12,8 +12,7 @@ public:
 	static SpriteFrameCache *spriteFrameCache;
 	static SimpleAudioEngine *audioEngine;
 	static UserDefault *userDefault;
-
-	static Dictionary *lang;
+	static unordered_map<string, string> *lang;
 	static vector<string> fonts;
 	static bool isEffectEnabled;
 
@@ -25,7 +24,7 @@ public:
 public:
 	static void init();
 
-	static const char *t(const char *key);
+	static string t(string key);
 	static Size p(float x, float y);
 
 	static Label *label(const char *text, float fontSize = 35, int fontIndex = 0);

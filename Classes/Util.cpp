@@ -1,4 +1,6 @@
 #include "Util.h"
+#include "json/rapidjson.h"
+#include "json/document.h"
 
 Director* Util::director;
 Size Util::size = Size(0, 0);
@@ -11,7 +13,7 @@ Point Util::center = Point(0, 0);
 SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
-Dictionary* Util::lang;
+unordered_map<string, string>* Util::lang;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 
@@ -30,8 +32,24 @@ void Util::init()
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = Point(cx, cy);
 	
-	Util::lang = Dictionary::createWithContentsOfFile("i18n/zh-CN.xml");
-	Util::lang->retain();
+	Util::lang = new unordered_map<string, string>;
+	string str = FileUtils::getInstance()->getStringFromFile("i18n/zh-CN.json");
+	CCLOG("%s\n", str);
+
+	rapidjson::Document d;
+	d.Parse<0>(str.c_str());
+	if (d.HasParseError())
+	{
+		CCLOG("GetParseError %s\n", d.GetParseError());
+	}
+	if (d.IsObject()) 
+	{
+		for (rapidjson::Value::ConstMemberIterator itr = d.MemberonBegin();
+			itr != d.MemberonEnd(); ++itr)
+		{
+			Util::lang->emplace(itr->name.GetString(), itr->value.GetString());
+		}
+	}
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
 	Util::fonts.push_back("fonts/HOPE.ttf");
@@ -52,14 +70,14 @@ void Util::init()
 	}*/
 }
 
-const char * Util::t( const char *key )
+string Util::t( string key )
 {
 	if (Util::lang)
 	{
-		String *c = (String *)Util::lang->objectForKey(key);
-		if (c)
+		unordered_map<string, string>::const_iterator it = Util::lang->find(key);
+		if (it != Util::lang->end())
 		{
-			return c->getCString();
+			return it->second;
 		}
 	}
 	return key;
