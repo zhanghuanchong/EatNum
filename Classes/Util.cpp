@@ -13,7 +13,7 @@ Point Util::center = Point(0, 0);
 SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
-unordered_map<string, string>* Util::lang;
+ValueMap Util::lang;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 
@@ -32,7 +32,6 @@ void Util::init()
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = Point(cx, cy);
 	
-	Util::lang = new unordered_map<string, string>;
 	string str = FileUtils::getInstance()->getStringFromFile("i18n/zh-CN.json");
 	CCLOG("%s\n", str);
 
@@ -47,7 +46,7 @@ void Util::init()
 		for (rapidjson::Value::ConstMemberIterator itr = d.MemberonBegin();
 			itr != d.MemberonEnd(); ++itr)
 		{
-			Util::lang->emplace(itr->name.GetString(), itr->value.GetString());
+			Util::lang[itr->name.GetString()] = Value(itr->value.GetString());
 		}
 	}
 
@@ -72,13 +71,10 @@ void Util::init()
 
 string Util::t( string key )
 {
-	if (Util::lang)
+	ValueMap::const_iterator it = Util::lang.find(key);
+	if (it != Util::lang.end())
 	{
-		unordered_map<string, string>::const_iterator it = Util::lang->find(key);
-		if (it != Util::lang->end())
-		{
-			return it->second;
-		}
+		return it->second.asString();
 	}
 	return key;
 }

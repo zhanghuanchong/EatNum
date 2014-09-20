@@ -12,7 +12,7 @@ public:
 	static SpriteFrameCache *spriteFrameCache;
 	static SimpleAudioEngine *audioEngine;
 	static UserDefault *userDefault;
-	static unordered_map<string, string> *lang;
+	static ValueMap lang;
 	static vector<string> fonts;
 	static bool isEffectEnabled;
 
