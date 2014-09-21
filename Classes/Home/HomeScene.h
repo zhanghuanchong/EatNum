@@ -14,7 +14,5 @@ public:
 private:
 	Label *labelNom;
 	Label *labelNum;
-
-	void menuItemPlayCallback(Ref *pSender);
 };
 

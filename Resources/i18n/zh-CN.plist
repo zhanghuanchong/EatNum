@@ -25,4 +25,8 @@
     <string>数字</string>
     <key>Num Nom</key>
     <string>吞噬数字</string>
+    <key>Select Chapter</key>
+    <string>选择级别</string>
+    <key>Select Level</key>
+    <string>选择关卡</string>
 </dict>

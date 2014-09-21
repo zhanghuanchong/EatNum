@@ -1,4 +1,6 @@
 #include "HomeScene.h"
+#include "Levels/ChapterScene.h"
+#include "Common/MenuItemImageScalable.h"
 
 bool HomeScene::init()
 {
@@ -18,11 +20,11 @@ bool HomeScene::init()
 	labelNum->setPosition(U::cx + 20, U::cy - 70);
 	this->addChild(labelNum);
 
-	//MenuItemImage *miPlay = MenuItemImage::create("play.png", "play.png", CC_CALLBACK_1(HomeScene::menuItemPlayCallback, this));
-	MenuItemImage *miPlay = MenuItemImage::create("play.png", "play.png", [&](Ref *){
-		CCLOG("Start in Lambda...");
+	MenuItemImageScalable *miPlay = MenuItemImageScalable::create("play.png", [&](Ref *){
+		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
 	});
 	Menu *menu = Menu::createWithItem(miPlay);
+	menu->setAnchorPoint(Vec2(0.5f, 0.5f));
 	menu->alignItemsVerticallyWithPadding(20);
 	menu->setPosition(U::cx, 120);
 	this->addChild(menu);
@@ -49,9 +51,4 @@ void HomeScene::onEnterTransitionDidFinish()
 		);
 	repeat = RepeatForever::create(seq);
 	labelNum->runAction(repeat);
-}
-
-void HomeScene::menuItemPlayCallback(Ref *pSender)
-{
-	CCLOG("Start...\n");
 }

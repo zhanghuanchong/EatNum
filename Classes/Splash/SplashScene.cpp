@@ -31,7 +31,7 @@ void SplashScene::onEnterTransitionDidFinish()
 	MoveTo *moveAction = MoveTo::create(0.3f, Vec2(U::cx, U::height * 0.1));
 	auto callback = [&](){
 		Util::playBackgroundMusic();
-		Util::director->replaceScene(CCTransitionFade::create(1, HomeScene::create()));
+		Util::director->replaceScene(TransitionFade::create(1, HomeScene::create()));
 	};
 	Sequence *sequence = Sequence::create(
 		DelayTime::create(0.5),

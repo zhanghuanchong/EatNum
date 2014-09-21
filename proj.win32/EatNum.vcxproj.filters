@@ -45,6 +45,9 @@
     <ClCompile Include="..\Classes\Levels\ChapterScene.cpp">
       <Filter>Classes\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Common\MenuItemImageScalable.cpp">
+      <Filter>Classes\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Levels\ChapterScene.h">
       <Filter>Classes\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\MenuItemImageScalable.h">
+      <Filter>Classes\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
