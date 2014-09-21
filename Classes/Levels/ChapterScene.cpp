@@ -1,5 +1,6 @@
 #include "ChapterScene.h"
 #include "Home/HomeScene.h"
+#include "Common/ScalableButton.h"
 
 bool ChapterScene::init()
 {
@@ -15,13 +16,11 @@ bool ChapterScene::init()
 	label->setPosition(U::cx, U::height * .8);
 	this->addChild(label);
 
-	MenuItemImage *miReturn = MenuItemImage::create("back.png", "back.png", [&](Ref *){
+	ScalableButton *btnPlay = ScalableButton::create("back.png", [](){
 		Util::director->replaceScene(TransitionSlideInL::create(0.2f, HomeScene::create()));
 	});
-	Menu *menu = Menu::createWithItem(miReturn);
-	menu->alignItemsVerticallyWithPadding(20);
-	menu->setPosition(U::cx, 120);
-	this->addChild(menu);
+	btnPlay->setPosition(U::cx, 120);
+	this->addChild(btnPlay);
 
     return true;
 }

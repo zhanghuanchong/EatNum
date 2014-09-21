@@ -25,24 +25,6 @@ bool HomeScene::init()
 	});
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
-
-	/*Sprite *btnPlay = Sprite::create("play.png");
-	btnPlay->setPosition(U::cx, 120);
-	this->addChild(btnPlay);
-
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->setSwallowTouches(true);
-	listener->onTouchBegan = [btnPlay](Touch *touch, Event *event) {
-		auto target = static_cast<Sprite*>(event->getCurrentTarget());
-		Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-		Size s = target->getContentSize();
-		Rect rect = Rect(0, 0, s.width, s.height);
-		return rect.containsPoint(locationInNode);
-	};
-	listener->onTouchEnded = [](Touch *touch, Event *event) {
-		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
-	};
-	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, btnPlay);*/
     
     return true;
 }

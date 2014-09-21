@@ -25,11 +25,24 @@ bool ScalableButton::initWithFile(const std::string& filename, const std::functi
 		Rect rect = Rect(0, 0, s.width, s.height);
 		return rect.containsPoint(locationInNode);
 	};
-	listener->onTouchEnded = [onTouchEnd](Touch *touch, Event *event) {
-		if (onTouchEnd)
+	listener->onTouchEnded = [onTouchEnd, this](Touch *touch, Event *event) {
+		if (this->m_bClicked)
 		{
-			onTouchEnd();
+			return;
 		}
+		this->m_bClicked = true;
+		Vector<FiniteTimeAction *> actions;
+		actions.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.5f)));
+		actions.pushBack(EaseSineIn::create(ScaleTo::create(0.1f, 1.0f)));
+		actions.pushBack(DelayTime::create(0.1f));
+		actions.pushBack(CallFunc::create([onTouchEnd, this](){
+			if (onTouchEnd)
+			{
+				this->m_bClicked = false;
+				onTouchEnd();
+			}
+		}));
+		this->runAction(Sequence::create(actions));
 	};
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
