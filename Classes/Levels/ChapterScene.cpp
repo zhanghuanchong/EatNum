@@ -16,7 +16,7 @@ bool ChapterScene::init()
 	this->addChild(label);
 
 	MenuItemImage *miReturn = MenuItemImage::create("back.png", "back.png", [&](Ref *){
-		Util::director->replaceScene(TransitionSlideInL::create(0.2, HomeScene::create()));
+		Util::director->replaceScene(TransitionSlideInL::create(0.2f, HomeScene::create()));
 	});
 	Menu *menu = Menu::createWithItem(miReturn);
 	menu->alignItemsVerticallyWithPadding(20);

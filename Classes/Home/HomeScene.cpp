@@ -1,6 +1,6 @@
 #include "HomeScene.h"
 #include "Levels/ChapterScene.h"
-#include "Common/MenuItemImageScalable.h"
+#include "Common/ScalableButton.h"
 
 bool HomeScene::init()
 {
@@ -20,14 +20,29 @@ bool HomeScene::init()
 	labelNum->setPosition(U::cx + 20, U::cy - 70);
 	this->addChild(labelNum);
 
-	MenuItemImageScalable *miPlay = MenuItemImageScalable::create("play.png", [&](Ref *){
+	ScalableButton *btnPlay = ScalableButton::create("play.png", [](){
 		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
 	});
-	Menu *menu = Menu::createWithItem(miPlay);
-	menu->setAnchorPoint(Vec2(0.5f, 0.5f));
-	menu->alignItemsVerticallyWithPadding(20);
-	menu->setPosition(U::cx, 120);
-	this->addChild(menu);
+	btnPlay->setPosition(U::cx, 120);
+	this->addChild(btnPlay);
+
+	/*Sprite *btnPlay = Sprite::create("play.png");
+	btnPlay->setPosition(U::cx, 120);
+	this->addChild(btnPlay);
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->setSwallowTouches(true);
+	listener->onTouchBegan = [btnPlay](Touch *touch, Event *event) {
+		auto target = static_cast<Sprite*>(event->getCurrentTarget());
+		Point locationInNode = target->convertToNodeSpace(touch->getLocation());
+		Size s = target->getContentSize();
+		Rect rect = Rect(0, 0, s.width, s.height);
+		return rect.containsPoint(locationInNode);
+	};
+	listener->onTouchEnded = [](Touch *touch, Event *event) {
+		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
+	};
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, btnPlay);*/
     
     return true;
 }
