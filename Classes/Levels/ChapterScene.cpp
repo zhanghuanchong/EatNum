@@ -1,6 +1,6 @@
 #include "ChapterScene.h"
 #include "Home/HomeScene.h"
-#include "Common/ScalableButton.h"
+#include "Common/ScalableSprite.h"
 
 bool ChapterScene::init()
 {
@@ -13,10 +13,10 @@ bool ChapterScene::init()
 	this->addChild(bgLayer);
 
 	auto label = U::label("Select Chapter", 50, 1);
-	label->setPosition(U::cx, U::height * .8);
+	label->setPosition(U::cx, U::height * .85);
 	this->addChild(label);
 
-	ScalableButton *btnPlay = ScalableButton::create("back.png", [](){
+	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [](){
 		Util::director->replaceScene(TransitionSlideInL::create(0.2f, HomeScene::create()));
 	});
 	btnPlay->setPosition(U::cx, 120);

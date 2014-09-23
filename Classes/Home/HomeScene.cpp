@@ -1,6 +1,6 @@
 #include "HomeScene.h"
 #include "Levels/ChapterScene.h"
-#include "Common/ScalableButton.h"
+#include "Common/ScalableSprite.h"
 
 bool HomeScene::init()
 {
@@ -20,7 +20,7 @@ bool HomeScene::init()
 	labelNum->setPosition(U::cx + 20, U::cy - 70);
 	this->addChild(labelNum);
 
-	ScalableButton *btnPlay = ScalableButton::create("play.png", [](){
+	ScalableSprite *btnPlay = ScalableSprite::create("play.png", [](){
 		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
 	});
 	btnPlay->setPosition(U::cx, 120);

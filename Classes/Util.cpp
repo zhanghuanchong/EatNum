@@ -76,9 +76,12 @@ cocos2d::Size Util::p( float x, float y )
 
 Label *Util::label(const char *text, float fontSize, int fontIndex)
 {
-	vector<string> paths = FileUtils::getInstance()->getSearchPaths();
-	auto label = Label::createWithTTF(U::t(text), Util::fonts.at(fontIndex), fontSize);
-	return label;
+	return Util::labelWithoutTranslate(U::t(text), fontSize, fontIndex);
+}
+
+Label * Util::labelWithoutTranslate(const string& text, float fontSize /*= 35*/, int fontIndex /*= 0*/)
+{
+	return Label::createWithTTF(text, Util::fonts.at(fontIndex), fontSize);
 }
 
 void Util::playEffect(const char *effect)

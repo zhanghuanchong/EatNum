@@ -45,7 +45,10 @@
     <ClCompile Include="..\Classes\Levels\ChapterScene.cpp">
       <Filter>Classes\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Common\ScalableButton.cpp">
+    <ClCompile Include="..\Classes\Common\ScalableSprite.cpp">
+      <Filter>Classes\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Common\Block.cpp">
       <Filter>Classes\Common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +77,10 @@
     <ClInclude Include="..\Classes\Levels\ChapterScene.h">
       <Filter>Classes\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Common\ScalableButton.h">
+    <ClInclude Include="..\Classes\Common\ScalableSprite.h">
+      <Filter>Classes\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\Block.h">
       <Filter>Classes\Common</Filter>
     </ClInclude>
   </ItemGroup>

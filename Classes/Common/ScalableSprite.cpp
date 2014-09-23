@@ -1,8 +1,8 @@
-#include "ScalableButton.h"
+#include "ScalableSprite.h"
 
-ScalableButton* ScalableButton::create(const std::string& filename, const std::function<void()>& onTouchEnd)
+ScalableSprite* ScalableSprite::create(const std::string& filename, const std::function<void()>& onTouchEnd)
 {
-	ScalableButton *sprite = new (std::nothrow) ScalableButton();
+	ScalableSprite *sprite = new (std::nothrow) ScalableSprite();
 	if (sprite && sprite->initWithFile(filename, onTouchEnd))
 	{
 		sprite->autorelease();
@@ -12,7 +12,7 @@ ScalableButton* ScalableButton::create(const std::string& filename, const std::f
 	return nullptr;
 }
 
-bool ScalableButton::initWithFile(const std::string& filename, const std::function<void()>& onTouchEnd)
+bool ScalableSprite::initWithFile(const std::string& filename, const std::function<void()>& onTouchEnd)
 {
 	auto ret = Sprite::initWithFile(filename);
 

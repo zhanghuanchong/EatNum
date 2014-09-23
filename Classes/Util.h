@@ -28,6 +28,7 @@ public:
 	static Size p(float x, float y);
 
 	static Label *label(const char *text, float fontSize = 35, int fontIndex = 0);
+	static Label *labelWithoutTranslate(const string& text, float fontSize = 35, int fontIndex = 0);
 
 	static void playBackgroundMusic(const char *file = "sound/bg.mp3");
 	static void playEffect(const char *effect);
