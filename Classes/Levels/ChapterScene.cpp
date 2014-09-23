@@ -1,6 +1,7 @@
 #include "ChapterScene.h"
 #include "Home/HomeScene.h"
 #include "Common/ScalableSprite.h"
+#include "Common/Block.h"
 
 bool ChapterScene::init()
 {
@@ -21,6 +22,17 @@ bool ChapterScene::init()
 	});
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
+
+	for (int i = 0; i < 8; i++)
+	{
+		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), nullptr);
+		float x = U::cx + ((i % 2) * 2 - 1) * 55;
+		float y = U::cy + ((7 - i) / 2 - 1.5) * 110;
+		block->setPosition(x, y);
+		this->addChild(block);
+
+		m_blocks.pushBack(block);
+	}
 
     return true;
 }

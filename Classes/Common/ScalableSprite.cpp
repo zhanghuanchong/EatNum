@@ -38,9 +38,9 @@ bool ScalableSprite::initWithFile(const std::string& filename, const std::functi
 		actions.pushBack(CallFunc::create([onTouchEnd, this](){
 			if (onTouchEnd)
 			{
-				this->m_bClicked = false;
 				onTouchEnd();
 			}
+			this->m_bClicked = false;
 		}));
 		this->runAction(Sequence::create(actions));
 	};

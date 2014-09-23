@@ -5,7 +5,7 @@ class Block : public Node
 {
 public:
 	static Block* create(const Color4B& bgColor, const string& title, const std::function<void()>& onTouchEnd,
-		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(50, 50));
+		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100));
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : m_bg(nullptr), m_title(nullptr), m_bClicked(false) {}

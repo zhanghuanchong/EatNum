@@ -18,6 +18,7 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 {
 	auto ret = Node::init();
 	this->setContentSize(size);
+	this->setAnchorPoint(Vec2(.5f, .5f));
 
 	// Add block bg
 	m_bg = Sprite::create();
@@ -31,23 +32,33 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, size);
 	m_bg->setTexture(tex);
 	m_bg->setTextureRect(Rect(0, 0, size.width, size.height));
+	m_bg->setAnchorPoint(Vec2(0.5f, 0.5f));
+	m_bg->setPosition(size.width / 2, size.height / 2);
 	this->addChild(m_bg, 0);
 
 	// Add title
-	m_title = U::labelWithoutTranslate(title);
+	m_title = U::labelWithoutTranslate(title, 60.0f);
 	m_title->setPosition(size.width / 2, size.height / 2);
+	m_title->setAnchorPoint(Vec2(0.5f, 0.65f));
 	m_title->setTextColor(titleColor);
 	this->addChild(m_title, 1);
 
 	// Touch event listener
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
-	listener->onTouchBegan = [](Touch *touch, Event *event) {
+	listener->onTouchBegan = [this](Touch *touch, Event *event) {
 		auto target = static_cast<Sprite*>(event->getCurrentTarget());
 		Point locationInNode = target->convertToNodeSpace(touch->getLocation());
 		Size s = target->getContentSize();
 		Rect rect = Rect(0, 0, s.width, s.height);
-		return rect.containsPoint(locationInNode);
+		if (rect.containsPoint(locationInNode)) {
+			this->m_bClicked = false;
+			Vector<FiniteTimeAction *> actions;
+			actions.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.5f)));
+			this->runAction(Sequence::create(actions));
+			return true;
+		}
+		return false;
 	};
 	listener->onTouchEnded = [onTouchEnd, this](Touch *touch, Event *event) {
 		if (this->m_bClicked)
@@ -56,15 +67,14 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 		}
 		this->m_bClicked = true;
 		Vector<FiniteTimeAction *> actions;
-		actions.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.5f)));
 		actions.pushBack(EaseSineIn::create(ScaleTo::create(0.1f, 1.0f)));
 		actions.pushBack(DelayTime::create(0.1f));
 		actions.pushBack(CallFunc::create([onTouchEnd, this](){
 			if (onTouchEnd)
 			{
-				this->m_bClicked = false;
 				onTouchEnd();
 			}
+			this->m_bClicked = false;
 		}));
 		this->runAction(Sequence::create(actions));
 	};
