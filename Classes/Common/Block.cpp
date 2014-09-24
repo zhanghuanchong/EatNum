@@ -34,9 +34,9 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 	buffer[3] = bgColor.a;
 
 	auto tex = new Texture2D();
-	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, Size(size.width - 1, size.height - 1));
+	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, size);
 	m_bg->setTexture(tex);
-	m_bg->setTextureRect(Rect(0, 0, size.width - 1, size.height - 1));
+	m_bg->setTextureRect(Rect(0, 0, size.width, size.height));
 	m_bg->setAnchorPoint(Vec2(0.5f, 0.5f));
 	m_card->addChild(m_bg, 0);
 
@@ -56,11 +56,11 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 	buffer[3] = color.a;
 
 	tex = new Texture2D();
-	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, Size(size.width - 1, size.height - 1));
+	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, size);
 	m_shader->setTexture(tex);
-	m_shader->setTextureRect(Rect(1, 1, size.width - 1, size.height - 1));
+	m_shader->setTextureRect(Rect(0, 0, size.width, size.height));
 	m_shader->setAnchorPoint(Vec2(0.5f, 0.5f));
-	m_shader->setPosition(size.width / 2, size.height / 2);
+	m_shader->setPosition(size.width / 2 + 2, size.height / 2 - 2);
 	this->addChild(m_shader, 0);
 
 	// Touch event listener
@@ -74,13 +74,13 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 		if (rect.containsPoint(locationInNode)) {
 			this->m_bClicked = false;
 			Vector<FiniteTimeAction *> actions;
-			actions.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.5f)));
+			actions.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.3f)));
 			actions.pushBack(EaseSineOut::create(MoveTo::create(0.1f, Vec2(size.width / 2 - 5, size.height / 2 + 5))));
 			Spawn *spawn = Spawn::create(actions);
 			this->m_card->runAction(spawn);
 
 			Vector<FiniteTimeAction *> actions2;
-			actions2.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.5f)));
+			actions2.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.35f)));
 			actions2.pushBack(EaseSineOut::create(MoveTo::create(0.1f, Vec2(size.width / 2 + 5, size.height / 2 - 5))));
 			this->m_shader->runAction(Spawn::create(actions2));
 
@@ -117,10 +117,8 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 
 		Vector<FiniteTimeAction *> actions2;
 		actions2.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.0f)));
-		actions2.pushBack(EaseSineOut::create(MoveTo::create(0.1f, Vec2(size.width, size.height / 2))));
+		actions2.pushBack(EaseSineOut::create(MoveTo::create(0.1f, Vec2(size.width / 2 + 2, size.height / 2 - 2))));
 		this->m_shader->runAction(Spawn::create(actions2));
-
-		this->runAction(Sequence::create(actions));
 	};
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 

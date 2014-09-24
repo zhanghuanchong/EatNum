@@ -31,7 +31,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	Util::init();
 
     // create a scene. it's an autorelease object
-	auto scene = HomeScene::create();
+	auto scene = ChapterScene::create();
 
     // run
     director->runWithScene(scene);
