@@ -1,0 +1,191 @@
+[
+  {
+    "chapter": 1,
+    "chapter_name": "First",
+    "success_tip": "Good",
+    "fail_tip": "Bad",
+    "levels": [
+      {
+        "level" : 1,
+        "tip": "Move to one less, gain one...",
+        "cells": [
+          {
+            "x": 1,
+            "y": 3,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "v": 2
+          }
+        ]
+      },
+      {
+        "level" : 2,
+        "tip": "Move to empty space, lose two...",
+        "cells": [
+          {
+            "x": 2,
+            "y": 3,
+            "v": 4
+          }
+        ]
+      },
+      {
+        "level" : 3,
+        "tip": "Ones can still move on though...",
+        "cells": [
+          {
+            "x": 2,
+            "y": 4,
+            "v": 1
+          }
+        ]
+      },
+      {
+        "level" : 4,
+        "tip": "Zeros can't move...",
+        "cells": [
+          {
+            "x": 2,
+            "y": 3,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "v": 0
+          }
+        ]
+      },
+      {
+        "level" : 5,
+        "tip": "If only one numbered box remains, you win.",
+        "cells": [
+          {
+            "x": 2,
+            "y": 2,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "v": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "v": 1
+          }
+        ]
+      },
+      {
+        "level" : 6,
+        "tip": "Remember, if you move to empty space, you lose two, but can't go below zero.",
+        "cells": [
+          {
+            "x": 1,
+            "y": 3,
+            "v": 2
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "v": 1
+          }
+        ]
+      },
+      {
+        "level" : 7,
+        "cells": [
+          {
+            "x": 0,
+            "y": 3,
+            "v": 0
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "v": 3
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "v": 2
+          }
+        ]
+      },
+      {
+        "level" : 8,
+        "cells": [
+          {
+            "x": 1,
+            "y": 2,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "v": 1
+          }
+        ]
+      },
+      {
+        "level" : 9,
+        "cells": [
+          {
+            "x": 2,
+            "y": 0,
+            "v": 9
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "v": 0
+          }
+        ]
+      },
+      {
+        "level" : 10,
+        "cells": [
+          {
+            "x": 1,
+            "y": 0,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "v": 1
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "v": 1
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "v": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "v": 1
+          }
+        ]
+      }
+    ]
+  }
+]
