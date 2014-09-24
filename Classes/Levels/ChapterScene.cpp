@@ -25,7 +25,9 @@ bool ChapterScene::init()
 
 	for (int i = 0; i < 8; i++)
 	{
-		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), nullptr);
+		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), [i, this](Ref* pSender){
+			this->gotoChapter(i);
+		});
 		float x = U::cx + ((i % 2) * 2 - 1) * 55;
 		float y = U::cy + ((7 - i) / 2 - 1.5) * 110;
 		block->setPosition(x, y);
@@ -37,7 +39,7 @@ bool ChapterScene::init()
     return true;
 }
 
-void ChapterScene::onEnterTransitionDidFinish()
+void ChapterScene::gotoChapter(int i)
 {
-
+	CCLOG("Goto chapter: %i\n", i);
 }

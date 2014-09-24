@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block* Block::create(const Color4B& bgColor, const string& title, const std::function<void()>& onTouchEnd, 
+Block* Block::create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
 	const Color4B& titleColor /*= Color4B::WHITE*/, const Size& size /*= Size(50, 50)*/)
 {
 	Block *sprite = new (std::nothrow) Block();
@@ -13,7 +13,7 @@ Block* Block::create(const Color4B& bgColor, const string& title, const std::fun
 	return nullptr;
 }
 
-bool Block::init(const Color4B& bgColor, const string& title, const std::function<void()>& onTouchEnd, 
+bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
 	const Color4B& titleColor, const Size& size)
 {
 	auto ret = Node::init();
@@ -107,7 +107,7 @@ bool Block::init(const Color4B& bgColor, const string& title, const std::functio
 		actionSequence.pushBack(CallFunc::create([onTouchEnd, this](){
 			if (onTouchEnd)
 			{
-				onTouchEnd();
+				onTouchEnd(this);
 			}
 			this->m_bClicked = false;
 

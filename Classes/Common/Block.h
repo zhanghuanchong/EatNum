@@ -4,7 +4,7 @@
 class Block : public Node
 {
 public:
-	static Block* create(const Color4B& bgColor, const string& title, const std::function<void()>& onTouchEnd,
+	static Block* create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
 		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100));
 
 CC_CONSTRUCTOR_ACCESS:
@@ -17,7 +17,7 @@ CC_CONSTRUCTOR_ACCESS:
 		m_oldZOrder(0) {}
 	virtual ~Block() {}
 
-	virtual bool init(const Color4B& bgColor, const string& title, const std::function<void()>& onTouchEnd, 
+	virtual bool init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
 		const Color4B& titleColor, const Size& size);
 
 private:
