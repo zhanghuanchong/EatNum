@@ -10,8 +10,6 @@ public:
     CREATE_FUNC(ChapterScene);
 
 private:
-	Vector<Block *> m_blocks;
-
 	void gotoChapter(int i);
 };
 

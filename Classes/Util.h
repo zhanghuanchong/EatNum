@@ -14,6 +14,7 @@ public:
 	static UserDefault *userDefault;
 	static ValueMap lang;
 	static vector<string> fonts;
+	static Document data;
 	static bool isEffectEnabled;
 
 	static float width;
@@ -32,6 +33,9 @@ public:
 
 	static void playBackgroundMusic(const char *file = "sound/bg.mp3");
 	static void playEffect(const char *effect);
+
+	static int getChapterCount();
+	static rapidjson::Value &getChapter(int i);
 };
 
 typedef Util U;

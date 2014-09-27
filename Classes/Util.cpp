@@ -12,6 +12,7 @@ SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
 ValueMap Util::lang;
+Document Util::data;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 
@@ -45,6 +46,13 @@ void Util::init()
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
 	
 	Util::spriteFrameCache->addSpriteFramesWithFile("image/common.plist");
+
+	string str = FileUtils::getInstance()->getStringFromFile("other/data.json");
+	data.Parse<0>(str.c_str());
+	if (data.HasParseError())
+	{
+		CCLOG("GetParseError %s\n", data.GetParseError());
+	}
 
 	/*Util::audioEngine->preloadBackgroundMusic("sound/bg.mp3");
 	const char *effects[] = {
@@ -98,4 +106,20 @@ void Util::playBackgroundMusic(const char *file)
 	{
 		Util::audioEngine->playBackgroundMusic(file);
 	}
+}
+
+int Util::getChapterCount()
+{
+	return Util::data.Size();
+}
+
+rapidjson::Value &Util::getChapter(int i)
+{
+	int count = Util::getChapterCount();
+	if (i >= 0 && i < count)
+	{
+		return Util::data[i];
+	}
+	static rapidjson::Value NullValue;
+	return NullValue;
 }

@@ -2,6 +2,7 @@
 #include "Home/HomeScene.h"
 #include "Common/ScalableSprite.h"
 #include "Common/Block.h"
+#include "Levels/LevelsScene.h"
 
 bool ChapterScene::init()
 {
@@ -23,17 +24,16 @@ bool ChapterScene::init()
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
 
-	for (int i = 0; i < 8; i++)
+	int count = Util::getChapterCount();
+	for (int i = 0; i < count; i++)
 	{
-		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), [i, this](Ref* pSender){
+		Block *block = Block::create(Color4B(180,179,85, 255), to_string(i + 1), [i, this](Ref* pSender){
 			this->gotoChapter(i);
 		});
 		float x = U::cx + ((i % 2) * 2 - 1) * 55;
-		float y = U::cy + ((7 - i) / 2 - 1.5) * 110;
+		float y = U::cy + ((count - 1 - i) / 2 - 1.5) * 110;
 		block->setPosition(x, y);
 		this->addChild(block);
-
-		m_blocks.pushBack(block);
 	}
 
     return true;
@@ -41,5 +41,6 @@ bool ChapterScene::init()
 
 void ChapterScene::gotoChapter(int i)
 {
-	CCLOG("Goto chapter: %i\n", i);
+	LevelsScene *ls = LevelsScene::createWithChapter(i);
+	Util::director->replaceScene(TransitionSlideInR::create(0.2f, ls));
 }
