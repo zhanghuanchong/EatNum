@@ -2,6 +2,7 @@
 #include "Common/Block.h"
 #include "Common/ScalableSprite.h"
 #include "Levels/ChapterScene.h"
+#include "Game/GameScene.h"
 
 LevelsScene * LevelsScene::createWithChapter(int chapter)
 {
@@ -45,7 +46,8 @@ bool LevelsScene::init()
 	for (int i = 0; i < count; i++)
 	{
 		Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender){
-			
+			GameScene *ls = GameScene::createWithLevel(i, this->m_nChapter);
+			Util::director->replaceScene(TransitionFade::create(0.5f, ls));
 		});
 		float x = U::cx + ((i % 5) * 2 - 4) * 55;
 		float y = U::cy + ((19 - i) / 5 - 1.5) * 110;
@@ -54,8 +56,4 @@ bool LevelsScene::init()
 	}
 
 	return true;
-}
-
-void LevelsScene::onEnterTransitionDidFinish()
-{
 }

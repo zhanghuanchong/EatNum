@@ -22,6 +22,9 @@
     <Filter Include="Classes\Levels">
       <UniqueIdentifier>{fa9ee270-e1c8-47b5-a1d3-df14beb24356}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Game">
+      <UniqueIdentifier>{fde739db-b19c-4017-ba21-ad69a98a85a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Common\Block.cpp">
       <Filter>Classes\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\GameScene.cpp">
+      <Filter>Classes\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Common\Block.h">
       <Filter>Classes\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\GameScene.h">
+      <Filter>Classes\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
