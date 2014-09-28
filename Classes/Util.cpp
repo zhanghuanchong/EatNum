@@ -123,3 +123,13 @@ rapidjson::Value &Util::getChapter(int i)
 	static rapidjson::Value NullValue;
 	return NullValue;
 }
+
+int Util::getLevelCount(int i)
+{
+	int count = Util::getChapterCount();
+	if (i >= 0 && i < count)
+	{
+		return Util::data[i]["levels"].Size();
+	}
+	return 0;
+}

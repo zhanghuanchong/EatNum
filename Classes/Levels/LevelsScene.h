@@ -18,6 +18,5 @@ CC_CONSTRUCTOR_ACCESS:
 
 private:
 	int m_nChapter;
-	rapidjson::Value m_oChapter;
 };
 

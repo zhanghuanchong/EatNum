@@ -36,6 +36,7 @@ public:
 
 	static int getChapterCount();
 	static rapidjson::Value &getChapter(int i);
+	static int getLevelCount(int chapter);
 };
 
 typedef Util U;

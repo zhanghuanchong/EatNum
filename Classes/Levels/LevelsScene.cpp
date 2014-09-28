@@ -28,8 +28,6 @@ bool LevelsScene::init()
 		return false;
 	}
 
-	this->m_oChapter = Util::getChapter(this->m_nChapter);
-
 	auto bgLayer = LayerColor::create(Color4B(115, 54, 72, 255));
 	this->addChild(bgLayer);
 
@@ -43,7 +41,7 @@ bool LevelsScene::init()
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
 
-	int count = this->m_oChapter["levels"].Size();
+	int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)
 	{
 		Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender){
@@ -60,5 +58,4 @@ bool LevelsScene::init()
 
 void LevelsScene::onEnterTransitionDidFinish()
 {
-	CCLOG("levels count: %i", this->m_oChapter["levels"].Size());
 }
