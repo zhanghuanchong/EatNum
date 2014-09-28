@@ -27,11 +27,11 @@ bool ChapterScene::init()
 	int count = Util::getChapterCount();
 	for (int i = 0; i < count; i++)
 	{
-		Block *block = Block::create(Color4B(180,179,85, 255), to_string(i + 1), [i, this](Ref* pSender){
+		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), [i, this](Ref* pSender){
 			this->gotoChapter(i);
 		});
 		float x = U::cx + ((i % 2) * 2 - 1) * 55;
-		float y = U::cy + ((count - 1 - i) / 2 - 1.5) * 110;
+		float y = U::cy + ((7 - i) / 2 - 1.5) * 110;
 		block->setPosition(x, y);
 		this->addChild(block);
 	}

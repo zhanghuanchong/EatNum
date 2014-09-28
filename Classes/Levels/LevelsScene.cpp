@@ -47,8 +47,8 @@ bool LevelsScene::init()
 		Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender){
 			
 		});
-		float x = U::cx + ((i % 2) * 2 - 1) * 55;
-		float y = U::cy + ((count - 1 - i) / 2 - 1.5) * 110;
+		float x = U::cx + ((i % 5) * 2 - 4) * 55;
+		float y = U::cy + ((19 - i) / 5 - 1.5) * 110;
 		block->setPosition(x, y);
 		this->addChild(block);
 	}
