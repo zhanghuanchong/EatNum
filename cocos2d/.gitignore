@@ -1,0 +1,5 @@
+*
+!.gitignore
+
+# cocos2d-x v3.2
+# cocos new -p com.app4cn.EatNum -l cpp -d D:/ EatNum
