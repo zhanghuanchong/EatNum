@@ -32,8 +32,12 @@ bool GameScene::init()
 	auto bgLayer = LayerColor::create(Color4B(97, 112, 116, 255)); //92,106,110
 	this->addChild(bgLayer);
 
-	auto label = U::label("Level m.n", 30, 1);
-	label->setPosition(U::cx, U::height * .9);
+	stringstream s;
+	s << U::t("Level") << " " << this->m_nChapter + 1 << " - " << this->m_nLevel + 1;
+
+	auto label = U::labelWithoutTranslate(s.str(), 35, 1);
+	label->setPosition(U::width - 20, U::height - 30);
+	label->setAnchorPoint(Vec2(1, 0.5));
 	this->addChild(label);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [this](){
@@ -47,6 +51,22 @@ bool GameScene::init()
 	});
 	btnReload->setPosition(U::cx + 80, 50);
 	this->addChild(btnReload);
+	
+	int x = U::cx - 2 * 100 - 50 - 2 * 10;
+	int y = U::cy - 3 * 100 - 2 * 10 - 5;
+	for (int i = 0; i < 6; i++)
+	{
+		y += 110;
+		int xj = x;
+		for (int j = 0; j < 5; j++)
+		{
+			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
+			block->setPosition(xj + 50, y - 50);
+			this->addChild(block);
+
+			xj += 110;
+		}
+	}
 
 	/*int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)

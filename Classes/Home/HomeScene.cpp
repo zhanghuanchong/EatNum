@@ -12,11 +12,11 @@ bool HomeScene::init()
 	auto bgLayer = LayerColor::create(Color4B(195, 75, 134, 255));
 	this->addChild(bgLayer);
 
-	labelNom = U::label("NOM", 100, 1);
+	labelNom = U::label("NOM", 120, 1);
 	labelNom->setPosition(U::cx - 20, U::cy + 70);
 	this->addChild(labelNom);
 
-	labelNum = U::label("NUM", 100, 1);
+	labelNum = U::label("NUM", 120, 1);
 	labelNum->setPosition(U::cx + 20, U::cy - 70);
 	this->addChild(labelNum);
 

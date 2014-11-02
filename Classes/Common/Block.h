@@ -5,7 +5,7 @@ class Block : public Node
 {
 public:
 	static Block* create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100));
+		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100), const bool interactive = true);
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
@@ -14,11 +14,12 @@ CC_CONSTRUCTOR_ACCESS:
 		m_shader(nullptr), 
 		m_card(nullptr), 
 		m_bClicked(false), 
+		m_bInteractive(true),
 		m_oldZOrder(0) {}
 	virtual ~Block() {}
 
 	virtual bool init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor, const Size& size);
+		const Color4B& titleColor, const Size& size, const bool interactive);
 
 private:
 	Sprite *m_bg;
@@ -26,6 +27,7 @@ private:
 	Sprite *m_shader;
 	Node *m_card;
 	bool m_bClicked;
+	bool m_bInteractive;
 	int m_oldZOrder;
 	CC_DISALLOW_COPY_AND_ASSIGN(Block);
 };

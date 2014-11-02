@@ -29,4 +29,6 @@
     <string>选择级别</string>
     <key>Select Level</key>
     <string>选择关卡</string>
+    <key>Level</key>
+    <string>关卡</string>
 </dict>

@@ -41,7 +41,7 @@ void Util::init()
 	Util::lang = FileUtils::getInstance()->getValueMapFromFile("i18n/zh-CN.plist");
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
-	Util::fonts.push_back("fonts/HOPE.ttf");
+	Util::fonts.push_back("fonts/FZMM.ttf");
 
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
 	
