@@ -37,6 +37,9 @@ public:
 	static int getChapterCount();
 	static rapidjson::Value &getChapter(int i);
 	static int getLevelCount(int chapter);
+	static rapidjson::Value &getLevel(int chapter, int level);
+
+	static string replace(const string& str, const string& src, const string& dest);
 };
 
 typedef Util U;

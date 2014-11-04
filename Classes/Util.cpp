@@ -68,6 +68,7 @@ void Util::init()
 
 string Util::t( string key )
 {
+	key = Util::replace(key, "\n", "\\n");
 	ValueMap::const_iterator it = Util::lang.find(key);
 	if (it != Util::lang.end())
 	{
@@ -132,4 +133,32 @@ int Util::getLevelCount(int i)
 		return Util::data[i]["levels"].Size();
 	}
 	return 0;
+}
+
+rapidjson::Value & Util::getLevel(int chapter, int level)
+{
+	int count = Util::getLevelCount(chapter);
+	assert(level >= 0 && level < count);
+
+	rapidjson::Value& chapterData = Util::getChapter(chapter);
+	return chapterData["levels"][level];
+}
+
+std::string Util::replace(const string& str, const string& src, const string& dest)
+{
+	string ret;
+	string::size_type pos_begin = 0;
+	string::size_type pos = str.find(src);
+	while (pos != string::npos)
+	{
+		ret.append(str.data() + pos_begin, pos - pos_begin);
+		ret += dest;
+		pos_begin = pos + 1;
+		pos = str.find(src, pos_begin);
+	}
+	if (pos_begin < str.length())
+	{
+		ret.append(str.begin() + pos_begin, str.end());
+	}
+	return ret;
 }

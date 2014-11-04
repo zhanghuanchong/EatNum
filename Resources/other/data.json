@@ -7,7 +7,7 @@
     "levels": [
       {
         "level": 1,
-        "tip": "Move to one less, gain one...",
+        "tip": "Move to one less, \ngain one...",
         "cells": [
           {
             "x": 1,
@@ -23,7 +23,7 @@
       },
       {
         "level": 2,
-        "tip": "Move to empty space, lose two...",
+        "tip": "Move to empty \nspace, lose two...",
         "cells": [
           {
             "x": 2,
@@ -34,7 +34,7 @@
       },
       {
         "level": 3,
-        "tip": "Ones can still move on though...",
+        "tip": "Ones can still move\n on though...",
         "cells": [
           {
             "x": 2,
@@ -61,7 +61,7 @@
       },
       {
         "level": 5,
-        "tip": "If only one numbered box remains, you win.",
+        "tip": "If only one numbered \nbox remains, you win.",
         "cells": [
           {
             "x": 2,
@@ -82,7 +82,7 @@
       },
       {
         "level": 6,
-        "tip": "Remember, if you move to empty space, you lose two, but can't go below zero.",
+        "tip": "Remember, if you \nmove to empty space, \nyou lose two, but can't \ngo below zero.",
         "cells": [
           {
             "x": 1,

@@ -31,4 +31,18 @@
     <string>选择关卡</string>
     <key>Level</key>
     <string>关卡</string>
+    <key>Move to one less, \ngain one...</key>
+    <string>移动到比自己小1的\n数字上, 增加1...</string>
+    <key>Move to empty \nspace, lose two...</key>
+    <string>移动到空格子里，\n减少1...</string>
+    <key>Ones can still move\n on though...</key>
+    <string>1可以再移动一次\n变成0...</string>
+    <key>Zeros can't move...</key>
+    <string>0不能移动...</string>
+    <key>If only one numbered \nbox remains, you win.</key>
+    <string>如果只剩下一个\n标有数字的格子，\n你就赢了！</string>
+    <key>Remember, if you \nmove to empty space, \nyou lose two, but can't \ngo below zero.</key>
+    <string>记住，如果移动到空格子\n，将减少2，但不会小于0。</string>
+    <key></key>
+    <string></string>    
 </dict>

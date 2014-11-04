@@ -68,6 +68,18 @@ bool GameScene::init()
 		}
 	}
 
+	rapidjson::Value& levelData = U::getLevel(m_nChapter, m_nLevel);
+	if (levelData.HasMember("tip"))
+	{
+		const char* tip = levelData["tip"].GetString();
+		auto tipLabel = U::label(tip, 45, 1);
+		tipLabel->setHorizontalAlignment(TextHAlignment::CENTER);
+		tipLabel->setVerticalAlignment(TextVAlignment::TOP);
+		tipLabel->setDimensions(U::width, y - 30);
+		tipLabel->setPosition(U::cx, (y - 30) / 2);
+		this->addChild(tipLabel);
+	}
+
 	/*int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)
 	{
