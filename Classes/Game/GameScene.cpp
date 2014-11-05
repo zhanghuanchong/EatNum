@@ -24,10 +24,10 @@ bool GameScene::initWithLevel(int level, int chapter)
 
 bool GameScene::init()
 {
-    if ( !Scene::init() )
-    {
-        return false;
-    }
+	if (!Scene::init())
+	{
+		return false;
+	}
 
 	auto bgLayer = LayerColor::create(Color4B(97, 112, 116, 255)); //92,106,110
 	this->addChild(bgLayer);
@@ -47,21 +47,22 @@ bool GameScene::init()
 	this->addChild(btnPlay);
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
-		
+
 	});
 	btnReload->setPosition(U::cx + 80, 50);
 	this->addChild(btnReload);
-	
+
 	int x = U::cx - 2 * 100 - 50 - 2 * 10;
 	int y = U::cy - 3 * 100 - 2 * 10 - 5;
+	int yj = y;
 	for (int i = 0; i < 6; i++)
 	{
-		y += 110;
+		yj += 110;
 		int xj = x;
 		for (int j = 0; j < 5; j++)
 		{
 			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
-			block->setPosition(xj + 50, y - 50);
+			block->setPosition(xj + 50, yj - 50);
 			this->addChild(block);
 
 			xj += 110;
@@ -75,9 +76,30 @@ bool GameScene::init()
 		auto tipLabel = U::label(tip, 45, 1);
 		tipLabel->setHorizontalAlignment(TextHAlignment::CENTER);
 		tipLabel->setVerticalAlignment(TextVAlignment::TOP);
-		tipLabel->setDimensions(U::width, y - 30);
-		tipLabel->setPosition(U::cx, (y - 30) / 2);
+		tipLabel->setDimensions(U::width, yj - 30);
+		tipLabel->setPosition(U::cx, (yj - 30) / 2);
 		this->addChild(tipLabel);
+	}
+
+	y = y + 6 * 100 + 6 * 10;
+
+	if (levelData.HasMember("cells") && levelData["cells"].IsArray())
+	{
+		for (unsigned i = 0; i < levelData["cells"].Size(); i++)
+		{
+			rapidjson::Value& cell = levelData["cells"][i];
+			if (cell.HasMember("x") && cell.HasMember("y") && cell.HasMember("v"))
+			{
+				int _x = cell["x"].GetInt();
+				int _y = cell["y"].GetInt();
+				int _v = cell["v"].GetInt();
+				int _t = _x * 100 + _y * 10 + _v;
+
+				Block *block = Block::create(Color4B(0, 0, 255, 255), to_string(_t), nullptr, Color4B::WHITE, Size(100, 100));
+				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
+				this->addChild(block);
+			}
+		}
 	}
 
 	/*int count = Util::getLevelCount(this->m_nChapter);
