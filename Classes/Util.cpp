@@ -72,8 +72,9 @@ string Util::t( string key )
 	ValueMap::const_iterator it = Util::lang.find(key);
 	if (it != Util::lang.end())
 	{
-		return it->second.asString();
+		key = it->second.asString();
 	}
+	key = Util::replace(key, "\\n", "\n");
 	return key;
 }
 
@@ -146,19 +147,12 @@ rapidjson::Value & Util::getLevel(int chapter, int level)
 
 std::string Util::replace(const string& str, const string& src, const string& dest)
 {
-	string ret;
-	string::size_type pos_begin = 0;
-	string::size_type pos = str.find(src);
+	string ret(str);
+	string::size_type pos = ret.find(src);
 	while (pos != string::npos)
 	{
-		ret.append(str.data() + pos_begin, pos - pos_begin);
-		ret += dest;
-		pos_begin = pos + 1;
-		pos = str.find(src, pos_begin);
-	}
-	if (pos_begin < str.length())
-	{
-		ret.append(str.begin() + pos_begin, str.end());
+		ret = ret.replace(pos, src.length(), dest);
+		pos = ret.find(src, pos + dest.length());
 	}
 	return ret;
 }
