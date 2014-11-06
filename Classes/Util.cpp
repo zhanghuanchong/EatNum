@@ -156,3 +156,31 @@ std::string Util::replace(const string& str, const string& src, const string& de
 	}
 	return ret;
 }
+
+cocos2d::Color4B Util::getColorOfBlockValue(int v)
+{
+	static Color4B colors[] = {
+		Color4B::BLACK,					/* 0 */
+		Color4B(222, 168, 64, 255),
+		Color4B(68, 114, 148, 255),
+		Color4B(255, 85, 85, 255),
+		Color4B(153, 136, 154, 255),
+		Color4B(187, 52, 85, 255),		/* 5 */
+		Color4B(66, 153, 220, 255),
+		Color4B(221, 152, 119, 255),
+		Color4B(135, 102, 85, 255),
+		Color4B(203, 153, 204, 255),
+		Color4B(67, 85, 85, 255),		/* 10 */
+		Color4B(170, 204, 205, 255),
+		Color4B(255, 220, 152, 255),
+		Color4B(245, 66, 150, 255),
+		Color4B(68, 114, 148, 255),
+		Color4B(187, 52, 85, 255),		/* 15 */
+		Color4B::BLACK
+	};
+	if (v >= 0 && v <= 16)
+	{
+		return colors[v];
+	}
+	return Color4B::BLACK;
+}

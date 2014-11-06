@@ -40,6 +40,8 @@ public:
 	static rapidjson::Value &getLevel(int chapter, int level);
 
 	static string replace(const string& str, const string& src, const string& dest);
+
+	static Color4B getColorOfBlockValue(int v);
 };
 
 typedef Util U;

@@ -61,7 +61,7 @@ bool GameScene::init()
 		int xj = x;
 		for (int j = 0; j < 5; j++)
 		{
-			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
+			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false, false);
 			block->setPosition(xj + 50, yj - 50);
 			this->addChild(block);
 
@@ -93,9 +93,20 @@ bool GameScene::init()
 				int _x = cell["x"].GetInt();
 				int _y = cell["y"].GetInt();
 				int _v = cell["v"].GetInt();
-				int _t = _x * 100 + _y * 10 + _v;
 
-				Block *block = Block::create(Color4B(0, 0, 255, 255), to_string(_t), nullptr, Color4B::WHITE, Size(100, 100));
+				Block *block;
+				if (_v > 0)
+				{
+					block = Block::create(U::getColorOfBlockValue(_v), to_string(_v), nullptr, Color4B::WHITE, Size(100, 100));
+				}
+				else if (_v == 0)
+				{
+					block = Block::create(Color4B::BLACK, to_string(_v), nullptr, Color4B::WHITE, Size(100, 100), false);
+				}
+				else
+				{
+					block = Block::create(Color4B(102, 102, 102, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
+				}
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
 				this->addChild(block);
 			}

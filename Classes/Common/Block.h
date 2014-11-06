@@ -5,7 +5,7 @@ class Block : public Node
 {
 public:
 	static Block* create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100), const bool interactive = true);
+		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100), const bool interactive = true, const bool shader = true);
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
@@ -19,7 +19,7 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual ~Block() {}
 
 	virtual bool init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor, const Size& size, const bool interactive);
+		const Color4B& titleColor, const Size& size, const bool interactive, const bool shader);
 
 private:
 	Sprite *m_bg;

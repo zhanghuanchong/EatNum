@@ -1,10 +1,10 @@
 #include "Block.h"
 
 Block* Block::create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-	const Color4B& titleColor /*= Color4B::WHITE*/, const Size& size /*= Size(100, 100)*/, const bool interactive /*= true*/)
+	const Color4B& titleColor /*= Color4B::WHITE*/, const Size& size /*= Size(100, 100)*/, const bool interactive /*= true*/, const bool shader/* = true*/)
 {
 	Block *sprite = new (std::nothrow) Block();
-	if (sprite && sprite->init(bgColor, title, onTouchEnd, titleColor, size, interactive))
+	if (sprite && sprite->init(bgColor, title, onTouchEnd, titleColor, size, interactive, shader))
 	{
 		sprite->autorelease();
 		return sprite;
@@ -14,7 +14,7 @@ Block* Block::create(const Color4B& bgColor, const string& title, const ccMenuCa
 }
 
 bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-	const Color4B& titleColor, const Size& size, const bool interactive)
+	const Color4B& titleColor, const Size& size, const bool interactive, const bool shader)
 {
 	auto ret = Node::init();
 	this->setContentSize(size);
@@ -46,7 +46,7 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 	m_title->setTextColor(titleColor);
 	m_card->addChild(m_title, 1);
 
-	if (interactive)
+	if (shader)
 	{
 		// Add shader
 		m_shader = Sprite::create();
@@ -64,7 +64,10 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 		m_shader->setAnchorPoint(Vec2(0.5f, 0.5f));
 		m_shader->setPosition(size.width / 2 + 2, size.height / 2 - 2);
 		this->addChild(m_shader, 0);
+	}
 
+	if (interactive)
+	{
 		// Touch event listener
 		auto listener = EventListenerTouchOneByOne::create();
 		listener->setSwallowTouches(true);
