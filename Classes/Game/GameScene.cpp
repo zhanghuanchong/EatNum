@@ -38,13 +38,13 @@ bool GameScene::init()
 	auto label = U::labelWithoutTranslate(s.str(), 35, 1);
 	label->setPosition(U::width - 20, U::height - 30);
 	label->setAnchorPoint(Vec2(1, 0.5));
-	this->addChild(label);
+	this->addChild(label, 1001);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
 	btnPlay->setPosition(U::cx - 80, 50);
-	this->addChild(btnPlay);
+	this->addChild(btnPlay, 1001);
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
 
@@ -63,7 +63,7 @@ bool GameScene::init()
 		{
 			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false, false);
 			block->setPosition(xj + 50, yj - 50);
-			this->addChild(block);
+			this->addChild(block, 0);
 
 			xj += 110;
 		}
@@ -78,7 +78,7 @@ bool GameScene::init()
 		tipLabel->setVerticalAlignment(TextVAlignment::TOP);
 		tipLabel->setDimensions(U::width, yj - 30);
 		tipLabel->setPosition(U::cx, (yj - 30) / 2);
-		this->addChild(tipLabel);
+		this->addChild(tipLabel, 1000);
 	}
 
 	y = y + 6 * 100 + 6 * 10;
@@ -108,7 +108,7 @@ bool GameScene::init()
 					block = Block::create(Color4B(102, 102, 102, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
 				}
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
-				this->addChild(block);
+				this->addChild(block, 10);
 			}
 		}
 	}

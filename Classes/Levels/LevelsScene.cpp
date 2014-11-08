@@ -36,6 +36,14 @@ bool LevelsScene::init()
 	label->setPosition(U::cx, U::height * .85);
 	this->addChild(label);
 
+	stringstream s;
+	s << U::t("Chapter") << " " << this->m_nChapter + 1;
+
+	auto labelChapter = U::labelWithoutTranslate(s.str(), 35, 1);
+	labelChapter->setPosition(U::width - 20, U::height - 30);
+	labelChapter->setAnchorPoint(Vec2(1, 0.5));
+	this->addChild(labelChapter);
+
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [](){
 		Util::director->replaceScene(TransitionSlideInL::create(0.2f, ChapterScene::create()));
 	});
