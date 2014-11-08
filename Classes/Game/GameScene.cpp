@@ -47,7 +47,7 @@ bool GameScene::init()
 	this->addChild(btnPlay, 1001);
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
-
+		this->initBlocks();
 	});
 	btnReload->setPosition(U::cx + 80, 50);
 	this->addChild(btnReload);
@@ -81,7 +81,22 @@ bool GameScene::init()
 		this->addChild(tipLabel, 1000);
 	}
 
-	y = y + 6 * 100 + 6 * 10;
+	this->initBlocks();
+
+    return true;
+}
+
+void GameScene::initBlocks()
+{
+	for (unsigned i = 0; i < m_blocks.size(); i++)
+	{
+		Block *block = m_blocks.at(i);
+		block->removeFromParentAndCleanup(true);
+	}
+
+	rapidjson::Value& levelData = U::getLevel(m_nChapter, m_nLevel);
+	int x = U::cx - 2 * 100 - 50 - 2 * 10;
+	int y = U::cy + 3 * 100 + 2 * 10 + 5;
 
 	if (levelData.HasMember("cells") && levelData["cells"].IsArray())
 	{
@@ -109,24 +124,10 @@ bool GameScene::init()
 				}
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
 				this->addChild(block, 10);
+				this->m_blocks.pushBack(block);
 			}
 		}
 	}
-
-	/*int count = Util::getLevelCount(this->m_nChapter);
-	for (int i = 0; i < count; i++)
-	{
-	Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender){
-	GameScene *ls = GameScene::createWithLevel(i, this->m_nChapter);
-	Util::director->replaceScene(TransitionFade::create(1.0f, ls));
-	});
-	float x = U::cx + ((i % 5) * 2 - 4) * 55;
-	float y = U::cy + ((19 - i) / 5 - 1.5) * 110;
-	block->setPosition(x, y);
-	this->addChild(block);
-	}*/
-
-    return true;
 }
 
 void GameScene::onEnterTransitionDidFinish()

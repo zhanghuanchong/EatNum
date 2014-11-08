@@ -1,6 +1,8 @@
 #pragma once
 #include "Util.h"
 
+class Block;
+
 class GameScene : public Scene
 {
 public:
@@ -15,8 +17,11 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual bool init();
 	virtual void onEnterTransitionDidFinish();
 
+	void initBlocks();
+
 private:
 	int m_nChapter;
 	int m_nLevel;
+	Vector<Block *> m_blocks;
 };
 
