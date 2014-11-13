@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "Common/Block.h"
+#include "Common/DraggableBlock.h"
 #include "Common/ScalableSprite.h"
 #include "Levels/LevelsScene.h"
 
@@ -112,7 +113,8 @@ void GameScene::initBlocks()
 				Block *block;
 				if (_v > 0)
 				{
-					block = Block::create(U::getColorOfBlockValue(_v), to_string(_v), nullptr, Color4B::WHITE, Size(100, 100));
+					block = DraggableBlock::create(U::getColorOfBlockValue(_v), 
+						to_string(_v));
 				}
 				else if (_v == 0)
 				{

@@ -119,7 +119,10 @@ bool Block::init(const Color4B& bgColor,
 			return false;
 		};
 		listener->onTouchMoved = [onTouchMoved, this](Touch *touch, Event *event) {
-
+			if (onTouchMoved)
+			{
+				onTouchMoved(this, touch, event);
+			}
 		};
 		listener->onTouchEnded = [onTouchEnd, this, size](Touch *touch, Event *event) {
 			if (this->m_bClicked)
@@ -149,6 +152,12 @@ bool Block::init(const Color4B& bgColor,
 			actions2.pushBack(EaseSineOut::create(ScaleTo::create(0.1f, 1.0f)));
 			actions2.pushBack(EaseSineOut::create(MoveTo::create(0.1f, Vec2(size.width / 2 + 2, size.height / 2 - 2))));
 			this->m_shader->runAction(Spawn::create(actions2));
+		};
+		listener->onTouchCancelled = [onTouchCancelled, this](Touch *touch, Event *event) {
+			if (onTouchCancelled)
+			{
+				onTouchCancelled(this, touch, event);
+			}
 		};
 		this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	}

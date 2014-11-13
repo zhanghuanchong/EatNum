@@ -57,6 +57,9 @@
     <ClCompile Include="..\Classes\Game\GameScene.cpp">
       <Filter>Classes\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Common\DraggableBlock.cpp">
+      <Filter>Classes\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Game\GameScene.h">
       <Filter>Classes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Common\DraggableBlock.h">
+      <Filter>Classes\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
