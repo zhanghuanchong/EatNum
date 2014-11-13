@@ -11,6 +11,16 @@ public:
 		const touchCallback& onTouchEnd = nullptr,
 		const touchCallback& onTouchCancelled = nullptr);
 
+	inline Point getDragStartPoint() 
+	{
+		return m_dragStartPoint;
+	};
+
+	inline Size getDragStartDistance()
+	{
+		return m_dragStartDistance;
+	};
+
 CC_CONSTRUCTOR_ACCESS:
 	DraggableBlock() :
 		m_dragStartPoint(0, 0),

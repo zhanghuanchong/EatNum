@@ -114,7 +114,10 @@ void GameScene::initBlocks()
 				if (_v > 0)
 				{
 					block = DraggableBlock::create(U::getColorOfBlockValue(_v), 
-						to_string(_v));
+						to_string(_v),
+						nullptr,
+						CC_CALLBACK_3(GameScene::onBlockMoved, this),
+						CC_CALLBACK_3(GameScene::onBlockEnded, this));
 				}
 				else if (_v == 0)
 				{
@@ -127,16 +130,6 @@ void GameScene::initBlocks()
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
 				this->addChild(block, 10);
 				this->m_blocks.pushBack(block);
-
-				/*auto listener = EventListenerTouchOneByOne::create();
-				listener->setSwallowTouches(true);
-				listener->onTouchBegan = [block](Touch *touch, Event *event) {
-				return true;
-				};
-				listener->onTouchMoved = [block](Touch *touch, Event *event) {
-				block->setPosition(touch->getLocation());
-				};
-				block->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, block);*/
 			}
 		}
 	}
@@ -145,4 +138,17 @@ void GameScene::initBlocks()
 void GameScene::onEnterTransitionDidFinish()
 {
 
+}
+
+void GameScene::onBlockMoved(Ref *sender, Touch *touch, Event *event)
+{
+	Point point = touch->getLocation();
+	CCLOG("point: %f, %f", point.x, point.y);
+}
+
+void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
+{
+	DraggableBlock *block = (DraggableBlock *)sender;
+	Point point = block->getDragStartPoint();
+	block->setPosition(point);
 }

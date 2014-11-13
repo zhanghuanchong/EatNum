@@ -18,6 +18,8 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual void onEnterTransitionDidFinish();
 
 	void initBlocks();
+	void onBlockMoved(Ref *sender, Touch *touch, Event *event);
+	void onBlockEnded(Ref *sender, Touch *touch, Event *event);
 
 private:
 	int m_nChapter;
