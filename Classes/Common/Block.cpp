@@ -96,6 +96,10 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 			}
 			return false;
 		};
+		listener->onTouchMoved = [this](Touch *touch, Event *event) {
+
+			this->setPosition(touch->getLocation());
+		};
 		listener->onTouchEnded = [onTouchEnd, this, size](Touch *touch, Event *event) {
 			if (this->m_bClicked)
 			{
