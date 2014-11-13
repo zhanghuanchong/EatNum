@@ -1,11 +1,21 @@
 #pragma once
 #include "Util.h"
 
+typedef std::function<void(Ref *, Touch *, Event *)> touchCallback;
+
 class Block : public Node
 {
 public:
-	static Block* create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor = Color4B::WHITE, const Size& size = Size(100, 100), const bool interactive = true, const bool shader = true);
+	static Block* create(const Color4B& bgColor, 
+		const string& title, 
+		const touchCallback& onTouchEnd,
+		const Color4B& titleColor = Color4B::WHITE, 
+		const Size& size = Size(100, 100), 
+		const bool interactive = true, 
+		const bool shader = true,
+		const touchCallback& onTouchBegan = nullptr,
+		const touchCallback& onTouchMoved = nullptr,
+		const touchCallback& onTouchCancelled = nullptr);
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
@@ -18,8 +28,16 @@ CC_CONSTRUCTOR_ACCESS:
 		m_oldZOrder(0) {}
 	virtual ~Block() {}
 
-	virtual bool init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-		const Color4B& titleColor, const Size& size, const bool interactive, const bool shader);
+	virtual bool init(const Color4B& bgColor, 
+		const string& title, 
+		const touchCallback& onTouchEnd,
+		const Color4B& titleColor, 
+		const Size& size, 
+		const bool interactive, 
+		const bool shader,
+		const touchCallback& onTouchBegan,
+		const touchCallback& onTouchMoved,
+		const touchCallback& onTouchCancelled);
 
 private:
 	Sprite *m_bg;

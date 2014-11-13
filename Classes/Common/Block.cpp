@@ -1,10 +1,19 @@
 #include "Block.h"
 
-Block* Block::create(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-	const Color4B& titleColor /*= Color4B::WHITE*/, const Size& size /*= Size(100, 100)*/, const bool interactive /*= true*/, const bool shader/* = true*/)
+Block* Block::create(const Color4B& bgColor, 
+	const string& title, 
+	const touchCallback& onTouchEnd,
+	const Color4B& titleColor /*= Color4B::WHITE*/, 
+	const Size& size /*= Size(100, 100)*/, 
+	const bool interactive /*= true*/, 
+	const bool shader/* = true*/,
+	const touchCallback& onTouchBegan/* = nullptr*/,
+	const touchCallback& onTouchMoved/* = nullptr*/,
+	const touchCallback& onTouchCancelled/* = nullptr*/)
 {
 	Block *sprite = new (std::nothrow) Block();
-	if (sprite && sprite->init(bgColor, title, onTouchEnd, titleColor, size, interactive, shader))
+	if (sprite && sprite->init(bgColor, title, onTouchEnd, titleColor, size, 
+		interactive, shader, onTouchBegan, onTouchMoved, onTouchCancelled))
 	{
 		sprite->autorelease();
 		return sprite;
@@ -13,8 +22,16 @@ Block* Block::create(const Color4B& bgColor, const string& title, const ccMenuCa
 	return nullptr;
 }
 
-bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallback& onTouchEnd,
-	const Color4B& titleColor, const Size& size, const bool interactive, const bool shader)
+bool Block::init(const Color4B& bgColor, 
+	const string& title, 
+	const touchCallback& onTouchEnd,
+	const Color4B& titleColor, 
+	const Size& size, 
+	const bool interactive, 
+	const bool shader,
+	const touchCallback& onTouchBegan,
+	const touchCallback& onTouchMoved,
+	const touchCallback& onTouchCancelled)
 {
 	auto ret = Node::init();
 	this->setContentSize(size);
@@ -71,7 +88,7 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 		// Touch event listener
 		auto listener = EventListenerTouchOneByOne::create();
 		listener->setSwallowTouches(true);
-		listener->onTouchBegan = [this, size](Touch *touch, Event *event) {
+		listener->onTouchBegan = [onTouchBegan, this, size](Touch *touch, Event *event) {
 			auto target = static_cast<Sprite*>(event->getCurrentTarget());
 			Point locationInNode = target->convertToNodeSpace(touch->getLocation());
 			Size s = target->getContentSize();
@@ -92,13 +109,17 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 				this->m_oldZOrder = this->getLocalZOrder();
 				this->setLocalZOrder(100);
 
+				if (onTouchBegan)
+				{
+					onTouchBegan(this, touch, event);
+				}
+
 				return true;
 			}
 			return false;
 		};
-		listener->onTouchMoved = [this](Touch *touch, Event *event) {
+		listener->onTouchMoved = [onTouchMoved, this](Touch *touch, Event *event) {
 
-			this->setPosition(touch->getLocation());
 		};
 		listener->onTouchEnded = [onTouchEnd, this, size](Touch *touch, Event *event) {
 			if (this->m_bClicked)
@@ -113,10 +134,10 @@ bool Block::init(const Color4B& bgColor, const string& title, const ccMenuCallba
 
 			Vector<FiniteTimeAction *> actionSequence;
 			actionSequence.pushBack(spawn);
-			actionSequence.pushBack(CallFunc::create([onTouchEnd, this](){
+			actionSequence.pushBack(CallFunc::create([onTouchEnd, touch, event, this](){
 				if (onTouchEnd)
 				{
-					onTouchEnd(this);
+					onTouchEnd(this, touch, event);
 				}
 				this->m_bClicked = false;
 

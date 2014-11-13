@@ -27,7 +27,7 @@ bool ChapterScene::init()
 	int count = Util::getChapterCount();
 	for (int i = 0; i < count; i++)
 	{
-		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), [i, this](Ref* pSender){
+		Block *block = Block::create(Color4B(158, 74, 47, 255), to_string(i + 1), [i, this](Ref* pSender, Touch *, Event *){
 			this->gotoChapter(i);
 		});
 		float x = U::cx + ((i % 2) * 2 - 1) * 55;

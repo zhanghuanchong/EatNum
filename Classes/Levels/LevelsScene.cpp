@@ -53,7 +53,7 @@ bool LevelsScene::init()
 	int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)
 	{
-		Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender){
+		Block *block = Block::create(Color4B(180, 179, 85, 255), to_string(i + 1), [i, this](Ref* pSender, Touch *, Event *){
 			GameScene *ls = GameScene::createWithLevel(i, this->m_nChapter);
 			Util::director->replaceScene(TransitionFade::create(0.5f, ls));
 		});
