@@ -89,7 +89,7 @@ bool GameScene::init()
 
 void GameScene::initBlocks()
 {
-	for (unsigned i = 0; i < m_blocks.size(); i++)
+	for (int i = 0; i < m_blocks.size(); i++)
 	{
 		Block *block = m_blocks.at(i);
 		block->removeFromParentAndCleanup(true);
@@ -115,7 +115,7 @@ void GameScene::initBlocks()
 				{
 					block = DraggableBlock::create(U::getColorOfBlockValue(_v), 
 						to_string(_v),
-						nullptr,
+						CC_CALLBACK_3(GameScene::onBlockBegan, this),
 						CC_CALLBACK_3(GameScene::onBlockMoved, this),
 						CC_CALLBACK_3(GameScene::onBlockEnded, this));
 				}
@@ -140,15 +140,48 @@ void GameScene::onEnterTransitionDidFinish()
 
 }
 
+void GameScene::onBlockBegan(Ref *sender, Touch *touch, Event *event)
+{
+	DraggableBlock *block = (DraggableBlock *)sender;
+	block->setDropped(false);
+}
+
 void GameScene::onBlockMoved(Ref *sender, Touch *touch, Event *event)
 {
 	Point point = touch->getLocation();
-	CCLOG("point: %f, %f", point.x, point.y);
+	DraggableBlock *block = (DraggableBlock *)sender;
+	Point startPoint = block->getDragStartPoint();
+
+	Point *newPoint = nullptr;
+	if (point.x - startPoint.x >= 60)
+	{
+		newPoint = new Point(startPoint.x + 110, startPoint.y);
+	} 
+	else if (point.x - startPoint.x <= -60)
+	{
+		newPoint = new Point(startPoint.x - 110, startPoint.y);
+	}
+	else if (point.y - startPoint.y >= 60)
+	{
+		newPoint = new Point(startPoint.x, startPoint.y + 110);
+	}
+	else if (point.y - startPoint.y <= -60)
+	{
+		newPoint = new Point(startPoint.x, startPoint.y - 110);
+	}
+
+	if (newPoint)
+	{
+		block->setDropped(true);
+		block->moveTo(*newPoint, 0.1f);
+	}
 }
 
 void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
 {
 	DraggableBlock *block = (DraggableBlock *)sender;
-	Point point = block->getDragStartPoint();
-	block->setPosition(point);
+	if (!block->isDropped())
+	{
+		block->revert();
+	}
 }

@@ -20,11 +20,17 @@ public:
 	{
 		return m_dragStartDistance;
 	};
+	bool isDropped() const { return m_dropped; }
+	void setDropped(bool val) { m_dropped = val; }
+
+	void revert();
+	void moveTo(Point &newPoint, float interval = 0.2f);
 
 CC_CONSTRUCTOR_ACCESS:
 	DraggableBlock() :
 		m_dragStartPoint(0, 0),
-		m_dragStartDistance(0, 0) {}
+		m_dragStartDistance(0, 0),
+		m_dropped(false) {}
 	virtual ~DraggableBlock() {}
 
 	virtual bool init(const Color4B& bgColor,
@@ -37,6 +43,7 @@ CC_CONSTRUCTOR_ACCESS:
 private:
 	Size m_dragStartDistance;
 	Point m_dragStartPoint;
+	bool m_dropped;
 	CC_DISALLOW_COPY_AND_ASSIGN(DraggableBlock);
 };
 

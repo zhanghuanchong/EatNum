@@ -46,6 +46,10 @@ bool DraggableBlock::init(const Color4B& bgColor,
 			}
 		}, 
 		[onTouchMoved, this](Ref *pSender, Touch *touch, Event *event) {
+			if (this->isDropped())
+			{
+				return;
+			}
 			Point touchPoint = touch->getLocation();
 			this->setPosition(Point(touchPoint.x - this->m_dragStartDistance.width,
 				touchPoint.y - this->m_dragStartDistance.height));
@@ -63,4 +67,16 @@ bool DraggableBlock::init(const Color4B& bgColor,
 				onTouchCancelled(this, touch, event);
 			}
 		});
+}
+
+void DraggableBlock::revert()
+{
+	this->moveTo(m_dragStartPoint);
+}
+
+void DraggableBlock::moveTo(Point &newPoint, float interval/* = 0.2f */)
+{
+	MoveTo *move = MoveTo::create(interval, newPoint);
+	EaseSineInOut *ease = EaseSineInOut::create(move);
+	this->runAction(ease);
 }
