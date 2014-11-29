@@ -27,6 +27,8 @@ public:
 		this->m_title->setString(newTitle);
 	}
 
+	void setBgColor(Color4B &color);
+
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
 		m_bg(nullptr), 

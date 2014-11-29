@@ -217,5 +217,55 @@ void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
 				block->updateValue(oldValue + 1);
 			}
 		}
+		this->checkIfDone();
 	}
+}
+
+void GameScene::checkIfDone()
+{
+	int visibleCount = 0;
+	for (size_t i = 0; i < m_blocks.size(); i++)
+	{
+		DraggableBlock *b = (DraggableBlock *)m_blocks.at(i);
+		if (b->isVisible())
+		{
+			visibleCount++;
+		}
+	}
+	if (visibleCount == 1)
+	{
+		this->showDoneLayer();
+	}
+}
+
+void GameScene::showDoneLayer()
+{
+	if (m_doneLayer == nullptr)
+	{
+		ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
+			Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
+		});
+
+		ScalableSprite *btnNext = ScalableSprite::create("next.png", [this](){
+
+		});
+		m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
+	}
+	this->addChild(m_doneLayer, 9999);
+}
+
+void GameScene::showFailLayer()
+{
+	if (m_failLayer == nullptr)
+	{
+		ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
+			Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
+		});
+
+		ScalableSprite *btnReload = ScalableSprite::create("replay.png", [this](){
+			this->initBlocks();
+		});
+		m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);
+	}
+	this->addChild(m_failLayer, 9999);
 }

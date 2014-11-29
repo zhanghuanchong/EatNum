@@ -31,6 +31,8 @@ bool HomeScene::init()
 
 void HomeScene::onEnterTransitionDidFinish()
 {
+	Scene::onEnterTransitionDidFinish();
+
 	MoveTo *actionDown = MoveTo::create(0.5, Vec2(U::cx - 20, U::cy + 40));
 	MoveTo *actionUp = MoveTo::create(0.5, Vec2(U::cx - 20, U::cy + 70));
 	Sequence *seq = Sequence::createWithTwoActions(

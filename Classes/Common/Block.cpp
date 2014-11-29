@@ -164,3 +164,16 @@ bool Block::init(const Color4B& bgColor,
 
 	return ret;
 }
+
+void Block::setBgColor(Color4B &bgColor)
+{
+	GLubyte *buffer = (GLubyte *)malloc(sizeof(GLubyte)* 4);
+	buffer[0] = bgColor.r;
+	buffer[1] = bgColor.g;
+	buffer[2] = bgColor.b;
+	buffer[3] = bgColor.a;
+	
+	auto tex = new Texture2D();
+	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, this->getContentSize());
+	m_bg->setTexture(tex);
+}

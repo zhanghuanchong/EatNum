@@ -95,10 +95,11 @@ int DraggableBlock::getValue()
 
 void DraggableBlock::decrease()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	//throw std::logic_error("The method or operation is not implemented.");
 }
 
 void DraggableBlock::updateValue(int newValue)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	this->setTitle(to_string(newValue));
+	this->setBgColor(U::getColorOfBlockValue(newValue));
 }
