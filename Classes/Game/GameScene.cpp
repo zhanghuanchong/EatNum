@@ -49,6 +49,7 @@ bool GameScene::init()
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
 		this->initBlocks();
+		this->scaleBlocks(0);
 	});
 	btnReload->setPosition(U::cx + 80, 50);
 	this->addChild(btnReload);
@@ -130,15 +131,30 @@ void GameScene::initBlocks()
 				}
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
 				this->addChild(block, 10);
+				block->setScale(0.9f);
 				this->m_blocks.pushBack(block);
 			}
 		}
 	}
 }
 
-void GameScene::onEnterTransitionDidFinish()
+void GameScene::onEnter()
 {
+	Scene::onEnter();
+	this->scaleBlocks();
+}
 
+void GameScene::scaleBlocks(float delay /*= 0.3*/)
+{
+	for (size_t i = 0; i < m_blocks.size(); i++)
+	{
+		Block *block = m_blocks.at(i);
+		Sequence *s = Sequence::createWithTwoActions(
+			DelayTime::create(i * 0.01 + delay),
+			EaseBackOut::create(ScaleTo::create(0.2, 1))
+			);
+		block->runAction(s);
+	}
 }
 
 void GameScene::onBlockBegan(Ref *sender, Touch *touch, Event *event)
@@ -263,6 +279,7 @@ void GameScene::showFailLayer()
 		});
 
 		ScalableSprite *btnReload = ScalableSprite::create("replay.png", [this](){
+			m_failLayer->removeFromParent();
 			this->initBlocks();
 		});
 		m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);

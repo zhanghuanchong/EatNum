@@ -19,9 +19,10 @@ CC_CONSTRUCTOR_ACCESS:
 
 	virtual bool initWithLevel(int level, int chapter);
 	virtual bool init();
-	virtual void onEnterTransitionDidFinish();
+	virtual void onEnter();
 
 	void initBlocks();
+	void scaleBlocks(float delay = 0.3);
 	void checkIfDone();
 	void showDoneLayer();
 	void showFailLayer();
