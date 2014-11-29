@@ -97,6 +97,8 @@ void GameScene::initBlocks()
 		block->removeFromParentAndCleanup(true);
 	}
 
+	m_blocks.clear();
+
 	rapidjson::Value& levelData = U::getLevel(m_nChapter, m_nLevel);
 	int x = U::cx - 2 * 100 - 50 - 2 * 10;
 	int y = U::cy + 3 * 100 + 2 * 10 + 5;
@@ -256,33 +258,32 @@ void GameScene::checkIfDone()
 
 void GameScene::showDoneLayer()
 {
-	if (m_doneLayer == nullptr)
-	{
-		ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
-			Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
-		});
+	ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
+		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
+	});
 
-		ScalableSprite *btnNext = ScalableSprite::create("next.png", [this](){
-
-		});
-		m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
-	}
+	ScalableSprite *btnNext = ScalableSprite::create("next.png", [this](){
+		m_doneLayer->removeFromParent();
+		m_doneLayer = nullptr;
+		this->m_nLevel++;
+		this->initBlocks();
+		this->scaleBlocks(0);
+	});
+	m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
 	this->addChild(m_doneLayer, 9999);
 }
 
 void GameScene::showFailLayer()
 {
-	if (m_failLayer == nullptr)
-	{
-		ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
-			Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
-		});
+	ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
+		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
+	});
 
-		ScalableSprite *btnReload = ScalableSprite::create("replay.png", [this](){
-			m_failLayer->removeFromParent();
-			this->initBlocks();
-		});
-		m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);
-	}
+	ScalableSprite *btnReload = ScalableSprite::create("replay.png", [this](){
+		m_failLayer->removeFromParent();
+		m_failLayer = nullptr;
+		this->initBlocks();
+	});
+	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);
 	this->addChild(m_failLayer, 9999);
 }
