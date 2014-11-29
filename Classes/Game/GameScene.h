@@ -11,7 +11,8 @@ public:
 CC_CONSTRUCTOR_ACCESS:
 	GameScene() :
 		m_nChapter(0),
-		m_nLevel(0) {}
+		m_nLevel(0),
+		m_playArea(0, 0, 0, 0) {}
 
 	virtual bool initWithLevel(int level, int chapter);
 	virtual bool init();
@@ -26,5 +27,6 @@ private:
 	int m_nChapter;
 	int m_nLevel;
 	Vector<Block *> m_blocks;
+	Rect m_playArea;
 };
 

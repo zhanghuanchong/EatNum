@@ -17,6 +17,16 @@ public:
 		const touchCallback& onTouchMoved = nullptr,
 		const touchCallback& onTouchCancelled = nullptr);
 
+	const std::string &getTitle() const 
+	{
+		return this->m_title->getString(); 
+	}
+
+	virtual void setTitle(const string &newTitle) 
+	{
+		this->m_title->setString(newTitle);
+	}
+
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
 		m_bg(nullptr), 

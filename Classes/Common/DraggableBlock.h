@@ -26,6 +26,11 @@ public:
 	void revert();
 	void moveTo(Point &newPoint, float interval = 0.2f);
 
+	virtual void setTitle(const string &newTitle);
+	int getValue();
+	void decrease();
+	void updateValue(int newValue);
+
 CC_CONSTRUCTOR_ACCESS:
 	DraggableBlock() :
 		m_dragStartPoint(0, 0),

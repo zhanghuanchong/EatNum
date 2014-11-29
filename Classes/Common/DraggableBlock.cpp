@@ -80,3 +80,25 @@ void DraggableBlock::moveTo(Point &newPoint, float interval/* = 0.2f */)
 	EaseSineInOut *ease = EaseSineInOut::create(move);
 	this->runAction(ease);
 }
+
+void DraggableBlock::setTitle(const string &newTitle)
+{
+	Block::setTitle(newTitle);
+
+}
+
+int DraggableBlock::getValue()
+{
+	const std::string &v = this->getTitle();
+	return atoi(v.c_str());
+}
+
+void DraggableBlock::decrease()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void DraggableBlock::updateValue(int newValue)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}

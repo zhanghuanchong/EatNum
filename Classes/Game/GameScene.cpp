@@ -55,6 +55,7 @@ bool GameScene::init()
 
 	int x = U::cx - 2 * 100 - 50 - 2 * 10;
 	int y = U::cy - 3 * 100 - 2 * 10 - 5;
+	m_playArea.setRect(x, y, 5 * 100 + 4 * 10, 6 * 100 + 5 * 10);
 	int yj = y;
 	for (int i = 0; i < 6; i++)
 	{
@@ -170,7 +171,7 @@ void GameScene::onBlockMoved(Ref *sender, Touch *touch, Event *event)
 		newPoint = new Point(startPoint.x, startPoint.y - 110);
 	}
 
-	if (newPoint)
+	if (newPoint && m_playArea.containsPoint(*newPoint))
 	{
 		block->setDropped(true);
 		block->moveTo(*newPoint, 0.1f);
@@ -183,5 +184,38 @@ void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
 	if (!block->isDropped())
 	{
 		block->revert();
+	}
+	else 
+	{
+		Vec2 pos = block->getPosition();
+		DraggableBlock *under = nullptr;
+		for (size_t i = 0; i < m_blocks.size(); i++)
+		{
+			DraggableBlock *b = (DraggableBlock *)m_blocks.at(i);
+			if (!b->isVisible() || b == block)
+			{
+				continue;
+			}
+			Vec2 p = b->getPosition();
+			if (pos.distanceSquared(p) < 1)
+			{
+				under = b;
+				break;
+			}
+		}
+		if (under == nullptr)
+		{
+			block->decrease();
+		}
+		else
+		{
+			under->setVisible(false);
+			int underValue = under->getValue();
+			int oldValue = block->getValue();
+			if (underValue == oldValue - 1)
+			{
+				block->updateValue(oldValue + 1);
+			}
+		}
 	}
 }
