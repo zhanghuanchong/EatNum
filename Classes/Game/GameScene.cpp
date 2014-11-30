@@ -265,6 +265,7 @@ void GameScene::showDoneLayer()
 	ScalableSprite *btnNext = ScalableSprite::create("next.png", [this](){
 		m_doneLayer->removeFromParent();
 		m_doneLayer = nullptr;
+		// TODO: add the level and chapter
 		this->m_nLevel++;
 		this->initBlocks();
 		this->scaleBlocks(0);
