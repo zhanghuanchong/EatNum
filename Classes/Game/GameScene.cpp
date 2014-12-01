@@ -33,14 +33,6 @@ bool GameScene::init()
 	auto bgLayer = LayerColor::create(Color4B(97, 112, 116, 255)); //92,106,110
 	this->addChild(bgLayer);
 
-	stringstream s;
-	s << U::t("Level") << " " << this->m_nChapter + 1 << " - " << this->m_nLevel + 1;
-
-	auto label = U::labelWithoutTranslate(s.str(), 35, 1);
-	label->setPosition(U::width - 20, U::height - 30);
-	label->setAnchorPoint(Vec2(1, 0.5));
-	this->addChild(label, 1001);
-
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
@@ -48,7 +40,7 @@ bool GameScene::init()
 	this->addChild(btnPlay, 1001);
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
-		this->initBlocks();
+		this->loadLevel();
 		this->scaleBlocks(0);
 	});
 	btnReload->setPosition(U::cx + 80, 50);
@@ -72,9 +64,38 @@ bool GameScene::init()
 		}
 	}
 
+	this->loadLevel();
+
+    return true;
+}
+
+void GameScene::loadLevel()
+{
+	if (m_levelIndicator == nullptr)
+	{
+		auto label = U::labelWithoutTranslate("", 35, 1);
+		label->setPosition(U::width - 20, U::height - 30);
+		label->setAnchorPoint(Vec2(1, 0.5));
+		this->addChild(label, 1001);
+
+		m_levelIndicator = label;
+	}
+
+	stringstream s;
+	s << U::t("Level") << " " << this->m_nChapter + 1 << " - " << this->m_nLevel + 1;
+	m_levelIndicator->setString(s.str());
+
+	if (m_tipLabel)
+	{
+		m_tipLabel->removeFromParent();
+		m_tipLabel = nullptr;
+	}
+
 	rapidjson::Value& levelData = U::getLevel(m_nChapter, m_nLevel);
 	if (levelData.HasMember("tip"))
 	{
+		int yj = U::cy + 3 * 100 + 2 * 10 + 5;
+
 		const char* tip = levelData["tip"].GetString();
 		auto tipLabel = U::label(tip, 45, 1);
 		tipLabel->setHorizontalAlignment(TextHAlignment::CENTER);
@@ -82,15 +103,10 @@ bool GameScene::init()
 		tipLabel->setDimensions(U::width, yj - 30);
 		tipLabel->setPosition(U::cx, (yj - 30) / 2);
 		this->addChild(tipLabel, 1000);
+
+		this->m_tipLabel = tipLabel;
 	}
 
-	this->initBlocks();
-
-    return true;
-}
-
-void GameScene::initBlocks()
-{
 	for (int i = 0; i < m_blocks.size(); i++)
 	{
 		Block *block = m_blocks.at(i);
@@ -99,7 +115,6 @@ void GameScene::initBlocks()
 
 	m_blocks.clear();
 
-	rapidjson::Value& levelData = U::getLevel(m_nChapter, m_nLevel);
 	int x = U::cx - 2 * 100 - 50 - 2 * 10;
 	int y = U::cy + 3 * 100 + 2 * 10 + 5;
 
@@ -267,7 +282,7 @@ void GameScene::showDoneLayer()
 		m_doneLayer = nullptr;
 		// TODO: add the level and chapter
 		this->m_nLevel++;
-		this->initBlocks();
+		this->loadLevel();
 		this->scaleBlocks(0);
 	});
 	m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
@@ -283,7 +298,7 @@ void GameScene::showFailLayer()
 	ScalableSprite *btnReload = ScalableSprite::create("replay.png", [this](){
 		m_failLayer->removeFromParent();
 		m_failLayer = nullptr;
-		this->initBlocks();
+		this->loadLevel();
 	});
 	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);
 	this->addChild(m_failLayer, 9999);

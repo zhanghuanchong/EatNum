@@ -14,6 +14,8 @@ CC_CONSTRUCTOR_ACCESS:
 		m_nChapter(0),
 		m_nLevel(0),
 		m_playArea(0, 0, 0, 0),
+		m_levelIndicator(nullptr),
+		m_tipLabel(nullptr),
 		m_doneLayer(nullptr), 
 		m_failLayer(nullptr) {}
 
@@ -21,7 +23,7 @@ CC_CONSTRUCTOR_ACCESS:
 	virtual bool init();
 	virtual void onEnter();
 
-	void initBlocks();
+	void loadLevel();
 	void scaleBlocks(float delay = 0.3);
 	void checkIfDone();
 	void showDoneLayer();
@@ -34,6 +36,8 @@ CC_CONSTRUCTOR_ACCESS:
 private:
 	int m_nChapter;
 	int m_nLevel;
+	Label *m_levelIndicator;
+	Label *m_tipLabel;
 	Vector<Block *> m_blocks;
 	Rect m_playArea;
 	LevelLayer *m_doneLayer;
