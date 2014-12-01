@@ -1,7 +1,7 @@
 #pragma once
 #include "Util.h"
 
-class LevelLayer : public LayerColor
+class LevelLayer : public Layer
 {
 public:
 	static LevelLayer *create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight);
@@ -12,9 +12,11 @@ public:
 CC_CONSTRUCTOR_ACCESS:
 	LevelLayer() : 
 		m_btnLeft(nullptr),
-		m_btnRight(nullptr) {}
+		m_btnRight(nullptr),
+		m_bgLayer(nullptr) {}
 
 private:
+	LayerColor *m_bgLayer;
 	Sprite *m_btnLeft;
 	Sprite *m_btnRight;
 };

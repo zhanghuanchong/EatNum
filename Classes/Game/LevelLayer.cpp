@@ -15,12 +15,16 @@ LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *b
 
 bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 {
-	if (!LayerColor::initWithColor(color))
+	if (!Layer::init())
 	{
 		return false;
 	}
 	m_btnLeft = btnLeft;
 	m_btnRight = btnRight;
+
+	m_bgLayer = LayerColor::create(color);
+	this->addChild(m_bgLayer);
+	m_bgLayer->setVisible(false);
 	
 	m_btnLeft->setPosition(-45, U::cy);
 	this->addChild(m_btnLeft);
@@ -40,8 +44,13 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 
 void LevelLayer::onEnter()
 {
-	LayerColor::onEnter();
+	Layer::onEnter();
 
-	m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2, Vec2(U::cx - 90, U::cy))));
-	m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2, Vec2(U::cx + 90, U::cy))));
+	Sequence *seq = Sequence::createWithTwoActions(DelayTime::create(0.5), CallFunc::create([this](){
+		m_bgLayer->setVisible(true);
+
+		m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx - 90, U::cy))));
+		m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy))));
+	}));
+	this->runAction(seq);
 }
