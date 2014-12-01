@@ -28,6 +28,13 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	m_btnRight->setPosition(U::width + 45, U::cy);
 	this->addChild(m_btnRight);
 
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->setSwallowTouches(true);
+	listener->onTouchBegan = [](Touch *touch, Event *event) {
+		return true;
+	};
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+
 	return true;
 }
 
