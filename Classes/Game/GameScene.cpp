@@ -242,12 +242,17 @@ void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
 		}
 		else
 		{
-			under->setVisible(false);
 			int underValue = under->getValue();
 			int oldValue = block->getValue();
 			if (underValue == oldValue - 1)
 			{
 				block->updateValue(oldValue + 1);
+				under->setVisible(false);
+			}
+			else
+			{
+				block->revert();
+				return;
 			}
 		}
 		this->checkIfDone();

@@ -95,11 +95,26 @@ int DraggableBlock::getValue()
 
 void DraggableBlock::decrease()
 {
-	//throw std::logic_error("The method or operation is not implemented.");
+	int v = this->getValue();
+	if (v <= 0)
+	{
+		return;
+	}
+	else if (v == 1)
+	{
+		v = 0;
+	}
+	else
+	{
+		v -= 2;
+	}
+	this->updateValue(v);
 }
 
 void DraggableBlock::updateValue(int newValue)
 {
 	this->setTitle(to_string(newValue));
 	this->setBgColor(U::getColorOfBlockValue(newValue));
+
+	// TODO: Disable the block after changing to zero!
 }
