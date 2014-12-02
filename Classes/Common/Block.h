@@ -28,6 +28,8 @@ public:
 	}
 
 	void setBgColor(Color4B &color);
+	void lock(bool addLocker = false);
+	void unlock();
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
@@ -35,6 +37,8 @@ CC_CONSTRUCTOR_ACCESS:
 		m_title(nullptr), 
 		m_shader(nullptr), 
 		m_card(nullptr),
+		m_listener(nullptr),
+		m_locker(nullptr),
 		m_bClicked(false), 
 		m_bInteractive(true),
 		m_oldZOrder(0) {}
@@ -59,6 +63,8 @@ private:
 	bool m_bClicked;
 	bool m_bInteractive;
 	int m_oldZOrder;
+	EventListener *m_listener;
+	Sprite *m_locker;
 	CC_DISALLOW_COPY_AND_ASSIGN(Block);
 };
 

@@ -31,8 +31,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	Util::init();
 
-    // create a scene. it's an autorelease object
-	auto scene = GameScene::createWithLevel(0, 0);
+	// create a scene. it's an autorelease object
+	//auto scene = SplashScene::create();
+	//auto scene = GameScene::createWithLevel(0, 0);
+	auto scene = ChapterScene::create();
 
     // run
     director->runWithScene(scene);

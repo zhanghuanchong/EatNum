@@ -159,7 +159,9 @@ bool Block::init(const Color4B& bgColor,
 				onTouchCancelled(this, touch, event);
 			}
 		};
-		this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+		this->m_listener = listener;
+
+		this->unlock();
 	}
 
 	return ret;
@@ -176,4 +178,34 @@ void Block::setBgColor(Color4B &bgColor)
 	auto tex = new Texture2D();
 	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, this->getContentSize());
 	m_bg->setTexture(tex);
+}
+
+void Block::lock(bool addLocker /*= false*/)
+{
+	this->getEventDispatcher()->removeEventListenersForTarget(this);
+
+	if (addLocker)
+	{
+		if (m_locker == nullptr)
+		{
+			m_locker = Sprite::create("locker.png");
+			const Size& s = this->getContentSize();
+			m_locker->setAnchorPoint(Vec2(1, 0));
+			m_locker->setPosition(s.width - 1, 1);
+			this->addChild(m_locker, 2);
+		}
+		m_locker->setVisible(true);
+	}
+}
+
+void Block::unlock()
+{
+	if (m_listener)
+	{
+		this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(this->m_listener, this);
+	}
+	if (m_locker)
+	{
+		m_locker->setVisible(false);
+	}
 }
