@@ -36,7 +36,7 @@
     <key>Move to one less, \ngain one...</key>
     <string>移动到比自己小1的\n数字上, 增加1...</string>
     <key>Move to empty \nspace, lose two...</key>
-    <string>移动到空格子里，\n减少1...</string>
+    <string>移动到空格子里，\n减少2...</string>
     <key>Ones can still move\n on though...</key>
     <string>1可以再移动一次\n变成0...</string>
     <key>Zeros can't move...</key>

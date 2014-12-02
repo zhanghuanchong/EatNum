@@ -262,17 +262,31 @@ void GameScene::onBlockEnded(Ref *sender, Touch *touch, Event *event)
 void GameScene::checkIfDone()
 {
 	int visibleCount = 0;
+	int zeroCount = 0;
 	for (size_t i = 0; i < m_blocks.size(); i++)
 	{
 		DraggableBlock *b = (DraggableBlock *)m_blocks.at(i);
 		if (b->isVisible())
 		{
-			visibleCount++;
+			int v = b->getValue();
+			if (v >= 0)
+			{
+				visibleCount++;
+
+				if (v == 0)
+				{
+					zeroCount++;
+				}
+			}
 		}
 	}
 	if (visibleCount == 1)
 	{
 		this->showDoneLayer();
+	}
+	else if (zeroCount == visibleCount)
+	{
+		this->showFailLayer();
 	}
 }
 

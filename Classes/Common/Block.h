@@ -34,7 +34,7 @@ CC_CONSTRUCTOR_ACCESS:
 		m_bg(nullptr), 
 		m_title(nullptr), 
 		m_shader(nullptr), 
-		m_card(nullptr), 
+		m_card(nullptr),
 		m_bClicked(false), 
 		m_bInteractive(true),
 		m_oldZOrder(0) {}

@@ -90,6 +90,10 @@ void DraggableBlock::setTitle(const string &newTitle)
 int DraggableBlock::getValue()
 {
 	const std::string &v = this->getTitle();
+	if (v.length() <= 0)
+	{
+		return -1;
+	}
 	return atoi(v.c_str());
 }
 
@@ -116,5 +120,8 @@ void DraggableBlock::updateValue(int newValue)
 	this->setTitle(to_string(newValue));
 	this->setBgColor(U::getColorOfBlockValue(newValue));
 
-	// TODO: Disable the block after changing to zero!
+	if (newValue == 0)
+	{
+		this->getEventDispatcher()->removeEventListenersForTarget(this);
+	}
 }
