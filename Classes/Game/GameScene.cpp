@@ -3,6 +3,7 @@
 #include "Common/DraggableBlock.h"
 #include "Common/ScalableSprite.h"
 #include "Levels/LevelsScene.h"
+#include "Home/HomeScene.h"
 
 GameScene * GameScene::createWithLevel(int level, int chapter)
 {
@@ -292,18 +293,52 @@ void GameScene::checkIfDone()
 
 void GameScene::showDoneLayer()
 {
+	bool showNext = true;
+	int nextChapter = m_nChapter;
+	int nextLevel = m_nLevel;
+	int maxLevel = U::getLevelCount(m_nChapter) - 1;
+	if (m_nLevel == maxLevel)
+	{
+		int maxChapter = U::getChapterCount() - 1;
+		if (m_nChapter == maxChapter)
+		{
+			showNext = false;
+		}
+		else
+		{
+			nextChapter = m_nChapter + 1;
+			nextLevel = 0;
+		}
+	}
+	else
+	{
+		nextLevel = m_nLevel + 1;
+	}
+	U::userDefault->setIntegerForKey("currentChapter", nextChapter);
+	U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+
 	ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
 
-	ScalableSprite *btnNext = ScalableSprite::create("next.png", [this](){
-		m_doneLayer->removeFromParent();
-		m_doneLayer = nullptr;
-		// TODO: add the level and chapter
-		this->m_nLevel++;
-		this->loadLevel();
-		this->scaleBlocks(0);
-	});
+	ScalableSprite *btnNext = nullptr;
+	if (showNext)
+	{
+		btnNext = ScalableSprite::create("next.png", [this, nextChapter, nextLevel, showNext](){
+			m_doneLayer->removeFromParent();
+			m_doneLayer = nullptr;
+			m_nChapter = nextChapter;
+			m_nLevel = nextLevel;
+			this->loadLevel();
+			this->scaleBlocks(0);
+		});
+	}
+	else
+	{
+		btnNext = ScalableSprite::create("home.png", [this, nextChapter, nextLevel, showNext](){
+			Util::director->replaceScene(TransitionFade::create(0.5f, HomeScene::create()));
+		});
+	}
 	m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
 	this->addChild(m_doneLayer, 9999);
 }

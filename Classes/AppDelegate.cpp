@@ -24,7 +24,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	}
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    //director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -32,9 +32,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	Util::init();
 
 	// create a scene. it's an autorelease object
-	//auto scene = SplashScene::create();
+	auto scene = SplashScene::create();
 	//auto scene = GameScene::createWithLevel(0, 0);
-	auto scene = ChapterScene::create();
+	//auto scene = ChapterScene::create();
 
     // run
     director->runWithScene(scene);

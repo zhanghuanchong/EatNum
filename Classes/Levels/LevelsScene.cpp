@@ -50,6 +50,9 @@ bool LevelsScene::init()
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
 
+	int currentChapter = U::userDefault->getIntegerForKey("currentChapter", 0);
+	int currentLevel = U::userDefault->getIntegerForKey("currentLevel", 0);
+
 	int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)
 	{
@@ -57,6 +60,10 @@ bool LevelsScene::init()
 			GameScene *ls = GameScene::createWithLevel(i, this->m_nChapter);
 			Util::director->replaceScene(TransitionFade::create(0.5f, ls));
 		});
+		if ((this->m_nChapter == currentChapter && i > currentLevel) || this->m_nChapter > currentChapter)
+		{
+			block->lock(true);
+		}
 		float x = U::cx + ((i % 5) * 2 - 4) * 55;
 		float y = U::cy + ((19 - i) / 5 - 1.5) * 110;
 		block->setPosition(x, y);

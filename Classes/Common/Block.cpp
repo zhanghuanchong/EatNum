@@ -191,7 +191,8 @@ void Block::lock(bool addLocker /*= false*/)
 			m_locker = Sprite::create("locker.png");
 			const Size& s = this->getContentSize();
 			m_locker->setAnchorPoint(Vec2(1, 0));
-			m_locker->setPosition(s.width - 1, 1);
+			m_locker->setPosition(s.width - 2, 2);
+			m_locker->setScale(0.6f);
 			this->addChild(m_locker, 2);
 		}
 		m_locker->setVisible(true);

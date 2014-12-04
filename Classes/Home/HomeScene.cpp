@@ -1,6 +1,7 @@
 #include "HomeScene.h"
 #include "Levels/ChapterScene.h"
 #include "Common/ScalableSprite.h"
+#include "Game/GameScene.h"
 
 bool HomeScene::init()
 {
@@ -21,7 +22,16 @@ bool HomeScene::init()
 	this->addChild(labelNum);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("play.png", [](){
-		Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
+		bool tutorial = U::userDefault->getBoolForKey("tutorial", true);
+		if (tutorial)
+		{
+			U::userDefault->setBoolForKey("tutorial", false);
+			Util::director->replaceScene(TransitionSlideInR::create(0.2f, GameScene::createWithLevel(0, 0)));
+		}
+		else
+		{
+			Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
+		}
 	});
 	btnPlay->setPosition(U::cx, 120);
 	this->addChild(btnPlay);
