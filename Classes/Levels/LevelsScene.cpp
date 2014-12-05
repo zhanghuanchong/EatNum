@@ -33,15 +33,15 @@ bool LevelsScene::init()
 	this->addChild(bgLayer);
 
 	auto label = U::label("Select Level", 50, 1);
-	label->setPosition(U::cx, U::height * .85);
+	label->setPosition(U::cx, U::height * .82);
 	this->addChild(label);
 
 	stringstream s;
 	s << U::t("Chapter") << " " << this->m_nChapter + 1;
 
 	auto labelChapter = U::labelWithoutTranslate(s.str(), 35, 1);
-	labelChapter->setPosition(U::width - 20, U::height - 30);
-	labelChapter->setAnchorPoint(Vec2(1, 0.5));
+	labelChapter->setPosition(U::cx - 270, U::cy + 230);
+	labelChapter->setAnchorPoint(Vec2(0, 0));
 	this->addChild(labelChapter);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [](){

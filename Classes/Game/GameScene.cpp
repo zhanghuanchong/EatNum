@@ -75,8 +75,8 @@ void GameScene::loadLevel()
 	if (m_levelIndicator == nullptr)
 	{
 		auto label = U::labelWithoutTranslate("", 35, 1);
-		label->setPosition(U::width - 20, U::height - 30);
-		label->setAnchorPoint(Vec2(1, 0.5));
+		label->setPosition(U::cx - 270, U::cy + 350);
+		label->setAnchorPoint(Vec2(0, 0));
 		this->addChild(label, 1001);
 
 		m_levelIndicator = label;

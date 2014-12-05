@@ -15,7 +15,7 @@ bool ChapterScene::init()
 	this->addChild(bgLayer);
 
 	auto label = U::label("Select Chapter", 50, 1);
-	label->setPosition(U::cx, U::height * .85);
+	label->setPosition(U::cx, U::height * .82);
 	this->addChild(label);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [](){
