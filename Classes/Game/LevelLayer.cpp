@@ -38,6 +38,7 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	});
 	m_share->setPosition(U::width - 10, 10);
 	m_share->setAnchorPoint(Vec2(1, 0));
+	m_share->setVisible(false);
 	this->addChild(m_share, 1000);
 
 	m_favorite = ScalableSprite::create("favorite.png", [](){
@@ -45,6 +46,7 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	});
 	m_favorite->setPosition(U::width - 78, 10);
 	m_favorite->setAnchorPoint(Vec2(1, 0));
+	m_favorite->setVisible(false);
 	this->addChild(m_favorite, 1000);
 
 	m_gameCenter = ScalableSprite::create("gamecenter.png", [](){
@@ -52,6 +54,7 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	});
 	m_gameCenter->setPosition(U::width - 146, 10);
 	m_gameCenter->setAnchorPoint(Vec2(1, 0));
+	m_gameCenter->setVisible(false);
 	this->addChild(m_gameCenter, 1000);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -70,6 +73,9 @@ void LevelLayer::onEnter()
 
 	Sequence *seq = Sequence::createWithTwoActions(DelayTime::create(0.5), CallFunc::create([this](){
 		m_bgLayer->setVisible(true);
+		m_share->setVisible(true);
+		m_favorite->setVisible(true);
+		m_gameCenter->setVisible(true);
 
 		m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx - 90, U::cy))));
 		m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy))));
