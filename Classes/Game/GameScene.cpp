@@ -2,6 +2,7 @@
 #include "Common/Block.h"
 #include "Common/DraggableBlock.h"
 #include "Common/ScalableSprite.h"
+#include "Common/BaseScene.h"
 #include "Levels/LevelsScene.h"
 #include "Home/HomeScene.h"
 
@@ -26,7 +27,7 @@ bool GameScene::initWithLevel(int level, int chapter)
 
 bool GameScene::init()
 {
-	if (!Scene::init())
+	if (!BaseScene::init())
 	{
 		return false;
 	}
@@ -37,14 +38,14 @@ bool GameScene::init()
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
-	btnPlay->setPosition(U::cx - 80, 50);
+	btnPlay->setPosition(U::cx - 70, 50);
 	this->addChild(btnPlay, 1001);
 
 	ScalableSprite *btnReload = ScalableSprite::create("reload.png", [this](){
 		this->loadLevel();
 		this->scaleBlocks(0);
 	});
-	btnReload->setPosition(U::cx + 80, 50);
+	btnReload->setPosition(U::cx + 70, 50);
 	this->addChild(btnReload);
 
 	int x = U::cx - 2 * 100 - 50 - 2 * 10;

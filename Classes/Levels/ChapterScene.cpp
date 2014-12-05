@@ -2,11 +2,12 @@
 #include "Home/HomeScene.h"
 #include "Common/ScalableSprite.h"
 #include "Common/Block.h"
+#include "Common/BaseScene.h"
 #include "Levels/LevelsScene.h"
 
 bool ChapterScene::init()
 {
-    if ( !Scene::init() )
+    if ( !BaseScene::init() )
     {
         return false;
 	}

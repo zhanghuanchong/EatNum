@@ -1,8 +1,9 @@
 #pragma once
 #include "Util.h"
 #include "Common/Block.h"
+#include "Common/BaseScene.h"
 
-class ChapterScene : public Scene
+class ChapterScene : public BaseScene
 {
 public:
     virtual bool init();

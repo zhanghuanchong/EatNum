@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Util.h"
+#include "Common/BaseScene.h"
 
-class LevelsScene : public Scene
+class LevelsScene : public BaseScene
 {
 public:
 	static LevelsScene *createWithChapter(int chapter);

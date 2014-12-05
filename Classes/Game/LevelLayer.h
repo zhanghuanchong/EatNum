@@ -1,5 +1,6 @@
 #pragma once
 #include "Util.h"
+#include "Common/ScalableSprite.h"
 
 class LevelLayer : public Layer
 {
@@ -19,5 +20,8 @@ private:
 	LayerColor *m_bgLayer;
 	Sprite *m_btnLeft;
 	Sprite *m_btnRight;
+	ScalableSprite *m_share;
+	ScalableSprite *m_favorite;
+	ScalableSprite *m_gameCenter;
 };
 

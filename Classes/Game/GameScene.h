@@ -1,10 +1,11 @@
 #pragma once
 #include "Util.h"
 #include "LevelLayer.h"
+#include "Common/BaseScene.h"
 
 class Block;
 
-class GameScene : public Scene
+class GameScene : public BaseScene
 {
 public:
 	static GameScene *createWithLevel(int level, int chapter);

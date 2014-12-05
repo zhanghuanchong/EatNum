@@ -1,6 +1,7 @@
 #include "LevelsScene.h"
 #include "Common/Block.h"
 #include "Common/ScalableSprite.h"
+#include "Common/BaseScene.h"
 #include "Levels/ChapterScene.h"
 #include "Game/GameScene.h"
 
@@ -24,7 +25,7 @@ bool LevelsScene::initWithChapter(int chapter)
 
 bool LevelsScene::init()
 {
-	if (!Scene::init()) 
+	if (!BaseScene::init()) 
 	{
 		return false;
 	}
