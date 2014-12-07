@@ -138,6 +138,7 @@ bool Block::init(const Color4B& bgColor,
 			Vector<FiniteTimeAction *> actionSequence;
 			actionSequence.pushBack(spawn);
 			actionSequence.pushBack(CallFunc::create([onTouchEnd, touch, event, this](){
+				U::playEffect();
 				if (onTouchEnd)
 				{
 					onTouchEnd(this, touch, event);

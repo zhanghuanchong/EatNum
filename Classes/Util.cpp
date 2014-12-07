@@ -94,12 +94,18 @@ Label * Util::labelWithoutTranslate(const string& text, float fontSize /*= 35*/,
 	return Label::createWithTTF(text, Util::fonts.at(fontIndex), fontSize);
 }
 
-void Util::playEffect(const char *effect)
+void Util::playEffect(const char *effect /*= "sound/effect.mp3"*/)
 {
 	if (Util::isEffectEnabled)
 	{
 		Util::audioEngine->playEffect(effect);
 	}
+}
+
+void Util::toggleEffect(const bool enabled)
+{
+	Util::userDefault->setBoolForKey(kConfigEffect, enabled);
+	Util::isEffectEnabled = enabled;
 }
 
 void Util::playBackgroundMusic(const char *file)

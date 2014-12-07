@@ -36,6 +36,7 @@ bool ScalableSprite::initWithFile(const std::string& filename, const std::functi
 		actions.pushBack(EaseSineIn::create(ScaleTo::create(0.1f, 1.0f)));
 		actions.pushBack(DelayTime::create(0.1f));
 		actions.pushBack(CallFunc::create([onTouchEnd, this](){
+			U::playEffect();
 			if (onTouchEnd)
 			{
 				onTouchEnd();
