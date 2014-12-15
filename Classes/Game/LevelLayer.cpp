@@ -1,5 +1,5 @@
 #include "LevelLayer.h"
-#include "Common/ScalableSprite.h"
+#include "../Common/ScalableSprite.h"
 
 LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 {

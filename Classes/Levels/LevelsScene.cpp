@@ -1,9 +1,9 @@
 #include "LevelsScene.h"
-#include "Common/Block.h"
-#include "Common/ScalableSprite.h"
-#include "Common/BaseScene.h"
-#include "Levels/ChapterScene.h"
-#include "Game/GameScene.h"
+#include "../Common/Block.h"
+#include "../Common/ScalableSprite.h"
+#include "../Common/BaseScene.h"
+#include "../Levels/ChapterScene.h"
+#include "../Game/GameScene.h"
 
 LevelsScene * LevelsScene::createWithChapter(int chapter)
 {

@@ -1,10 +1,10 @@
 #include "GameScene.h"
-#include "Common/Block.h"
-#include "Common/DraggableBlock.h"
-#include "Common/ScalableSprite.h"
-#include "Common/BaseScene.h"
-#include "Levels/LevelsScene.h"
-#include "Home/HomeScene.h"
+#include "../Common/Block.h"
+#include "../Common/DraggableBlock.h"
+#include "../Common/ScalableSprite.h"
+#include "../Common/BaseScene.h"
+#include "../Levels/LevelsScene.h"
+#include "../Home/HomeScene.h"
 
 GameScene * GameScene::createWithLevel(int level, int chapter)
 {
@@ -58,7 +58,7 @@ bool GameScene::init()
 		int xj = x;
 		for (int j = 0; j < 5; j++)
 		{
-			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false, false);
+			Block *block = Block::create(Color4B(92, 106, 110, 255), "", nullptr, Color4B::WHITE, cocos2d::Size(100, 100), false, false);
 			block->setPosition(xj + 50, yj - 60);
 			this->addChild(block, 0);
 
@@ -142,11 +142,11 @@ void GameScene::loadLevel()
 				}
 				else if (_v == 0)
 				{
-					block = Block::create(Color4B::BLACK, to_string(_v), nullptr, Color4B::WHITE, Size(100, 100), false);
+					block = Block::create(Color4B::BLACK, to_string(_v), nullptr, Color4B::WHITE, cocos2d::Size(100, 100), false);
 				}
 				else
 				{
-					block = Block::create(Color4B(102, 102, 102, 255), "", nullptr, Color4B::WHITE, Size(100, 100), false);
+					block = Block::create(Color4B(102, 102, 102, 255), "", nullptr, Color4B::WHITE, cocos2d::Size(100, 100), false);
 				}
 				block->setPosition(x + _x * 110 + 50, y - _y * 110 - 50);
 				this->addChild(block, 10);
@@ -184,26 +184,26 @@ void GameScene::onBlockBegan(Ref *sender, Touch *touch, Event *event)
 
 void GameScene::onBlockMoved(Ref *sender, Touch *touch, Event *event)
 {
-	Point point = touch->getLocation();
+	cocos2d::Point point = touch->getLocation();
 	DraggableBlock *block = (DraggableBlock *)sender;
-	Point startPoint = block->getDragStartPoint();
+	cocos2d::Point startPoint = block->getDragStartPoint();
 
-	Point *newPoint = nullptr;
+	cocos2d::Point *newPoint = nullptr;
 	if (point.x - startPoint.x >= 60)
 	{
-		newPoint = new Point(startPoint.x + 110, startPoint.y);
+		newPoint = new cocos2d::Point(startPoint.x + 110, startPoint.y);
 	} 
 	else if (point.x - startPoint.x <= -60)
 	{
-		newPoint = new Point(startPoint.x - 110, startPoint.y);
+		newPoint = new cocos2d::Point(startPoint.x - 110, startPoint.y);
 	}
 	else if (point.y - startPoint.y >= 60)
 	{
-		newPoint = new Point(startPoint.x, startPoint.y + 110);
+		newPoint = new cocos2d::Point(startPoint.x, startPoint.y + 110);
 	}
 	else if (point.y - startPoint.y <= -60)
 	{
-		newPoint = new Point(startPoint.x, startPoint.y - 110);
+		newPoint = new cocos2d::Point(startPoint.x, startPoint.y - 110);
 	}
 
 	if (newPoint && m_playArea.containsPoint(*newPoint))

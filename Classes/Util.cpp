@@ -1,13 +1,13 @@
 #include "Util.h"
 
 Director* Util::director;
-Size Util::size = Size(0, 0);
+cocos2d::Size Util::size = cocos2d::Size(0, 0);
 float Util::width;
 float Util::height;
 float Util::cx;
 float Util::cy;
-Point Util::origin = Point(0, 0);
-Point Util::center = Point(0, 0);
+cocos2d::Point Util::origin = cocos2d::Point(0, 0);
+cocos2d::Point Util::center = cocos2d::Point(0, 0);
 SpriteFrameCache* Util::spriteFrameCache;
 SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
@@ -29,7 +29,7 @@ void Util::init()
 	Util::origin = Util::director->getVisibleOrigin();
 	Util::cx = Util::origin.x + Util::width / 2;
 	Util::cy = Util::origin.y + Util::height / 2;
-	Util::center = Point(cx, cy);
+	Util::center = cocos2d::Point(cx, cy);
 
 	vector<string> paths;
 	paths.push_back("fonts");
@@ -41,7 +41,7 @@ void Util::init()
 	Util::lang = FileUtils::getInstance()->getValueMapFromFile("i18n/zh-CN.plist");
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
-	Util::fonts.push_back("fonts/FZMM.ttf");
+	Util::fonts.push_back("fonts/FZMM.TTF");
 
 	Util::isEffectEnabled = Util::userDefault->getBoolForKey(kConfigEffect, true);
 	
@@ -80,8 +80,8 @@ string Util::t( string key )
 
 cocos2d::Size Util::p( float x, float y )
 {
-	Point o = Util::origin;
-	return Size(o.x + x, o.y + y);
+	cocos2d::Point o = Util::origin;
+	return cocos2d::Size(o.x + x, o.y + y);
 }
 
 Label *Util::label(const char *text, float fontSize, int fontIndex)

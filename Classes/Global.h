@@ -6,10 +6,11 @@
 #include "json/rapidjson.h"
 #include "json/document.h"
 
+using namespace std;
+
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
-using namespace std;
 using namespace rapidjson;
 
 static const char *kConfigMusic = "Music";

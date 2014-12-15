@@ -20,9 +20,9 @@ bool ScalableSprite::initWithFile(const std::string& filename, const std::functi
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = [](Touch *touch, Event *event) {
 		auto target = static_cast<Sprite*>(event->getCurrentTarget());
-		Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-		Size s = target->getContentSize();
-		Rect rect = Rect(0, 0, s.width, s.height);
+		cocos2d::Point locationInNode = target->convertToNodeSpace(touch->getLocation());
+		cocos2d::Size s = target->getContentSize();
+		cocos2d::Rect rect = cocos2d::Rect(0, 0, s.width, s.height);
 		return rect.containsPoint(locationInNode);
 	};
 	listener->onTouchEnded = [onTouchEnd, this](Touch *touch, Event *event) {

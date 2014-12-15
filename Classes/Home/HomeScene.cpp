@@ -1,7 +1,7 @@
 #include "HomeScene.h"
-#include "Levels/ChapterScene.h"
-#include "Common/ScalableSprite.h"
-#include "Game/GameScene.h"
+#include "../Levels/ChapterScene.h"
+#include "../Common/ScalableSprite.h"
+#include "../Game/GameScene.h"
 
 bool HomeScene::init()
 {
