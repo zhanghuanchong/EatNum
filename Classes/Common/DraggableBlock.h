@@ -11,12 +11,12 @@ public:
 		const touchCallback& onTouchEnd = nullptr,
 		const touchCallback& onTouchCancelled = nullptr);
 
-	inline Point getDragStartPoint() 
+	inline cocos2d::Point getDragStartPoint() 
 	{
 		return m_dragStartPoint;
 	};
 
-	inline Size getDragStartDistance()
+	inline cocos2d::Size getDragStartDistance()
 	{
 		return m_dragStartDistance;
 	};
@@ -24,7 +24,7 @@ public:
 	void setDropped(bool val) { m_dropped = val; }
 
 	void revert();
-	void moveTo(Point &newPoint, float interval = 0.2f);
+	void moveTo(cocos2d::Point &newPoint, float interval = 0.2f);
 
 	virtual void setTitle(const string &newTitle);
 	int getValue();
@@ -46,8 +46,8 @@ CC_CONSTRUCTOR_ACCESS:
 		const touchCallback& onTouchCancelled);
 
 private:
-	Size m_dragStartDistance;
-	Point m_dragStartPoint;
+	cocos2d::Size m_dragStartDistance;
+	cocos2d::Point m_dragStartPoint;
 	bool m_dropped;
 	CC_DISALLOW_COPY_AND_ASSIGN(DraggableBlock);
 };

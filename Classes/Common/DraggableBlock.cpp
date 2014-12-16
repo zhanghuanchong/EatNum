@@ -29,15 +29,15 @@ bool DraggableBlock::init(const Color4B& bgColor,
 		title, 
 		onTouchEnd, 
 		Color4B::WHITE, 
-		Size(100, 100), 
+		cocos2d::Size(100, 100), 
 		true, 
 		true, 
 		[onTouchBegan, this](Ref *pSender, Touch *touch, Event *event) {
-			Point currentPoint = this->getPosition();
+			cocos2d::Point currentPoint = this->getPosition();
 			this->m_dragStartPoint = currentPoint;
 
-			Point touchPoint = touch->getLocation();
-			this->m_dragStartDistance = Point(touchPoint.x - currentPoint.x, 
+			cocos2d::Point touchPoint = touch->getLocation();
+			this->m_dragStartDistance = cocos2d::Point(touchPoint.x - currentPoint.x, 
 				touchPoint.y - currentPoint.y);
 
 			if (onTouchBegan)
@@ -50,8 +50,8 @@ bool DraggableBlock::init(const Color4B& bgColor,
 			{
 				return;
 			}
-			Point touchPoint = touch->getLocation();
-			this->setPosition(Point(touchPoint.x - this->m_dragStartDistance.width,
+			cocos2d::Point touchPoint = touch->getLocation();
+			this->setPosition(cocos2d::Point(touchPoint.x - this->m_dragStartDistance.width,
 				touchPoint.y - this->m_dragStartDistance.height));
 
 			if (onTouchMoved)
@@ -74,7 +74,7 @@ void DraggableBlock::revert()
 	this->moveTo(m_dragStartPoint);
 }
 
-void DraggableBlock::moveTo(Point &newPoint, float interval/* = 0.2f */)
+void DraggableBlock::moveTo(cocos2d::Point &newPoint, float interval/* = 0.2f */)
 {
 	MoveTo *move = MoveTo::create(interval, newPoint);
 	EaseSineInOut *ease = EaseSineInOut::create(move);
@@ -118,7 +118,8 @@ void DraggableBlock::decrease()
 void DraggableBlock::updateValue(int newValue)
 {
 	this->setTitle(to_string(newValue));
-	this->setBgColor(U::getColorOfBlockValue(newValue));
+    Color4B color = U::getColorOfBlockValue(newValue);
+	this->setBgColor(color);
 
 	if (newValue == 0)
 	{

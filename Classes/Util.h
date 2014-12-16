@@ -6,9 +6,9 @@ class Util
 {
 public:
 	static Director *director;
-	static Size size;
-	static Point origin;
-	static Point center;
+	static cocos2d::Size size;
+	static cocos2d::Point origin;
+	static cocos2d::Point center;
 	static SpriteFrameCache *spriteFrameCache;
 	static SimpleAudioEngine *audioEngine;
 	static UserDefault *userDefault;
@@ -26,7 +26,7 @@ public:
 	static void init();
 
 	static string t(string key);
-	static Size p(float x, float y);
+	static cocos2d::Size p(float x, float y);
 
 	static Label *label(const char *text, float fontSize = 35, int fontIndex = 0);
 	static Label *labelWithoutTranslate(const string& text, float fontSize = 35, int fontIndex = 0);

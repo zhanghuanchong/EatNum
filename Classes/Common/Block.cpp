@@ -4,7 +4,7 @@ Block* Block::create(const Color4B& bgColor,
 	const string& title, 
 	const touchCallback& onTouchEnd,
 	const Color4B& titleColor /*= Color4B::WHITE*/, 
-	const Size& size /*= Size(100, 100)*/, 
+	const cocos2d::Size& size /*= cocos2d::Size(100, 100)*/, 
 	const bool interactive /*= true*/, 
 	const bool shader/* = true*/,
 	const touchCallback& onTouchBegan/* = nullptr*/,
@@ -26,7 +26,7 @@ bool Block::init(const Color4B& bgColor,
 	const string& title, 
 	const touchCallback& onTouchEnd,
 	const Color4B& titleColor, 
-	const Size& size, 
+	const cocos2d::Size& size, 
 	const bool interactive, 
 	const bool shader,
 	const touchCallback& onTouchBegan,
@@ -53,7 +53,7 @@ bool Block::init(const Color4B& bgColor,
 	auto tex = new Texture2D();
 	tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, size);
 	m_bg->setTexture(tex);
-	m_bg->setTextureRect(Rect(0, 0, size.width, size.height));
+	m_bg->setTextureRect(cocos2d::Rect(0, 0, size.width, size.height));
 	m_bg->setAnchorPoint(Vec2(0.5f, 0.5f));
 	m_card->addChild(m_bg, 0);
 
@@ -77,7 +77,7 @@ bool Block::init(const Color4B& bgColor,
 		tex = new Texture2D();
 		tex->initWithData(buffer, sizeof(GLubyte)* 4, Texture2D::PixelFormat::RGBA8888, 1, 1, size);
 		m_shader->setTexture(tex);
-		m_shader->setTextureRect(Rect(0, 0, size.width, size.height));
+		m_shader->setTextureRect(cocos2d::Rect(0, 0, size.width, size.height));
 		m_shader->setAnchorPoint(Vec2(0.5f, 0.5f));
 		m_shader->setPosition(size.width / 2 + 2, size.height / 2 - 2);
 		this->addChild(m_shader, 0);
@@ -90,9 +90,9 @@ bool Block::init(const Color4B& bgColor,
 		listener->setSwallowTouches(true);
 		listener->onTouchBegan = [onTouchBegan, this, size](Touch *touch, Event *event) {
 			auto target = static_cast<Sprite*>(event->getCurrentTarget());
-			Point locationInNode = target->convertToNodeSpace(touch->getLocation());
-			Size s = target->getContentSize();
-			Rect rect = Rect(0, 0, s.width, s.height);
+			cocos2d::Point locationInNode = target->convertToNodeSpace(touch->getLocation());
+			cocos2d::Size s = target->getContentSize();
+			cocos2d::Rect rect = cocos2d::Rect(0, 0, s.width, s.height);
 			if (rect.containsPoint(locationInNode)) {
 				this->m_bClicked = false;
 				Vector<FiniteTimeAction *> actions;
@@ -190,7 +190,7 @@ void Block::lock(bool addLocker /*= false*/)
 		if (m_locker == nullptr)
 		{
 			m_locker = Sprite::create("locker.png");
-			const Size& s = this->getContentSize();
+			const cocos2d::Size& s = this->getContentSize();
 			m_locker->setAnchorPoint(Vec2(1, 0));
 			m_locker->setPosition(s.width - 2, 2);
 			m_locker->setScale(0.6f);

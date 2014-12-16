@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Util.h"
-#include "Common/BaseScene.h"
+#include "../Common/BaseScene.h"
 
 class LevelsScene : public BaseScene
 {

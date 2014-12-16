@@ -1,7 +1,7 @@
 #pragma once
 #include "Util.h"
 #include "LevelLayer.h"
-#include "Common/BaseScene.h"
+#include "../Common/BaseScene.h"
 
 class Block;
 
@@ -40,7 +40,7 @@ private:
 	Label *m_levelIndicator;
 	Label *m_tipLabel;
 	Vector<Block *> m_blocks;
-	Rect m_playArea;
+	cocos2d::Rect m_playArea;
 	LevelLayer *m_doneLayer;
 	LevelLayer *m_failLayer;
 };
