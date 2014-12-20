@@ -46,7 +46,7 @@ bool BaseScene::init()
 			m_music->setOpacity(100);
 		}
 	});
-	m_music->setPosition(U::width - 78, 10);
+	m_music->setPosition(U::width - 88, 10);
 	m_music->setAnchorPoint(Vec2(1, 0));
 	bool music = U::userDefault->getBoolForKey(kConfigMusic, true);
 	if (!music)

@@ -14,11 +14,11 @@ bool HomeScene::init()
 	this->addChild(bgLayer);
 
 	labelNom = U::label("NOM", 150, 1);
-	labelNom->setPosition(U::cx - 20, U::cy + 80 + 70);
+	labelNom->setPosition(U::cx - 20, U::cy + 70 + 70);
 	this->addChild(labelNom);
 
 	labelNum = U::label("NUM", 150, 1);
-	labelNum->setPosition(U::cx + 20, U::cy + 80 - 70);
+	labelNum->setPosition(U::cx + 20, U::cy + 70 - 70);
 	this->addChild(labelNum);
 
 	ScalableSprite *btnPlay = ScalableSprite::create("play.png", [](){
