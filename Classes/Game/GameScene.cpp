@@ -294,6 +294,8 @@ void GameScene::checkIfDone()
 
 void GameScene::showDoneLayer()
 {
+	this->m_failCounter = 0;
+
 	bool showNext = true;
 	int nextChapter = m_nChapter;
 	int nextLevel = m_nLevel;
@@ -346,6 +348,8 @@ void GameScene::showDoneLayer()
 
 void GameScene::showFailLayer()
 {
+	this->m_failCounter++;
+
 	ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
@@ -355,6 +359,56 @@ void GameScene::showFailLayer()
 		m_failLayer = nullptr;
 		this->loadLevel();
 	});
-	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload);
+
+	ScalableSprite *btnSkip = nullptr;
+	if (this->m_failCounter >= 3)
+	{
+		btnSkip = ScalableSprite::create("skip.png", [this](){
+			m_failLayer->removeFromParent();
+			m_failLayer = nullptr;
+
+			bool showNext = true;
+			int nextChapter = m_nChapter;
+			int nextLevel = m_nLevel;
+			int maxLevel = U::getLevelCount(m_nChapter) - 1;
+			if (m_nLevel == maxLevel)
+			{
+				int maxChapter = U::getChapterCount() - 1;
+				if (m_nChapter == maxChapter)
+				{
+					showNext = false;
+				}
+				else
+				{
+					nextChapter = m_nChapter + 1;
+					nextLevel = 0;
+				}
+			}
+			else
+			{
+				nextLevel = m_nLevel + 1;
+			}
+
+			if (!showNext)
+			{
+				return;
+			}
+
+			U::userDefault->setIntegerForKey("currentChapter", nextChapter);
+			U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+
+			m_nChapter = nextChapter;
+			m_nLevel = nextLevel;
+			this->loadLevel();
+			this->scaleBlocks(0);
+		});
+	}
+
+	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload, btnSkip);
 	this->addChild(m_failLayer, 9999);
+}
+
+void GameScene::calculateNextChapterAndLevel(int *chapter, int *level)
+{
+
 }

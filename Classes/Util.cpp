@@ -190,3 +190,18 @@ cocos2d::Color4B Util::getColorOfBlockValue(int v)
 	}
 	return Color4B::BLACK;
 }
+
+void Util::setupSkippedFile()
+{
+	FileUtils::getWritablePath() + "/skipped_levels.plist"
+}
+
+void Util::addSkippedLevel(int chapter, int level)
+{
+
+}
+
+bool Util::isLevelSkipped(int chapter, int level)
+{
+
+}

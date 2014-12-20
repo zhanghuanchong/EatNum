@@ -43,6 +43,12 @@ public:
 	static string replace(const string& str, const string& src, const string& dest);
 
 	static Color4B getColorOfBlockValue(int v);
+
+	static void addSkippedLevel(int chapter, int level);
+	static bool isLevelSkipped(int chapter, int level);
+
+private:
+	static string getSkippedLevelFilePath();
 };
 
 typedef Util U;

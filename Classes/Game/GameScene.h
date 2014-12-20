@@ -15,6 +15,7 @@ CC_CONSTRUCTOR_ACCESS:
 		m_nChapter(0),
 		m_nLevel(0),
 		m_playArea(0, 0, 0, 0),
+		m_failCounter(0),
 		m_levelIndicator(nullptr),
 		m_tipLabel(nullptr),
 		m_doneLayer(nullptr), 
@@ -37,6 +38,7 @@ CC_CONSTRUCTOR_ACCESS:
 private:
 	int m_nChapter;
 	int m_nLevel;
+	int m_failCounter;
 	Label *m_levelIndicator;
 	Label *m_tipLabel;
 	Vector<Block *> m_blocks;

@@ -1,10 +1,10 @@
 #include "LevelLayer.h"
 #include "../Common/ScalableSprite.h"
 
-LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
+LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/)
 {
 	LevelLayer *sprite = new (std::nothrow) LevelLayer();
-	if (sprite && sprite->init(color, btnLeft, btnRight))
+	if (sprite && sprite->init(color, btnLeft, btnRight, btnAdditional))
 	{
 		sprite->autorelease();
 		return sprite;
@@ -14,7 +14,7 @@ LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *b
 }
 
 
-bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
+bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/)
 {
 	if (!Layer::init())
 	{
@@ -22,6 +22,7 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	}
 	m_btnLeft = btnLeft;
 	m_btnRight = btnRight;
+	m_btnAdditional = btnAdditional;
 
 	m_bgLayer = LayerColor::create(color);
 	this->addChild(m_bgLayer);
@@ -54,6 +55,13 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight)
 	m_gameCenter->setOpacity(1);
 	this->addChild(m_gameCenter, 1000);
 
+	if (m_btnAdditional)
+	{
+		m_btnAdditional->setPosition(U::width - 45, 45);
+		m_btnAdditional->setVisible(false);
+		this->addChild(m_btnAdditional);
+	}
+
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->setSwallowTouches(true);
 	listener->onTouchBegan = [](Touch *touch, Event *event) {
@@ -80,6 +88,12 @@ void LevelLayer::onEnter()
 		m_share->runAction(spawn);
 		m_favorite->runAction(spawn->clone());
 		m_gameCenter->runAction(spawn->clone());
+	}), DelayTime::create(0.2), CallFunc::create([this](){
+		if (m_btnAdditional)
+		{
+			m_btnAdditional->setVisible(true);
+			m_btnAdditional->runAction(Blink::create(1.0f, 3));
+		}
 	}), nullptr);
 	this->runAction(seq);
 
