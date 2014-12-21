@@ -30,6 +30,7 @@ public:
 	void setBgColor(Color4B &color);
 	void lock(bool addLocker = false);
 	void unlock();
+	void setSkipped();
 
 CC_CONSTRUCTOR_ACCESS:
 	Block() : 
@@ -39,6 +40,7 @@ CC_CONSTRUCTOR_ACCESS:
 		m_card(nullptr),
 		m_listener(nullptr),
 		m_locker(nullptr),
+		m_skipper(nullptr),
 		m_bClicked(false), 
 		m_bInteractive(true),
 		m_oldZOrder(0) {}
@@ -65,6 +67,7 @@ private:
 	int m_oldZOrder;
 	EventListener *m_listener;
 	Sprite *m_locker;
+	Sprite *m_skipper;
 	CC_DISALLOW_COPY_AND_ASSIGN(Block);
 };
 

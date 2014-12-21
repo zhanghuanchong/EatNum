@@ -53,6 +53,7 @@ bool LevelsScene::init()
 
 	int currentChapter = U::userDefault->getIntegerForKey("currentChapter", 0);
 	int currentLevel = U::userDefault->getIntegerForKey("currentLevel", 0);
+	ValueVector skippedLevels = U::getAllSkippedLevels();
 
 	int count = Util::getLevelCount(this->m_nChapter);
 	for (int i = 0; i < count; i++)
@@ -64,6 +65,10 @@ bool LevelsScene::init()
 		if ((this->m_nChapter == currentChapter && i > currentLevel) || this->m_nChapter > currentChapter)
 		{
 			block->lock(true);
+		}
+		int levelIndex = this->m_nChapter * 1000 + i;
+		if (find(skippedLevels.begin(), skippedLevels.end(), cocos2d::Value(levelIndex)) != skippedLevels.end()) {
+			block->setSkipped();
 		}
 		float x = U::cx + ((i % 5) * 2 - 4) * 55;
 		float y = U::cy + ((19 - i) / 5 - 1.5) * 110;

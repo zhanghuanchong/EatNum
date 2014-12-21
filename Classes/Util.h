@@ -12,8 +12,10 @@ public:
 	static SpriteFrameCache *spriteFrameCache;
 	static SimpleAudioEngine *audioEngine;
 	static UserDefault *userDefault;
+	static FileUtils *fileUtils;
 	static ValueMap lang;
 	static vector<string> fonts;
+	static string configFilePath;
 	static Document data;
 	static bool isEffectEnabled;
 
@@ -44,11 +46,12 @@ public:
 
 	static Color4B getColorOfBlockValue(int v);
 
-	static void addSkippedLevel(int chapter, int level);
-	static bool isLevelSkipped(int chapter, int level);
+	static ValueMap getConfig();
 
-private:
-	static string getSkippedLevelFilePath();
+	static void addSkippedLevel(int chapter, int level);
+	static void removeFromSkippedLevel(int chapter, int level);
+	static bool isLevelSkipped(int chapter, int level);
+	static ValueVector getAllSkippedLevels();
 };
 
 typedef Util U;

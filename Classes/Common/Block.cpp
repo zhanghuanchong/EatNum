@@ -211,3 +211,17 @@ void Block::unlock()
 		m_locker->setVisible(false);
 	}
 }
+
+void Block::setSkipped()
+{
+	if (m_skipper == nullptr)
+	{
+		m_skipper = Sprite::create("sad.png");
+		const cocos2d::Size& s = this->getContentSize();
+		m_skipper->setAnchorPoint(Vec2(1, 0));
+		m_skipper->setPosition(s.width - 2, 2);
+		m_skipper->setScale(0.6f);
+		this->addChild(m_skipper, 2);
+	}
+	m_skipper->setVisible(true);
+}

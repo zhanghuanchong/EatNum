@@ -320,6 +320,8 @@ void GameScene::showDoneLayer()
 	U::userDefault->setIntegerForKey("currentChapter", nextChapter);
 	U::userDefault->setIntegerForKey("currentLevel", nextLevel);
 
+	U::removeFromSkippedLevel(m_nChapter, m_nLevel);
+
 	ScalableSprite *btnMenu = ScalableSprite::create("menu.png", [this](){
 		Util::director->replaceScene(TransitionFade::create(0.5f, LevelsScene::createWithChapter(this->m_nChapter)));
 	});
@@ -396,6 +398,9 @@ void GameScene::showFailLayer()
 
 			U::userDefault->setIntegerForKey("currentChapter", nextChapter);
 			U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+			U::addSkippedLevel(m_nChapter, m_nLevel);
+
+			this->m_failCounter = 0;
 
 			m_nChapter = nextChapter;
 			m_nLevel = nextLevel;
@@ -406,9 +411,4 @@ void GameScene::showFailLayer()
 
 	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload, btnSkip);
 	this->addChild(m_failLayer, 9999);
-}
-
-void GameScene::calculateNextChapterAndLevel(int *chapter, int *level)
-{
-
 }

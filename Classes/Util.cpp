@@ -13,6 +13,8 @@ SimpleAudioEngine* Util::audioEngine;
 UserDefault *Util::userDefault;
 ValueMap Util::lang;
 Document Util::data;
+FileUtils *Util::fileUtils;
+string Util::configFilePath;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 
@@ -31,14 +33,16 @@ void Util::init()
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = cocos2d::Point(cx, cy);
 
+	Util::fileUtils = FileUtils::getInstance();
+
 	vector<string> paths;
 	paths.push_back("fonts");
 	paths.push_back("i18n");
 	paths.push_back("sound");
 	paths.push_back("image");
-	FileUtils::getInstance()->setSearchResolutionsOrder(paths);
+	Util::fileUtils->setSearchResolutionsOrder(paths);
 
-	Util::lang = FileUtils::getInstance()->getValueMapFromFile("i18n/zh-CN.plist");
+	Util::lang = Util::fileUtils->getValueMapFromFile("i18n/zh-CN.plist");
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
 	Util::fonts.push_back("fonts/FZMM.TTF");
@@ -47,23 +51,26 @@ void Util::init()
 	
 	Util::spriteFrameCache->addSpriteFramesWithFile("image/common.plist");
 
-	string str = FileUtils::getInstance()->getStringFromFile("other/data.json");
+	string str = Util::fileUtils->getStringFromFile("other/data.json");
 	data.Parse<0>(str.c_str());
 	if (data.HasParseError())
 	{
 		CCLOG("GetParseError %s\n", data.GetParseError());
 	}
 
-	/*Util::audioEngine->preloadBackgroundMusic("sound/bg.mp3");
+	Util::configFilePath = Util::fileUtils->getWritablePath() + "config.plist";
+	if (!Util::fileUtils->isFileExist(Util::configFilePath)) {
+		Util::fileUtils->writeToFile(ValueMap(), Util::configFilePath);
+	}
+
+	Util::audioEngine->preloadBackgroundMusic("sound/music.mp3");
 	const char *effects[] = {
-	"on.mp3",
-	"off.mp3",
-	"click.mp3"
+		"effect.mp3"
 	};
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < sizeof(effects) / sizeof(effects[0]); i++)
 	{
-	Util::audioEngine->preloadEffect(effects[i]);
-	}*/
+		Util::audioEngine->preloadEffect(effects[i]);
+	}
 }
 
 string Util::t( string key )
@@ -191,17 +198,50 @@ cocos2d::Color4B Util::getColorOfBlockValue(int v)
 	return Color4B::BLACK;
 }
 
-void Util::setupSkippedFile()
-{
-	FileUtils::getWritablePath() + "/skipped_levels.plist"
-}
-
 void Util::addSkippedLevel(int chapter, int level)
 {
+	ValueMap vm = Util::getConfig();
+	ValueVector &vv = vm["skipped_levels"].asValueVector();
+	int levelIndex = chapter * 1000 + level;
+	if (find(vv.begin(), vv.end(), cocos2d::Value(levelIndex)) == vv.end())
+	{
+		vv.push_back(cocos2d::Value(levelIndex));
+	}
+	Util::fileUtils->writeToFile(vm, Util::configFilePath);
+}
 
+void Util::removeFromSkippedLevel(int chapter, int level)
+{
+	ValueMap vm = Util::getConfig();
+	ValueVector &vv = vm["skipped_levels"].asValueVector();
+	int levelIndex = chapter * 1000 + level;
+	ValueVector::iterator i = find(vv.begin(), vv.end(), cocos2d::Value(levelIndex));
+	if (i != vv.end())
+	{
+		vv.erase(i);
+	}
+	Util::fileUtils->writeToFile(vm, Util::configFilePath);
 }
 
 bool Util::isLevelSkipped(int chapter, int level)
 {
+	ValueVector vv = Util::getAllSkippedLevels();
+	int levelIndex = chapter * 1000 + level;
+	return find(vv.begin(), vv.end(), cocos2d::Value(levelIndex)) != vv.end();
+}
 
+ValueVector Util::getAllSkippedLevels()
+{
+	ValueMap vm = Util::getConfig();
+	return vm["skipped_levels"].asValueVector();
+}
+
+cocos2d::ValueMap Util::getConfig()
+{
+	ValueMap vm = Util::fileUtils->getValueMapFromFile(Util::configFilePath);
+	if (vm.count("skipped_levels") <= 0)
+	{
+		vm["skipped_levels"] = ValueVector();
+	}
+	return vm;
 }
