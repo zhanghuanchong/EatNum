@@ -39,8 +39,8 @@
 		3A79B8641A3A83F6008C7B78 /* SplashScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A79B8561A3A83F6008C7B78 /* SplashScene.cpp */; };
 		3A79B8651A3A83F6008C7B78 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A79B8581A3A83F6008C7B78 /* Util.cpp */; };
 		3ACE97651A470102004AB0B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACE97641A470102004AB0B1 /* Images.xcassets */; };
-		3ACE97691A4701BC004AB0B1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ACE97681A4701BC004AB0B1 /* Info.plist */; };
 		3ACE976B1A470201004AB0B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ACE976A1A470201004AB0B1 /* Images.xcassets */; };
+		3ACE976E1A471E29004AB0B1 /* Util_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE976D1A471E29004AB0B1 /* Util_iOS.mm */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -252,6 +252,8 @@
 		3ACE97641A470102004AB0B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "EatNum iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		3ACE97681A4701BC004AB0B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ios/Info.plist; sourceTree = SOURCE_ROOT; };
 		3ACE976A1A470201004AB0B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "EatNum iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		3ACE976C1A471E29004AB0B1 /* Util_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util_iOS.h; path = ../Classes/Util_iOS.h; sourceTree = "<group>"; };
+		3ACE976D1A471E29004AB0B1 /* Util_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Util_iOS.mm; path = ../Classes/Util_iOS.mm; sourceTree = "<group>"; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -352,6 +354,8 @@
 				3A79B8551A3A83F6008C7B78 /* Splash */,
 				3A79B8581A3A83F6008C7B78 /* Util.cpp */,
 				3A79B8591A3A83F6008C7B78 /* Util.h */,
+				3ACE976C1A471E29004AB0B1 /* Util_iOS.h */,
+				3ACE976D1A471E29004AB0B1 /* Util_iOS.mm */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
 				1AFAF8B416D35DE700DB1158 /* AppDelegate.h */,
 			);
@@ -688,7 +692,6 @@
 				3A79B8371A3A82E0008C7B78 /* fonts in Resources */,
 				3ACE97651A470102004AB0B1 /* Images.xcassets in Resources */,
 				3A79B8391A3A82E0008C7B78 /* image in Resources */,
-				3ACE97691A4701BC004AB0B1 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +724,7 @@
 				3A79B85B1A3A83F6008C7B78 /* Block.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,
 				3A79B8631A3A83F6008C7B78 /* LevelsScene.cpp in Sources */,
+				3ACE976E1A471E29004AB0B1 /* Util_iOS.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 				3A79B85C1A3A83F6008C7B78 /* DraggableBlock.cpp in Sources */,
 			);
@@ -794,7 +798,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: ZHANG HUANCHONG (Q8T75D3U64)";
@@ -829,7 +833,7 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: ZHANG HUANCHONG (8S89Z3ZA8N)";
