@@ -60,7 +60,8 @@ void Util::init()
 
 	Util::configFilePath = Util::fileUtils->getWritablePath() + "config.plist";
 	if (!Util::fileUtils->isFileExist(Util::configFilePath)) {
-		Util::fileUtils->writeToFile(ValueMap(), Util::configFilePath);
+        ValueMap vm;
+		Util::fileUtils->writeToFile(vm, Util::configFilePath);
 	}
 
 	Util::audioEngine->preloadBackgroundMusic("sound/music.mp3");
