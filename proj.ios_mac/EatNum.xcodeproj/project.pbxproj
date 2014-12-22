@@ -21,6 +21,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		3A5FE8721A47B33500999FA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5FE8701A47B33500999FA2 /* InfoPlist.strings */; };
+		3A5FE8751A47B35500999FA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5FE8731A47B35500999FA2 /* InfoPlist.strings */; };
 		3A79B8371A3A82E0008C7B78 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8321A3A82E0008C7B78 /* fonts */; };
 		3A79B8381A3A82E0008C7B78 /* i18n in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8331A3A82E0008C7B78 /* i18n */; };
 		3A79B8391A3A82E0008C7B78 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8341A3A82E0008C7B78 /* image */; };
@@ -220,6 +222,8 @@
 		1D6058910D05DD3D006BFB54 /* EatNum iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EatNum iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3A5FE8711A47B33500999FA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		3A5FE8741A47B35500999FA2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3A79B8321A3A82E0008C7B78 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		3A79B8331A3A82E0008C7B78 /* i18n */ = {isa = PBXFileReference; lastKnownFileType = folder; path = i18n; sourceTree = "<group>"; };
 		3A79B8341A3A82E0008C7B78 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				3A5FE86E1A47B31C00999FA2 /* en.lproj */,
+				3A5FE86F1A47B31C00999FA2 /* zh-Hans.lproj */,
 				3ACE976A1A470201004AB0B1 /* Images.xcassets */,
 				3ACE97681A4701BC004AB0B1 /* Info.plist */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
@@ -428,6 +434,24 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		3A5FE86E1A47B31C00999FA2 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3A5FE8701A47B33500999FA2 /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = ios/en.lproj;
+			sourceTree = SOURCE_ROOT;
+		};
+		3A5FE86F1A47B31C00999FA2 /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3A5FE8731A47B35500999FA2 /* InfoPlist.strings */,
+			);
+			name = "zh-Hans.lproj";
+			path = "ios/zh-Hans.lproj";
+			sourceTree = SOURCE_ROOT;
 		};
 		3A79B83C1A3A83F6008C7B78 /* Common */ = {
 			isa = PBXGroup;
@@ -599,6 +623,8 @@
 				Japanese,
 				French,
 				German,
+				en,
+				"zh-Hans",
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -695,11 +721,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A79B8381A3A82E0008C7B78 /* i18n in Resources */,
+				3A5FE8721A47B33500999FA2 /* InfoPlist.strings in Resources */,
 				3ACE976B1A470201004AB0B1 /* Images.xcassets in Resources */,
 				3A79B83A1A3A82E0008C7B78 /* other in Resources */,
 				3A79B83B1A3A82E0008C7B78 /* sound in Resources */,
 				3A79B8371A3A82E0008C7B78 /* fonts in Resources */,
 				3ACE97651A470102004AB0B1 /* Images.xcassets in Resources */,
+				3A5FE8751A47B35500999FA2 /* InfoPlist.strings in Resources */,
 				3A79B8391A3A82E0008C7B78 /* image in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -802,6 +830,25 @@
 			targetProxy = 1AC6FB2C180E99E1004C840B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3A5FE8701A47B33500999FA2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A5FE8711A47B33500999FA2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A5FE8731A47B35500999FA2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A5FE8741A47B35500999FA2 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
