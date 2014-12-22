@@ -297,8 +297,8 @@ void GameScene::showDoneLayer()
 	this->m_failCounter = 0;
 
 	bool showNext = true;
-	int nextChapter = m_nChapter;
-	int nextLevel = m_nLevel;
+    int nextChapter = m_nChapter;
+    int nextLevel = m_nLevel;
 	int maxLevel = U::getLevelCount(m_nChapter) - 1;
 	if (m_nLevel == maxLevel)
 	{
@@ -317,8 +317,14 @@ void GameScene::showDoneLayer()
 	{
 		nextLevel = m_nLevel + 1;
 	}
-	U::userDefault->setIntegerForKey("currentChapter", nextChapter);
-	U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+    int currentChapter = U::userDefault->getIntegerForKey("currentChapter");
+    if (currentChapter < nextChapter) {
+        U::userDefault->setIntegerForKey("currentChapter", nextChapter);
+    }
+    int currentLevel = U::userDefault->getIntegerForKey("currentLevel");
+    if (currentLevel < nextLevel) {
+        U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+    }
 
 	U::removeFromSkippedLevel(m_nChapter, m_nLevel);
 
