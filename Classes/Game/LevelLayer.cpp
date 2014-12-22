@@ -1,6 +1,10 @@
 #include "LevelLayer.h"
 #include "../Common/ScalableSprite.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    #include "../Util_iOS.h"
+#endif
+
 LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/)
 {
 	LevelLayer *sprite = new (std::nothrow) LevelLayer();
@@ -42,7 +46,9 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, S
 	this->addChild(m_share, 1000);
 
 	m_favorite = ScalableSprite::create("favorite.png", [](){
-
+    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        Util_iOS::commentInAppStore();
+    #endif
 	});
 	m_favorite->setPosition(U::cx, U::cy - 140);
 	m_favorite->setOpacity(1);
