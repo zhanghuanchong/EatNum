@@ -46,16 +46,18 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, S
 	this->addChild(m_share, 1000);
 
 	m_favorite = ScalableSprite::create("favorite.png", [](){
-    #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        Util_iOS::commentInAppStore();
-    #endif
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            Util_iOS::commentInAppStore();
+        #endif
 	});
 	m_favorite->setPosition(U::cx, U::cy - 140);
 	m_favorite->setOpacity(1);
 	this->addChild(m_favorite, 1000);
 
 	m_gameCenter = ScalableSprite::create("gamecenter.png", [](){
-
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+                Util_iOS::showGameCenter();
+        #endif
 	});
 	m_gameCenter->setPosition(U::cx + 80, U::cy - 140);
 	m_gameCenter->setOpacity(1);
