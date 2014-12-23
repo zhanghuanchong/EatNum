@@ -87,6 +87,24 @@ void GameScene::loadLevel()
 	s << U::t("Level") << " " << this->m_nChapter + 1 << " - " << this->m_nLevel + 1;
 	m_levelIndicator->setString(s.str());
 
+	if (m_question)
+	{
+		m_question->removeFromParent();
+		m_question = nullptr;
+	}
+
+	if (this->m_nChapter > 0 || this->m_nLevel > 4)
+	{
+		m_question = ScalableSprite::create("question.png", [this](){
+			m_nChapter = 0;
+			m_nLevel = 0;
+			this->loadLevel();
+			this->scaleBlocks(0);
+		});
+		m_question->setPosition(U::width - 60, U::cy + 385);
+		this->addChild(m_question, 1001);
+	}
+
 	if (m_tipLabel)
 	{
 		m_tipLabel->removeFromParent();
@@ -298,33 +316,41 @@ void GameScene::showDoneLayer()
 
 	bool showNext = true;
     int nextChapter = m_nChapter;
-    int nextLevel = m_nLevel;
-	int maxLevel = U::getLevelCount(m_nChapter) - 1;
-	if (m_nLevel == maxLevel)
+	int nextLevel = m_nLevel;
+	int currentChapter = U::userDefault->getIntegerForKey("currentChapter");
+	int currentLevel = U::userDefault->getIntegerForKey("currentLevel");
+	if (m_nChapter == 0 && m_nLevel == 4)
 	{
-		int maxChapter = U::getChapterCount() - 1;
-		if (m_nChapter == maxChapter)
-		{
-			showNext = false;
-		}
-		else
-		{
-			nextChapter = m_nChapter + 1;
-			nextLevel = 0;
-		}
+		nextChapter = currentChapter;
+		nextLevel = currentLevel;
 	}
 	else
 	{
-		nextLevel = m_nLevel + 1;
+		int maxLevel = U::getLevelCount(m_nChapter) - 1;
+		if (m_nLevel == maxLevel)
+		{
+			int maxChapter = U::getChapterCount() - 1;
+			if (m_nChapter == maxChapter)
+			{
+				showNext = false;
+			}
+			else
+			{
+				nextChapter++;
+				nextLevel = 0;
+			}
+		}
+		else
+		{
+			nextLevel++;
+		}
+		if (currentChapter < nextChapter) {
+			U::userDefault->setIntegerForKey("currentChapter", nextChapter);
+		}
+		if (currentLevel < nextLevel || nextLevel == 0) {
+			U::userDefault->setIntegerForKey("currentLevel", nextLevel);
+		}
 	}
-    int currentChapter = U::userDefault->getIntegerForKey("currentChapter");
-    if (currentChapter < nextChapter) {
-        U::userDefault->setIntegerForKey("currentChapter", nextChapter);
-    }
-    int currentLevel = U::userDefault->getIntegerForKey("currentLevel");
-    if (currentLevel < nextLevel) {
-        U::userDefault->setIntegerForKey("currentLevel", nextLevel);
-    }
 
 	U::removeFromSkippedLevel(m_nChapter, m_nLevel);
 

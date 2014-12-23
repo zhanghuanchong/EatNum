@@ -19,7 +19,8 @@ CC_CONSTRUCTOR_ACCESS:
 		m_levelIndicator(nullptr),
 		m_tipLabel(nullptr),
 		m_doneLayer(nullptr), 
-		m_failLayer(nullptr) {}
+		m_failLayer(nullptr),
+		m_question(nullptr) {}
 
 	virtual bool initWithLevel(int level, int chapter);
 	virtual bool init();
@@ -41,6 +42,7 @@ private:
 	int m_failCounter;
 	Label *m_levelIndicator;
 	Label *m_tipLabel;
+	ScalableSprite *m_question;
 	Vector<Block *> m_blocks;
 	cocos2d::Rect m_playArea;
 	LevelLayer *m_doneLayer;
