@@ -27,6 +27,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
+#import <GameKit/GameKit.h>
 
 @implementation AppController
 
@@ -78,6 +79,8 @@ static AppDelegate s_sharedApplication;
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
     cocos2d::Application::getInstance()->run();
+    
+    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:nil];
 
     return YES;
 }

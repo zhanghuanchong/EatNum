@@ -6,6 +6,7 @@ class Util_iOS
 {
 public:
     static void commentInAppStore();
+    static void showGameCenter();
 };
 
 

@@ -110,5 +110,11 @@
     [super dealloc];
 }
 
+#pragma mark - GameCenter
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
