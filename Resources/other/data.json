@@ -82,7 +82,6 @@
       },
       {
         "level": 6,
-        "tip": "Remember, if you \nmove to empty space, \nyou lose two, but can't \ngo below zero.",
         "cells": [
           {
             "x": 1,
