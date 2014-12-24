@@ -20,10 +20,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	//int width = 768, height = 1024;
 	int width = 640, height = 1136;
 	//int width = 640, height = 960;
+	//int width = 480, height = 840;
     if(!glview) {
         glview = GLView::createWithRect("My Game", cocos2d::Rect(0, 0, width, height), 0.7F);
 		director->setOpenGLView(glview);
-		glview->setDesignResolutionSize(width, height, ResolutionPolicy::FIXED_WIDTH);
+		
+		int designWidth = 640;
+		int designHeight = 1136;
+		glview->setDesignResolutionSize(designWidth, designHeight, ResolutionPolicy::FIXED_WIDTH);
 	}
 
     // turn on display FPS

@@ -76,7 +76,7 @@ void GameScene::loadLevel()
 	if (m_levelIndicator == nullptr)
 	{
 		auto label = U::labelWithoutTranslate("", 40, 1);
-		label->setPosition(U::cx - 270, U::cy + 345);
+		label->setPosition(U::cx - 270, U::cy + 315);
 		label->setAnchorPoint(Vec2(0, 0));
 		this->addChild(label, 1001);
 
@@ -101,7 +101,7 @@ void GameScene::loadLevel()
 			this->loadLevel();
 			this->scaleBlocks(0);
 		});
-		m_question->setPosition(U::width - 60, U::cy + 385);
+		m_question->setPosition(U::width - 60, U::cy + 360);
 		this->addChild(m_question, 1001);
 	}
 
