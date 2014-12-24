@@ -21,8 +21,9 @@ bool HomeScene::init()
 	labelNum->setPosition(U::cx + 20, U::cy + 70 - 70);
 	this->addChild(labelNum);
 
-	ScalableSprite *btnPlay = ScalableSprite::create("play.png", [](){
-		bool tutorial = U::userDefault->getBoolForKey("tutorial", true);
+	bool tutorial = U::userDefault->getBoolForKey("tutorial", true);
+
+	ScalableSprite *btnPlay = ScalableSprite::create("play.png", [tutorial](){
 		if (tutorial)
 		{
 			U::userDefault->setBoolForKey("tutorial", false);
@@ -30,10 +31,26 @@ bool HomeScene::init()
 		}
 		else
 		{
-			Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
+			int currentChapter = U::userDefault->getIntegerForKey("currentChapter");
+			int currentLevel = U::userDefault->getIntegerForKey("currentLevel");
+			Util::director->replaceScene(TransitionSlideInR::create(0.2f, GameScene::createWithLevel(currentLevel, currentChapter)));
 		}
 	});
-	btnPlay->setPosition(U::cx, 220);
+
+	if (tutorial)
+	{
+		btnPlay->setPosition(U::cx, U::height / 4);
+	}
+	else
+	{
+		btnPlay->setPosition(U::cx, U::height / 4 + 70);
+
+		ScalableSprite *btnMenu = ScalableSprite::create("menu_green.png", [](){
+			Util::director->replaceScene(TransitionSlideInR::create(0.2f, ChapterScene::create()));
+		});
+		btnMenu->setPosition(U::cx, U::height / 4 - 70);
+		this->addChild(btnMenu);
+	}
 	this->addChild(btnPlay);
     
     return true;
