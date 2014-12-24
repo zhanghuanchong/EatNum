@@ -25,10 +25,12 @@
 
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
+#import "GADBannerView.h"
 
 @interface RootViewController : UIViewController<GKGameCenterControllerDelegate> {
-
+    GADBannerView *bannerView_;
 }
 - (BOOL) prefersStatusBarHidden;
+- (void) addGameView;
 
 @end

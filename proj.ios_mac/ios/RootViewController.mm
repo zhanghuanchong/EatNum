@@ -45,13 +45,29 @@
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
-*/
+- (void) addGameView
+{
+    // 在屏幕顶部创建标准尺寸的视图。
+    // 在GADAdSize.h中对可用的AdSize常量进行说明。
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    // 指定广告单元ID。
+    bannerView_.adUnitID = @"ca-app-pub-5072970286349933/8027482821";
+    
+    // 告知运行时文件，在将用户转至广告的展示位置之后恢复哪个UIViewController
+    // 并将其添加至视图层级结构。
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    
+    // 启动一般性请求并在其中加载广告。
+    [bannerView_ loadRequest:[GADRequest request]];
+}
+
 // Override to allow orientations other than the default portrait orientation.
 // This method is deprecated on ios6
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
