@@ -41,8 +41,19 @@ void Util::init()
 	paths.push_back("sound");
 	paths.push_back("image");
 	Util::fileUtils->setSearchResolutionsOrder(paths);
+    
+    
+    stringstream s;
+    s << "i18n/";
+    LanguageType languageType = Application::getInstance()->getCurrentLanguage();
+    if (languageType == LanguageType::CHINESE) {
+        s << "zh-CN";
+    } else {
+        s << "en-US";
+    }
+    s << ".plist";
 
-	Util::lang = Util::fileUtils->getValueMapFromFile("i18n/zh-CN.plist");
+	Util::lang = Util::fileUtils->getValueMapFromFile(s.str());
 
 	Util::fonts.push_back("fonts/calibrib.ttf");
 	Util::fonts.push_back("fonts/FZMM.TTF");

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Mobile Education Game Expert</key>
+	<string>Mobile Education Game Expert</string>
+	<key>Start Game</key>
+	<string>Start Game</string>
+	<key>Invite Friends</key>
+	<string>Invite Friends</string>
+	<key>Free Coins</key>
+	<string>Free Coins</string>
+	<key>On</key>
+	<string>On</string>
+	<key>Off</key>
+	<string>Off</string>
+	<key>Music</key>
+	<string>Music</string>
+	<key>Effect</key>
+	<string>Effect</string>
+	<key>Programmer: Hans Zhang</key>
+	<string>Programmer: Hans Zhang</string>
+	<key>Designer: Ruth Wu</key>
+	<string>Designer: Ruth Wu</string>
+	<key>NOM</key>
+	<string>NOM</string>
+	<key>NUM</key>
+	<string>NUM</string>
+	<key>Num Nom</key>
+	<string>Num Nom</string>
+	<key>Select Chapter</key>
+	<string>Select Chapter</string>
+	<key>Select Level</key>
+	<string>Select Level</string>
+	<key>Chapter</key>
+	<string>Chapter</string>
+	<key>Level</key>
+	<string>Level</string>
+	<key>Move to one less, \ngain one...</key>
+	<string>Move to one less, \ngain one...</string>
+	<key>Move to empty \nspace, lose two...</key>
+	<string>Move to empty \nspace, lose two...</string>
+	<key>Ones can still move\n on though...</key>
+	<string>Ones can still move\n on though...</string>
+	<key>Zeros can&apos;t move...</key>
+	<string>Zeros can&apos;t move...</string>
+	<key>If only one numbered \nbox remains, you win.</key>
+	<string>If only one numbered \nbox remains, you win.</string>
+</dict>
+</plist>
