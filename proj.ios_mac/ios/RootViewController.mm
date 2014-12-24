@@ -65,7 +65,9 @@
     [self.view addSubview:bannerView_];
     
     // 启动一般性请求并在其中加载广告。
-    [bannerView_ loadRequest:[GADRequest request]];
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"31dc7200c408120825a49d2c336921c7"];
+    [bannerView_ loadRequest:request];
 }
 
 // Override to allow orientations other than the default portrait orientation.
