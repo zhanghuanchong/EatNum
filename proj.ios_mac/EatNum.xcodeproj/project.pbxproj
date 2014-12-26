@@ -34,6 +34,8 @@
 		3A6E132C1A4B19CC00EFE356 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E132B1A4B19CC00EFE356 /* EventKit.framework */; };
 		3A6E132E1A4B19F300EFE356 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E132D1A4B19F300EFE356 /* EventKitUI.framework */; };
 		3A6E13301A4B1A3900EFE356 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E132F1A4B1A3900EFE356 /* GameController.framework */; };
+		3A76489B1A4CF91000436452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A7648991A4CF91000436452 /* Localizable.strings */; };
+		3A7648A01A4CF92200436452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A76489E1A4CF92200436452 /* Localizable.strings */; };
 		3A79B8371A3A82E0008C7B78 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8321A3A82E0008C7B78 /* fonts */; };
 		3A79B8381A3A82E0008C7B78 /* i18n in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8331A3A82E0008C7B78 /* i18n */; };
 		3A79B8391A3A82E0008C7B78 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8341A3A82E0008C7B78 /* image */; };
@@ -258,6 +260,8 @@
 		3A6E132B1A4B19CC00EFE356 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/EventKit.framework; sourceTree = DEVELOPER_DIR; };
 		3A6E132D1A4B19F300EFE356 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/EventKitUI.framework; sourceTree = DEVELOPER_DIR; };
 		3A6E132F1A4B1A3900EFE356 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		3A76489A1A4CF91000436452 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		3A76489F1A4CF92200436452 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		3A79B8321A3A82E0008C7B78 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		3A79B8331A3A82E0008C7B78 /* i18n */ = {isa = PBXFileReference; lastKnownFileType = folder; path = i18n; sourceTree = "<group>"; };
 		3A79B8341A3A82E0008C7B78 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
@@ -495,6 +499,7 @@
 			isa = PBXGroup;
 			children = (
 				3A5FE8701A47B33500999FA2 /* InfoPlist.strings */,
+				3A7648991A4CF91000436452 /* Localizable.strings */,
 			);
 			name = en.lproj;
 			path = ios/en.lproj;
@@ -504,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				3A5FE8731A47B35500999FA2 /* InfoPlist.strings */,
+				3A76489E1A4CF92200436452 /* Localizable.strings */,
 			);
 			name = "zh-Hans.lproj";
 			path = "ios/zh-Hans.lproj";
@@ -798,9 +804,11 @@
 			files = (
 				3A79B8381A3A82E0008C7B78 /* i18n in Resources */,
 				3A5FE8721A47B33500999FA2 /* InfoPlist.strings in Resources */,
+				3A7648A01A4CF92200436452 /* Localizable.strings in Resources */,
 				3ACE976B1A470201004AB0B1 /* Images.xcassets in Resources */,
 				3A79B83A1A3A82E0008C7B78 /* other in Resources */,
 				3A79B83B1A3A82E0008C7B78 /* sound in Resources */,
+				3A76489B1A4CF91000436452 /* Localizable.strings in Resources */,
 				3A79B8371A3A82E0008C7B78 /* fonts in Resources */,
 				3ACE97651A470102004AB0B1 /* Images.xcassets in Resources */,
 				3A5FE8751A47B35500999FA2 /* InfoPlist.strings in Resources */,
@@ -922,6 +930,22 @@
 				3A5FE8741A47B35500999FA2 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3A7648991A4CF91000436452 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A76489A1A4CF91000436452 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3A76489E1A4CF92200436452 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A76489F1A4CF92200436452 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

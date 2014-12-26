@@ -38,8 +38,10 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, S
 	m_btnRight->setPosition(U::width + 45, U::cy + 60);
 	this->addChild(m_btnRight);
 
-	m_share = ScalableSprite::create("share.png", [](){
-
+    m_share = ScalableSprite::create("share.png", [](){
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            Util_iOS::showActivities();
+        #endif
 	});
 	m_share->setPosition(U::cx - 80, U::cy - 140);
 	m_share->setOpacity(1);
