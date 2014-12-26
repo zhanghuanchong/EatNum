@@ -52,6 +52,11 @@ public:
 	static void removeFromSkippedLevel(int chapter, int level);
 	static bool isLevelSkipped(int chapter, int level);
 	static ValueVector getAllSkippedLevels();
+    
+    static bool checkPlayCount();
+    
+private:
+    static int playCount;
 };
 
 typedef Util U;

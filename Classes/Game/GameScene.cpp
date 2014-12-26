@@ -376,7 +376,11 @@ void GameScene::showDoneLayer()
 			Util::director->replaceScene(TransitionFade::create(0.5f, HomeScene::create()));
 		});
 	}
-	m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext);
+    bool showAd = true;
+    if (m_nChapter == 0 && m_nLevel < 4) {
+        showAd = false;
+    }
+	m_doneLayer = LevelLayer::create(Color4B(109, 160, 67, 255), btnMenu, btnNext, nullptr, showAd);
 	this->addChild(m_doneLayer, 9999);
 }
 
@@ -440,7 +444,11 @@ void GameScene::showFailLayer()
 			this->scaleBlocks(0);
 		});
 	}
-
-	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload, btnSkip);
+    
+    bool showAd = true;
+    if (m_nChapter == 0 && m_nLevel < 4) {
+        showAd = false;
+    }
+	m_failLayer = LevelLayer::create(Color4B(87, 23, 24, 255), btnMenu, btnReload, btnSkip, showAd);
 	this->addChild(m_failLayer, 9999);
 }

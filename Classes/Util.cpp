@@ -17,6 +17,7 @@ FileUtils *Util::fileUtils;
 string Util::configFilePath;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
+int Util::playCount = 0;
 
 void Util::init()
 {
@@ -256,4 +257,14 @@ cocos2d::ValueMap Util::getConfig()
 		vm["skipped_levels"] = ValueVector();
 	}
 	return vm;
+}
+
+bool Util::checkPlayCount()
+{
+    Util::playCount++;
+    if (Util::playCount == 3) {
+        Util::playCount = 0;
+        return true;
+    }
+    return false;
 }

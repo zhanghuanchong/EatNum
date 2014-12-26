@@ -5,9 +5,9 @@
 class LevelLayer : public Layer
 {
 public:
-	static LevelLayer *create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional = nullptr);
+	static LevelLayer *create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional = nullptr, bool showAd = true);
 
-	virtual bool init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional = nullptr);
+	virtual bool init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional = nullptr, bool showAd = true);
     virtual void onEnter();
 
 CC_CONSTRUCTOR_ACCESS:
@@ -15,7 +15,8 @@ CC_CONSTRUCTOR_ACCESS:
 		m_btnLeft(nullptr),
 		m_btnRight(nullptr),
 		m_bgLayer(nullptr),
-		m_btnAdditional(nullptr) {}
+		m_btnAdditional(nullptr),
+        m_showAd(true) {}
 
 private:
 	LayerColor *m_bgLayer;
@@ -25,5 +26,6 @@ private:
 	ScalableSprite *m_share;
 	ScalableSprite *m_favorite;
 	ScalableSprite *m_gameCenter;
+    bool m_showAd;
 };
 
