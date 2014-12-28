@@ -15,5 +15,7 @@ public:
 private:
 	Label *labelNom;
 	Label *labelNum;
+	ScalableSprite *m_share;
+	ScalableSprite *m_about;
 };
 
