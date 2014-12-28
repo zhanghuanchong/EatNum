@@ -8,6 +8,7 @@ public:
     static void commentInAppStore();
     static void showGameCenter();
     static void showActivities();
+    static void showInterstitialAd();
 };
 
 

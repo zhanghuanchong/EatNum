@@ -26,11 +26,14 @@
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
 #import "GADBannerView.h"
+#import "GADInterstitial.h"
 
-@interface RootViewController : UIViewController<GKGameCenterControllerDelegate> {
+@interface RootViewController : UIViewController<GKGameCenterControllerDelegate, GADInterstitialDelegate> {
     GADBannerView *bannerView_;
+    GADInterstitial *interstitial_;
 }
 - (BOOL) prefersStatusBarHidden;
 - (void) addGameView;
+- (void) showInterstitialAd;
 
 @end

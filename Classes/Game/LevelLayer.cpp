@@ -5,10 +5,10 @@
     #include "../Util_iOS.h"
 #endif
 
-LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/)
+LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/, bool showAd/* = true */)
 {
 	LevelLayer *sprite = new (std::nothrow) LevelLayer();
-	if (sprite && sprite->init(color, btnLeft, btnRight, btnAdditional))
+	if (sprite && sprite->init(color, btnLeft, btnRight, btnAdditional, showAd))
 	{
 		sprite->autorelease();
 		return sprite;
@@ -18,7 +18,7 @@ LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *b
 }
 
 
-bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/)
+bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/, bool showAd/* = true */)
 {
 	if (!Layer::init())
 	{
@@ -27,6 +27,7 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, S
 	m_btnLeft = btnLeft;
 	m_btnRight = btnRight;
 	m_btnAdditional = btnAdditional;
+    m_showAd = showAd;
 
 	m_bgLayer = LayerColor::create(color);
 	this->addChild(m_bgLayer);
@@ -90,14 +91,20 @@ void LevelLayer::onEnter()
 		m_bgLayer->setVisible(true);
 
 		m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx - 90, U::cy + 60))));
-		m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy + 60))));
+        m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy + 60))));
 	}), DelayTime::create(0.2), CallFunc::create([this](){
 		Spawn *spawn = Spawn::createWithTwoActions(
 			EaseSineOut::create(FadeIn::create(0.3f)), 
 			EaseBackOut::create(MoveBy::create(0.3f, Vec2(0, 60))));
 		m_share->runAction(spawn);
 		m_favorite->runAction(spawn->clone());
-		m_gameCenter->runAction(spawn->clone());
+        m_gameCenter->runAction(spawn->clone());
+        
+        if (this->m_showAd && U::checkPlayCount()) {
+            #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+                Util_iOS::showInterstitialAd();
+            #endif
+        }
 	}), DelayTime::create(0.2), CallFunc::create([this](){
 		if (m_btnAdditional)
 		{

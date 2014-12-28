@@ -27,3 +27,9 @@ void Util_iOS::showActivities()
     RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
     [vc presentViewController:avc animated:YES completion:nil];
 }
+
+void Util_iOS::showInterstitialAd()
+{
+    RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+    [vc showInterstitialAd];
+}

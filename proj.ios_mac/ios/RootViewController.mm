@@ -45,9 +45,24 @@
 }
 */
 
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+}*/
+
+- (GADRequest *)getGADRequest {
+    GADRequest *request = [GADRequest request];
+    request.testDevices = @[@"31dc7200c408120825a49d2c336921c7"];
+    return request;
+}
+
+- (void)loadGADInterstitial {
+    // 插页式广告
+    interstitial_ = [[GADInterstitial alloc] init];
+    interstitial_.adUnitID = @"ca-app-pub-5072970286349933/9504216029";
+    interstitial_.delegate = self;
+    [interstitial_ loadRequest:[self getGADRequest]];
 }
 
 - (void) addGameView
@@ -65,9 +80,10 @@
     [self.view addSubview:bannerView_];
     
     // 启动一般性请求并在其中加载广告。
-    GADRequest *request = [GADRequest request];
-    request.testDevices = @[@"31dc7200c408120825a49d2c336921c7"];
-    [bannerView_ loadRequest:request];
+    [bannerView_ loadRequest:[self getGADRequest]];
+    
+    // 插页式广告
+    [self loadGADInterstitial];
 }
 
 // Override to allow orientations other than the default portrait orientation.
@@ -128,11 +144,29 @@
     [super dealloc];
 }
 
+- (void)showInterstitialAd {
+    if ([interstitial_ isReady]) {
+        [interstitial_ presentFromRootViewController:self];
+    }
+}
+
 #pragma mark - GameCenter
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Interstitial Delegate
+- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    NSLog(@"Interstitial Ad Error: %@", [error localizedDescription]);
+    [self loadGADInterstitial];
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad
+{
+    [self loadGADInterstitial];
 }
 
 @end
