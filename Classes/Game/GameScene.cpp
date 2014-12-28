@@ -319,7 +319,7 @@ void GameScene::showDoneLayer()
 	int nextLevel = m_nLevel;
 	int currentChapter = U::userDefault->getIntegerForKey("currentChapter");
 	int currentLevel = U::userDefault->getIntegerForKey("currentLevel");
-	if (m_nChapter == 0 && m_nLevel == 4)
+	if (m_nChapter == 0 && m_nLevel == 4 && !(currentChapter == 0 && currentLevel == 4))
 	{
 		nextChapter = currentChapter;
 		nextLevel = currentLevel;
