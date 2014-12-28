@@ -33,6 +33,8 @@
     <string>级别</string>
     <key>Level</key>
     <string>关卡</string>
+    <key>ABOUT_ME</key>
+    <string>开发者：Hans Zhang\n美术：Ruth Wu\n网址：http://wuruihong.com\n邮箱：support@wuruihong.com</string>
     <key>Move to one less, \ngain one...</key>
     <string>移动到比自己小1的\n数字上, 增加1...</string>
     <key>Move to empty \nspace, lose two...</key>

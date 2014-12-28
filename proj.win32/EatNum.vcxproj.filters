@@ -25,6 +25,9 @@
     <Filter Include="Classes\Game">
       <UniqueIdentifier>{fde739db-b19c-4017-ba21-ad69a98a85a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\About">
+      <UniqueIdentifier>{098f9a88-cdcd-45ba-aaa0-690b13286520}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -65,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Common\BaseScene.cpp">
       <Filter>Classes\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\About\AboutScene.cpp">
+      <Filter>Classes\About</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Common\BaseScene.h">
       <Filter>Classes\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\About\AboutScene.h">
+      <Filter>Classes\About</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
