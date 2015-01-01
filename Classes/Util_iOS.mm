@@ -33,3 +33,15 @@ void Util_iOS::showInterstitialAd()
     RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
     [vc showInterstitialAd];
 }
+
+void Util_iOS::reportScore(int score)
+{
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"EatNum_Score"];
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    NSArray *scores = @[scoreReporter];
+    [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
+        //Do something interesting here.
+    }];
+}
