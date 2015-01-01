@@ -356,7 +356,7 @@ void GameScene::showDoneLayer()
 		}
         if (currentChapter * 20 + currentLevel < nextChapter * 20 + nextLevel) {
             #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-                Util_iOS::reportScore(nextChapter * 20 + nextLevel);
+                Util_iOS::reportScore(currentChapter * 20 + currentLevel + 1);
             #endif
         }
 	}

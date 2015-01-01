@@ -1,4 +1,5 @@
 #include "Util_iOS.h"
+#include "Util.h"
 #import <GameKit/GameKit.h>
 #import "RootViewController.h"
 
@@ -37,11 +38,72 @@ void Util_iOS::showInterstitialAd()
 void Util_iOS::reportScore(int score)
 {
     GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"EatNum_Score"];
-    scoreReporter.value = score;
+    ValueVector v = U::getAllSkippedLevels();
+    scoreReporter.value = score - v.size();
     scoreReporter.context = 0;
     
     NSArray *scores = @[scoreReporter];
     [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
-        //Do something interesting here.
+        if (error != nil) {
+            NSLog(@"Error in reporting score: %@", error);
+        } else {
+            NSLog(@"Reported score: %lli", scoreReporter.value);
+        }
     }];
+    
+    if (score < 5) {
+        return;
+    }
+    
+    NSString *identifier = nil;
+    NSMutableArray *achievements = [[NSMutableArray alloc] init];
+    if (score == 5) {
+        identifier = @"EatNum_Tutorial";
+    } else if (score == 20) {
+        identifier = @"Achievement_Level_1";
+    } else if (score == 40) {
+        identifier = @"Achievement_Level_2";
+    } else if (score == 60) {
+        identifier = @"Achievement_Level_3";
+    } else if (score == 80) {
+        identifier = @"Achievement_Level_4";
+    } else if (score == 100) {
+        identifier = @"Achievement_Level_5";
+    } else if (score == 120) {
+        identifier = @"Achievement_Level_6";
+    } else if (score == 140) {
+        identifier = @"Achievement_Level_7";
+    } else if (score == 158) {
+        identifier = @"Achievement_Level_8";
+    }
+    if (score > 5) {
+        NSLog(@"Achievement: Achievement_Start");
+        GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: @"Achievement_Start"];
+        if (achievement)
+        {
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = YES;
+            [achievements addObject:achievement];
+        }
+    }
+    
+    if (identifier != nil) {
+        NSLog(@"Achievement: %@", identifier);
+        GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: identifier];
+        if (achievement)
+        {
+            achievement.percentComplete = 100.0;
+            achievement.showsCompletionBanner = YES;
+            [achievements addObject:achievement];
+        }
+    }
+    if ([achievements count] > 0) {
+        [GKAchievement reportAchievements:achievements withCompletionHandler:^(NSError *error)
+         {
+             if (error != nil)
+             {
+                 NSLog(@"Error in reporting achievements: %@", error);
+             }
+         }];
+    }
 }
