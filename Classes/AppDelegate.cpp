@@ -16,13 +16,17 @@ AppDelegate::~AppDelegate()
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
-    auto glview = director->getOpenGLView();
-	//int width = 768, height = 1024;
-	//int width = 640, height = 1136;
-	int width = 640, height = 960;
-	//int width = 480, height = 840;
-    if(!glview) {
-        glview = GLView::createWithRect("My Game", cocos2d::Rect(0, 0, width, height), 0.7F);
+	auto glview = director->getOpenGLView();
+	//int width = 750, height = 1334; // iPhone 4.7'
+	//int width = 1080, height = 1920; // iPhone 5.5'
+	//int width = 1242, height = 2208; // iPhone 5.5' Rendered
+	//int width = 640, height = 1136; // iPhone 4'
+	int width = 640, height = 960; // iPhone 3.5'
+	//int width = 768, height = 1024; // iPad
+	//int width = 1536, height = 2048; // iPad Retina
+	//int width = 480, height = 840; // Android
+	if (!glview) {
+        glview = GLView::createWithRect("My Game", cocos2d::Rect(0, 0, width, height), 0.89F);
 		director->setOpenGLView(glview);
 		
 		int designWidth = 640;
