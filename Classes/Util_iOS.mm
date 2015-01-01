@@ -1,6 +1,7 @@
 #include "Util_iOS.h"
 #include "Util.h"
 #import <GameKit/GameKit.h>
+#import <MessageUI/MessageUI.h>
 #import "RootViewController.h"
 
 void Util_iOS::commentInAppStore()
@@ -106,4 +107,18 @@ void Util_iOS::reportScore(int score)
              }
          }];
     }
+}
+
+void Util_iOS::sendMail()
+{
+    RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
+    
+    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+    mailPicker.mailComposeDelegate = vc;
+    
+    [mailPicker setSubject: NSLocalizedString(@"MailSubject", @"")];
+    
+    NSArray *toRecipients = [NSArray arrayWithObject: @"support@wuruihong.com"];
+    [mailPicker setToRecipients: toRecipients];
+    [vc presentModalViewController: mailPicker animated:YES];
 }

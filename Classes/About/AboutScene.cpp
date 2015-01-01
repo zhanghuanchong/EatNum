@@ -1,5 +1,6 @@
 #include "AboutScene.h"
 #include "../Home/HomeScene.h"
+#include "../Util_iOS.h"
 
 bool AboutScene::init()
 {
@@ -25,8 +26,16 @@ bool AboutScene::init()
 	ScalableSprite *btnPlay = ScalableSprite::create("back.png", [](){
 		Util::director->replaceScene(TransitionFlipX::create(0.3f, HomeScene::create()));
 	});
-	btnPlay->setPosition(U::cx, 120);
-	this->addChild(btnPlay);
+	btnPlay->setPosition(U::cx - 65, 130);
+    this->addChild(btnPlay);
+    
+    ScalableSprite *btnMail = ScalableSprite::create("mail.png", [](){
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            Util_iOS::sendMail();
+        #endif
+    });
+    btnMail->setPosition(U::cx + 65, 130);
+    this->addChild(btnMail);
 
     return true;
 }

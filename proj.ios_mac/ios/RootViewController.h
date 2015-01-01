@@ -25,10 +25,11 @@
 
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
+#import <MessageUI/MessageUI.h>
 #import "GADBannerView.h"
 #import "GADInterstitial.h"
 
-@interface RootViewController : UIViewController<GKGameCenterControllerDelegate, GADInterstitialDelegate> {
+@interface RootViewController : UIViewController<GKGameCenterControllerDelegate, GADInterstitialDelegate, MFMailComposeViewControllerDelegate> {
     GADBannerView *bannerView_;
     GADInterstitial *interstitial_;
 }
