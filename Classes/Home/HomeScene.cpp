@@ -2,6 +2,7 @@
 #include "../Levels/ChapterScene.h"
 #include "../Common/ScalableSprite.h"
 #include "../Game/GameScene.h"
+#include "../About/AboutScene.h"
 
 bool HomeScene::init()
 {
@@ -52,6 +53,22 @@ bool HomeScene::init()
 		this->addChild(btnMenu);
 	}
 	this->addChild(btnPlay);
+
+	m_share = ScalableSprite::create("share_50.png", [](){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		Util_iOS::showActivities();
+#endif
+	});
+	m_share->setPosition(10, 10);
+	m_share->setAnchorPoint(Vec2(0, 0));
+	this->addChild(m_share, 1000);
+
+	m_about = ScalableSprite::create("about.png", [this](){
+		Util::director->replaceScene(TransitionFlipX::create(0.3f, AboutScene::create()));
+	});
+	m_about->setPosition(90, 10);
+	m_about->setAnchorPoint(Vec2(0, 0));
+	this->addChild(m_about, 1000);
     
     return true;
 }
