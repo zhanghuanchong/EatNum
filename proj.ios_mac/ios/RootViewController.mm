@@ -169,4 +169,15 @@
     [self loadGADInterstitial];
 }
 
+#pragma mark - Mail Delegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    if (error != nil)
+    {
+        NSLog(@"Failed to send mail: %@", error);
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 @end

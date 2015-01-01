@@ -9,6 +9,8 @@ public:
     static void showGameCenter();
     static void showActivities();
     static void showInterstitialAd();
+    static void reportScore(int score);
+    static void sendMail();
 };
 
 

@@ -6,6 +6,10 @@
 #include "../Levels/LevelsScene.h"
 #include "../Home/HomeScene.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    #include "../Util_iOS.h"
+#endif
+
 GameScene * GameScene::createWithLevel(int level, int chapter)
 {
 	GameScene *sprite = new (std::nothrow) GameScene();
@@ -350,6 +354,11 @@ void GameScene::showDoneLayer()
 		if (currentLevel < nextLevel || nextLevel == 0) {
 			U::userDefault->setIntegerForKey("currentLevel", nextLevel);
 		}
+        if (currentChapter * 20 + currentLevel < nextChapter * 20 + nextLevel) {
+            #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+                Util_iOS::reportScore(currentChapter * 20 + currentLevel + 1);
+            #endif
+        }
 	}
 
 	U::removeFromSkippedLevel(m_nChapter, m_nLevel);
