@@ -4,6 +4,10 @@
 #include "../Game/GameScene.h"
 #include "../About/AboutScene.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    #include "../Util_iOS.h"
+#endif
+
 bool HomeScene::init()
 {
     if ( !BaseScene::init() )
@@ -55,18 +59,27 @@ bool HomeScene::init()
 	this->addChild(btnPlay);
 
 	m_share = ScalableSprite::create("share_50.png", [](){
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		Util_iOS::showActivities();
-#endif
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            Util_iOS::showActivities();
+        #endif
 	});
 	m_share->setPosition(10, 10);
 	m_share->setAnchorPoint(Vec2(0, 0));
 	this->addChild(m_share, 1000);
+    
+    m_gamecenter = ScalableSprite::create("gamecenter_50.png", [](){
+        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            Util_iOS::showGameCenter();
+        #endif
+    });
+    m_gamecenter->setPosition(90, 10);
+    m_gamecenter->setAnchorPoint(Vec2(0, 0));
+    this->addChild(m_gamecenter, 1000);
 
 	m_about = ScalableSprite::create("about.png", [this](){
 		Util::director->replaceScene(TransitionFlipX::create(0.3f, AboutScene::create()));
 	});
-	m_about->setPosition(90, 10);
+	m_about->setPosition(170, 10);
 	m_about->setAnchorPoint(Vec2(0, 0));
 	this->addChild(m_about, 1000);
     

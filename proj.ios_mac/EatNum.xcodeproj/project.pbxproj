@@ -23,6 +23,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		3A5FE8721A47B33500999FA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5FE8701A47B33500999FA2 /* InfoPlist.strings */; };
 		3A5FE8751A47B35500999FA2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5FE8731A47B35500999FA2 /* InfoPlist.strings */; };
+		3A6BDF4E1A54E25F002FADC8 /* AboutScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A6BDF4C1A54E25F002FADC8 /* AboutScene.cpp */; };
 		3A6E131A1A4B162000EFE356 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E13191A4B162000EFE356 /* libGoogleAdMobAds.a */; };
 		3A6E131E1A4B164300EFE356 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E131D1A4B164300EFE356 /* AdSupport.framework */; };
 		3A6E13201A4B166700EFE356 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6E131F1A4B166700EFE356 /* MessageUI.framework */; };
@@ -39,7 +40,6 @@
 		3A79B8371A3A82E0008C7B78 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8321A3A82E0008C7B78 /* fonts */; };
 		3A79B8381A3A82E0008C7B78 /* i18n in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8331A3A82E0008C7B78 /* i18n */; };
 		3A79B8391A3A82E0008C7B78 /* image in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8341A3A82E0008C7B78 /* image */; };
-		3A79B83A1A3A82E0008C7B78 /* other in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8351A3A82E0008C7B78 /* other */; };
 		3A79B83B1A3A82E0008C7B78 /* sound in Resources */ = {isa = PBXBuildFile; fileRef = 3A79B8361A3A82E0008C7B78 /* sound */; };
 		3A79B85A1A3A83F6008C7B78 /* BaseScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A79B83D1A3A83F6008C7B78 /* BaseScene.cpp */; };
 		3A79B85B1A3A83F6008C7B78 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3A79B83F1A3A83F6008C7B78 /* Block.cpp */; };
@@ -237,6 +237,8 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A5FE8711A47B33500999FA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		3A5FE8741A47B35500999FA2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
+		3A6BDF4C1A54E25F002FADC8 /* AboutScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AboutScene.cpp; sourceTree = "<group>"; };
+		3A6BDF4D1A54E25F002FADC8 /* AboutScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutScene.h; sourceTree = "<group>"; };
 		3A6E130D1A4B162000EFE356 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		3A6E130E1A4B162000EFE356 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
 		3A6E130F1A4B162000EFE356 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
@@ -265,7 +267,6 @@
 		3A79B8321A3A82E0008C7B78 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		3A79B8331A3A82E0008C7B78 /* i18n */ = {isa = PBXFileReference; lastKnownFileType = folder; path = i18n; sourceTree = "<group>"; };
 		3A79B8341A3A82E0008C7B78 /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
-		3A79B8351A3A82E0008C7B78 /* other */ = {isa = PBXFileReference; lastKnownFileType = folder; path = other; sourceTree = "<group>"; };
 		3A79B8361A3A82E0008C7B78 /* sound */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sound; sourceTree = "<group>"; };
 		3A79B83D1A3A83F6008C7B78 /* BaseScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseScene.cpp; sourceTree = "<group>"; };
 		3A79B83E1A3A83F6008C7B78 /* BaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScene.h; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				3A6BDF4B1A54E25F002FADC8 /* About */,
 				3A79B83C1A3A83F6008C7B78 /* Common */,
 				3A79B8471A3A83F6008C7B78 /* Game */,
 				3A79B84C1A3A83F6008C7B78 /* Global.h */,
@@ -515,6 +517,16 @@
 			path = "ios/zh-Hans.lproj";
 			sourceTree = SOURCE_ROOT;
 		};
+		3A6BDF4B1A54E25F002FADC8 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				3A6BDF4C1A54E25F002FADC8 /* AboutScene.cpp */,
+				3A6BDF4D1A54E25F002FADC8 /* AboutScene.h */,
+			);
+			name = About;
+			path = ../Classes/About;
+			sourceTree = "<group>";
+		};
 		3A6E130C1A4B162000EFE356 /* GoogleMobileAdsSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,7 +636,6 @@
 				3A79B8321A3A82E0008C7B78 /* fonts */,
 				3A79B8331A3A82E0008C7B78 /* i18n */,
 				3A79B8341A3A82E0008C7B78 /* image */,
-				3A79B8351A3A82E0008C7B78 /* other */,
 				3A79B8361A3A82E0008C7B78 /* sound */,
 			);
 			name = Resources;
@@ -806,7 +817,6 @@
 				3A5FE8721A47B33500999FA2 /* InfoPlist.strings in Resources */,
 				3A7648A01A4CF92200436452 /* Localizable.strings in Resources */,
 				3ACE976B1A470201004AB0B1 /* Images.xcassets in Resources */,
-				3A79B83A1A3A82E0008C7B78 /* other in Resources */,
 				3A79B83B1A3A82E0008C7B78 /* sound in Resources */,
 				3A76489B1A4CF91000436452 /* Localizable.strings in Resources */,
 				3A79B8371A3A82E0008C7B78 /* fonts in Resources */,
@@ -841,6 +851,7 @@
 				3A79B8651A3A83F6008C7B78 /* Util.cpp in Sources */,
 				3A79B8601A3A83F6008C7B78 /* LevelLayer.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				3A6BDF4E1A54E25F002FADC8 /* AboutScene.cpp in Sources */,
 				3A79B85A1A3A83F6008C7B78 /* BaseScene.cpp in Sources */,
 				3A79B85B1A3A83F6008C7B78 /* Block.cpp in Sources */,
 				1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */,

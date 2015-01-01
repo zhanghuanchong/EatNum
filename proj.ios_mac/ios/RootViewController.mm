@@ -53,7 +53,7 @@
 
 - (GADRequest *)getGADRequest {
     GADRequest *request = [GADRequest request];
-//    request.testDevices = @[@"31dc7200c408120825a49d2c336921c7"];
+    request.testDevices = @[@"31dc7200c408120825a49d2c336921c7"];
     return request;
 }
 

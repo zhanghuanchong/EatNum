@@ -17,5 +17,6 @@ private:
 	Label *labelNum;
 	ScalableSprite *m_share;
 	ScalableSprite *m_about;
+    ScalableSprite *m_gamecenter;
 };
 
