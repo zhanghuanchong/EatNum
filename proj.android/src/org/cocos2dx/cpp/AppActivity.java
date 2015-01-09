@@ -26,18 +26,26 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.cpp;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.app4cn.eatnum.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 public class AppActivity extends Cocos2dxActivity {
 	private AdView adView;
+	private static boolean bShowAd = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,13 +55,57 @@ public class AppActivity extends Cocos2dxActivity {
 		adView = new AdView(this);
 		adView.setAdUnitId("ca-app-pub-5072970286349933/3457682424");
 		adView.setAdSize(AdSize.BANNER);
+		
+        FrameLayout fl = (FrameLayout) ((ViewGroup)this.findViewById(android.R.id.content)).getChildAt(0);
+        
+        final LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        this.setContentView(layout);
+        
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+        		LinearLayout.LayoutParams.MATCH_PARENT,
+        		LinearLayout.LayoutParams.WRAP_CONTENT,
+        		1.0f);
+        layout.addView(fl, param);
 
-		// 查询LinearLayout，假设其已指定
-		// 属性android:id="@+id/mainLayout"。
-		LinearLayout layout = (LinearLayout)findViewById(R.id.mainLayout);
-
-		// 在其中添加adView。
-		layout.addView(adView);
+        final LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(
+        		LinearLayout.LayoutParams.MATCH_PARENT,
+        		100);
+        String result = "";
+        URL url = null;
+        HttpURLConnection connection = null;
+        InputStreamReader in = null;
+        try {
+            url = new URL("http://wuruihong.com/eatnum.php");
+//            url = new URL("http://wuruihong.com/eatnum.php?s=xiaomi");
+//            url = new URL("http://wuruihong.com/eatnum.php?s=360");
+            connection = (HttpURLConnection) url.openConnection();
+            in = new InputStreamReader(connection.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(in);
+            StringBuffer strBuffer = new StringBuffer();
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                strBuffer.append(line);
+            }
+            result = strBuffer.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (result.equals("true")) {
+        	bShowAd = true;
+        	layout.addView(adView, param2);
+        }
 
 		// 启动一般性请求。
 		AdRequest adRequest = new AdRequest.Builder().build();
