@@ -34,22 +34,31 @@ import java.net.URL;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 
 public class AppActivity extends Cocos2dxActivity {
 	private AdView adView;
+	private static InterstitialAd interstitial;
 	private static boolean bShowAd = false;
+	private static Context context;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
 
 		// 创建adView。
 		adView = new AdView(this);
@@ -112,8 +121,43 @@ public class AppActivity extends Cocos2dxActivity {
 
 		// 在adView中加载广告请求。
 		adView.loadAd(adRequest);
+		
+	    interstitial = new InterstitialAd(this);
+	    interstitial.setAdUnitId("ca-app-pub-5072970286349933/4934415623");
+	    interstitial.setAdListener(new AdListener(){
+
+			@Override
+			public void onAdFailedToLoad(int errorCode) {
+				super.onAdFailedToLoad(errorCode);
+				
+				interstitial.loadAd(new AdRequest.Builder().build());
+			}
+	    	
+	    });
+	    
+	    adRequest = new AdRequest.Builder().build();
+	    interstitial.loadAd(adRequest);
 	}
 
+	public static void showInterstitialAd() {
+		if (bShowAd) {
+			Activity c = (Activity)context;
+			c.runOnUiThread(new Runnable() {
+			    @Override
+			    public void run() {
+					if (interstitial.isLoaded()) {
+						Log.i("AdMob", "Should show Ad now");
+						interstitial.show();
+					} else {
+						Log.e("AdMob", "Ad is not loaded yet. Reload now");
+						AdRequest adRequest = new AdRequest.Builder().build();
+					    interstitial.loadAd(adRequest);
+					}
+			    }
+			});
+		}
+	}
+	
 	@Override
 	public void onPause() {
 		adView.pause();
