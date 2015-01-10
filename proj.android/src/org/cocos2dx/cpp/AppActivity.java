@@ -34,8 +34,11 @@ import java.net.URL;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.R;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -153,6 +156,21 @@ public class AppActivity extends Cocos2dxActivity {
 						AdRequest adRequest = new AdRequest.Builder().build();
 					    interstitial.loadAd(adRequest);
 					}
+			    }
+			});
+		}
+	}
+
+	public static void sendMail() {
+		if (bShowAd) {
+			final Activity c = (Activity)context;
+			c.runOnUiThread(new Runnable() {
+			    @Override
+			    public void run() {
+			    	Intent data=new Intent(Intent.ACTION_SENDTO);
+			    	data.setData(Uri.parse("mailto:support@wuruihong.com"));
+			    	data.putExtra(Intent.EXTRA_SUBJECT, c.getString(com.app4cn.eatnum.R.string.mail_subject));
+			    	c.startActivity(data);
 			    }
 			});
 		}

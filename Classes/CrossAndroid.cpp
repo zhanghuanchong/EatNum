@@ -43,5 +43,11 @@ void CrossAndroid::reportScore(int score)
 
 void CrossAndroid::sendMail()
 {
-
+	JniMethodInfo info;
+	bool ret = JniHelper::getStaticMethodInfo(info, "org/cocos2dx/cpp/AppActivity", "sendMail", "()V");
+	if(ret)
+	{
+		CCLog("Invoke sendMail");
+		info.env->CallStaticVoidMethod(info.classID, info.methodID);
+	}
 }

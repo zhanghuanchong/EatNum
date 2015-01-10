@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Eat Num</string>
+    <string name="mail_subject">Eat Num - Feedback</string>
 </resources>
