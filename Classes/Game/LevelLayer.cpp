@@ -77,18 +77,29 @@ void LevelLayer::onEnter()
 {
 	Layer::onEnter();
 
-	Sequence *seq = Sequence::create(DelayTime::create(0.5), CallFunc::create([this](){
+	int heightDelta = 60;
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		m_btnLeft->setPositionY(U::cy);
+		m_btnRight->setPositionY(U::cy);
+		heightDelta = 0;
+	#endif
+
+	Sequence *seq = Sequence::create(DelayTime::create(0.5), CallFunc::create([this, heightDelta](){
 		m_bgLayer->setVisible(true);
 
-		m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx - 90, U::cy + 60))));
-        m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy + 60))));
+		m_btnLeft->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx - 90, U::cy + heightDelta))));
+        m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy + heightDelta))));
 	}), DelayTime::create(0.2), CallFunc::create([this](){
-		Spawn *spawn = Spawn::createWithTwoActions(
-			EaseSineOut::create(FadeIn::create(0.3f)), 
-			EaseBackOut::create(MoveBy::create(0.3f, Vec2(0, 60))));
-		m_share->runAction(spawn);
-		m_favorite->runAction(spawn->clone());
-        m_gameCenter->runAction(spawn->clone());
+
+		#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)
+			Spawn *spawn = Spawn::createWithTwoActions(
+				EaseSineOut::create(FadeIn::create(0.3f)),
+				EaseBackOut::create(MoveBy::create(0.3f, Vec2(0, 60))));
+			m_share->runAction(spawn);
+			m_favorite->runAction(spawn->clone());
+			m_gameCenter->runAction(spawn->clone());
+		#endif
         
         if (this->m_showAd && U::checkPlayCount()) {
 			Util::crossHelper->showInterstitialAd();
