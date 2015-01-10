@@ -4,10 +4,6 @@
 #include "../Game/GameScene.h"
 #include "../About/AboutScene.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    #include "../Util_iOS.h"
-#endif
-
 bool HomeScene::init()
 {
     if ( !BaseScene::init() )
@@ -59,18 +55,14 @@ bool HomeScene::init()
 	this->addChild(btnPlay);
 
 	m_share = ScalableSprite::create("share_50.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            Util_iOS::showActivities();
-        #endif
+        Util::crossHelper->showActivities();
 	});
 	m_share->setPosition(10, 10);
 	m_share->setAnchorPoint(Vec2(0, 0));
 	this->addChild(m_share, 1000);
     
     m_gamecenter = ScalableSprite::create("gamecenter_50.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            Util_iOS::showGameCenter();
-        #endif
+        Util::crossHelper->showGameCenter();
     });
     m_gamecenter->setPosition(90, 10);
     m_gamecenter->setAnchorPoint(Vec2(0, 0));

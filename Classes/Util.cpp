@@ -1,5 +1,11 @@
 #include "Util.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	#include "CrossiOS.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	#include "CrossAndroid.h"
+#endif
+
 Director* Util::director;
 cocos2d::Size Util::size = cocos2d::Size(0, 0);
 float Util::width;
@@ -15,6 +21,7 @@ ValueMap Util::lang;
 Document Util::data;
 FileUtils *Util::fileUtils;
 string Util::configFilePath;
+CrossHelper *Util::crossHelper;
 vector<string> Util::fonts;
 bool Util::isEffectEnabled = true;
 int Util::playCount = 0;
@@ -34,6 +41,14 @@ void Util::init()
 	Util::cy = Util::origin.y + Util::height / 2;
 	Util::center = cocos2d::Point(cx, cy);
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	Util::crossHelper = new CrossiOS;
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	Util::crossHelper = new CrossAndroid;
+#else
+	Util::crossHelper = new CrossHelper;
+#endif
+
 	Util::fileUtils = FileUtils::getInstance();
 
 	vector<string> paths;
@@ -42,7 +57,6 @@ void Util::init()
 	paths.push_back("sound");
 	paths.push_back("image");
 	Util::fileUtils->setSearchResolutionsOrder(paths);
-    
     
     stringstream s;
     s << "i18n/";

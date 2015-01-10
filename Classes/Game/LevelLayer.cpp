@@ -1,10 +1,6 @@
 #include "LevelLayer.h"
 #include "../Common/ScalableSprite.h"
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    #include "../Util_iOS.h"
-#endif
-
 LevelLayer * LevelLayer::create(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, Sprite *btnAdditional/* = nullptr*/, bool showAd/* = true */)
 {
 	LevelLayer *sprite = new (std::nothrow) LevelLayer();
@@ -40,27 +36,21 @@ bool LevelLayer::init(const Color4B &color, Sprite *btnLeft, Sprite *btnRight, S
 	this->addChild(m_btnRight);
 
     m_share = ScalableSprite::create("share.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            Util_iOS::showActivities();
-        #endif
+        Util::crossHelper->showActivities();
 	});
 	m_share->setPosition(U::cx - 80, U::cy - 140);
 	m_share->setOpacity(1);
 	this->addChild(m_share, 1000);
 
 	m_favorite = ScalableSprite::create("favorite.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            Util_iOS::commentInAppStore();
-        #endif
+		Util::crossHelper->commentInAppStore();
 	});
 	m_favorite->setPosition(U::cx, U::cy - 140);
 	m_favorite->setOpacity(1);
 	this->addChild(m_favorite, 1000);
 
 	m_gameCenter = ScalableSprite::create("gamecenter.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-                Util_iOS::showGameCenter();
-        #endif
+		Util::crossHelper->showGameCenter();
 	});
 	m_gameCenter->setPosition(U::cx + 80, U::cy - 140);
 	m_gameCenter->setOpacity(1);
@@ -101,9 +91,7 @@ void LevelLayer::onEnter()
         m_gameCenter->runAction(spawn->clone());
         
         if (this->m_showAd && U::checkPlayCount()) {
-            #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-                Util_iOS::showInterstitialAd();
-            #endif
+			Util::crossHelper->showInterstitialAd();
         }
 	}), DelayTime::create(0.2), CallFunc::create([this](){
 		if (m_btnAdditional)

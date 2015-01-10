@@ -13,6 +13,8 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Util.cpp \
+                   ../../Classes/CrossHelper.cpp \
+                   ../../Classes/CrossAndroid.cpp \
                    ../../Classes/Common/Block.cpp \
                    ../../Classes/Common/DraggableBlock.cpp \
                    ../../Classes/Common/ScalableSprite.cpp \

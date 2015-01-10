@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Global.h"
+#include "CrossHelper.h"
 
 class Util
 {
@@ -17,6 +18,7 @@ public:
 	static vector<string> fonts;
 	static string configFilePath;
 	static Document data;
+	static CrossHelper *crossHelper;
 	static bool isEffectEnabled;
 
 	static float width;

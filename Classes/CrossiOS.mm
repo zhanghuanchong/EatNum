@@ -1,15 +1,15 @@
-#include "Util_iOS.h"
+#include "CrossiOS.h"
 #include "Util.h"
 #import <GameKit/GameKit.h>
 #import <MessageUI/MessageUI.h>
 #import "RootViewController.h"
 
-void Util_iOS::commentInAppStore()
+void CrossiOS::commentInAppStore()
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/us/app/tun-shi-shu-zi/id953857266?l=zh&ls=1&mt=8"]];
 }
 
-void Util_iOS::showGameCenter()
+void CrossiOS::showGameCenter()
 {
     GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
     if (gameCenterController != nil)
@@ -21,7 +21,7 @@ void Util_iOS::showGameCenter()
     }
 }
 
-void Util_iOS::showActivities()
+void CrossiOS::showActivities()
 {
     NSString *str = NSLocalizedString(@"ShareString", nil);
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/tun-shi-shu-zi/id953857266?l=zh&ls=1&mt=8"];
@@ -30,13 +30,13 @@ void Util_iOS::showActivities()
     [vc presentViewController:avc animated:YES completion:nil];
 }
 
-void Util_iOS::showInterstitialAd()
+void CrossiOS::showInterstitialAd()
 {
     RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
     [vc showInterstitialAd];
 }
 
-void Util_iOS::reportScore(int score)
+void CrossiOS::reportScore(int score)
 {
     GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"EatNum_Score"];
     ValueVector v = U::getAllSkippedLevels();
@@ -109,7 +109,7 @@ void Util_iOS::reportScore(int score)
     }
 }
 
-void Util_iOS::sendMail()
+void CrossiOS::sendMail()
 {
     RootViewController *vc = (RootViewController *)[[[UIApplication sharedApplication] keyWindow] rootViewController];
     

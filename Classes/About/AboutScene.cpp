@@ -1,6 +1,5 @@
 #include "AboutScene.h"
 #include "../Home/HomeScene.h"
-#include "../Util_iOS.h"
 
 bool AboutScene::init()
 {
@@ -30,9 +29,7 @@ bool AboutScene::init()
     this->addChild(btnPlay);
     
     ScalableSprite *btnMail = ScalableSprite::create("mail.png", [](){
-        #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-            Util_iOS::sendMail();
-        #endif
+		Util::crossHelper->sendMail();
     });
     btnMail->setPosition(U::cx + 65, 130);
     this->addChild(btnMail);
