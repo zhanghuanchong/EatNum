@@ -8,6 +8,7 @@ public:
     virtual void showInterstitialAd();
     virtual void sendMail();
     virtual void askForExit();
+    virtual void showActivities();
 
     virtual ~CrossAndroid();
 };

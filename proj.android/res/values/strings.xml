@@ -6,4 +6,5 @@
     <string name="quit_string">Quit this game or not?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="share_string">I\'m playing a fun game: Eat Num. Let\'s play together!</string>
 </resources>

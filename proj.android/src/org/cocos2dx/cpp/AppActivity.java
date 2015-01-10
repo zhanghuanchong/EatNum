@@ -57,6 +57,7 @@ public class AppActivity extends Cocos2dxActivity {
 	private static InterstitialAd interstitial;
 	private static boolean bShowAd = false;
 	private static Context context;
+	private static String apkURL = "http://goo.gl/dLCKQO"; // http://wuruihong.com/eatnum_google_play.apk 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -187,6 +188,20 @@ public class AppActivity extends Cocos2dxActivity {
 						  }
 					  })
 					  .show();
+		    }
+		});
+	}
+	
+	public static void showActivities() {
+		final Activity c = (Activity)context;
+		c.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+		    	Intent sendIntent = new Intent();
+		    	sendIntent.setAction(Intent.ACTION_SEND);
+		    	sendIntent.putExtra(Intent.EXTRA_TEXT, c.getString(com.app4cn.eatnum.R.string.share_string) + AppActivity.apkURL);
+		    	sendIntent.setType("text/plain");
+		    	c.startActivity(sendIntent);
 		    }
 		});
 	}

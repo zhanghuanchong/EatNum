@@ -6,4 +6,5 @@
     <string name="quit_string">确定要退出吗？</string>
     <string name="yes">确定</string>
     <string name="no">取消</string>
+    <string name="share_string">我正在玩一个有趣的游戏：吞噬数字。来一起玩吧～</string>
 </resources>
