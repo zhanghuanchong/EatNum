@@ -127,16 +127,6 @@ public class AppActivity extends Cocos2dxActivity {
 		
 	    interstitial = new InterstitialAd(this);
 	    interstitial.setAdUnitId("ca-app-pub-5072970286349933/4934415623");
-	    interstitial.setAdListener(new AdListener(){
-
-			@Override
-			public void onAdFailedToLoad(int errorCode) {
-				super.onAdFailedToLoad(errorCode);
-				
-				interstitial.loadAd(new AdRequest.Builder().build());
-			}
-	    	
-	    });
 	    
 	    adRequest = new AdRequest.Builder().build();
 	    interstitial.loadAd(adRequest);
