@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">吞噬数字</string>
     <string name="mail_subject">吞噬数字 - 反馈</string>
+    <string name="quit">退出</string>
+    <string name="quit_string">确定要退出吗？</string>
+    <string name="yes">确定</string>
+    <string name="no">取消</string>
 </resources>

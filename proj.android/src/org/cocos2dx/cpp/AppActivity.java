@@ -34,9 +34,10 @@ import java.net.URL;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
-import android.R;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,7 +46,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -152,18 +152,43 @@ public class AppActivity extends Cocos2dxActivity {
 	}
 
 	public static void sendMail() {
-		if (bShowAd) {
-			final Activity c = (Activity)context;
-			c.runOnUiThread(new Runnable() {
-			    @Override
-			    public void run() {
-			    	Intent data=new Intent(Intent.ACTION_SENDTO);
-			    	data.setData(Uri.parse("mailto:support@wuruihong.com"));
-			    	data.putExtra(Intent.EXTRA_SUBJECT, c.getString(com.app4cn.eatnum.R.string.mail_subject));
-			    	c.startActivity(data);
-			    }
-			});
-		}
+		final Activity c = (Activity)context;
+		c.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+		    	Intent data=new Intent(Intent.ACTION_SENDTO);
+		    	data.setData(Uri.parse("mailto:support@wuruihong.com"));
+		    	data.putExtra(Intent.EXTRA_SUBJECT, c.getString(com.app4cn.eatnum.R.string.mail_subject));
+		    	c.startActivity(data);
+		    }
+		});
+	}
+	
+	public static void askForExit() {
+		final Activity c = (Activity)context;
+		c.runOnUiThread(new Runnable() {
+		    @Override
+		    public void run() {
+				AlertDialog.Builder build = new AlertDialog.Builder(c);
+				build.setTitle(c.getString(com.app4cn.eatnum.R.string.quit))
+					  .setMessage(c.getString(com.app4cn.eatnum.R.string.quit_string))
+					  .setPositiveButton(c.getString(com.app4cn.eatnum.R.string.yes), new DialogInterface.OnClickListener() {
+
+						  @Override
+						  public void onClick(DialogInterface dialog, int which) {
+							  System.exit(0);
+						  }
+					  })
+					  .setNegativeButton(c.getString(com.app4cn.eatnum.R.string.no), new DialogInterface.OnClickListener() {
+
+						  @Override
+						  public void onClick(DialogInterface dialog, int which) {
+							  dialog.dismiss();
+						  }
+					  })
+					  .show();
+		    }
+		});
 	}
 	
 	@Override

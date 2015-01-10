@@ -11,20 +11,6 @@
 CrossAndroid::~CrossAndroid()
 {}
 
-void CrossAndroid::commentInAppStore()
-{
-
-}
-
-void CrossAndroid::showGameCenter()
-{
-
-}
-
-void CrossAndroid::showActivities()
-{
-}
-
 void CrossAndroid::showInterstitialAd()
 {
 	JniMethodInfo info;
@@ -36,11 +22,6 @@ void CrossAndroid::showInterstitialAd()
 	}
 }
 
-void CrossAndroid::reportScore(int score)
-{
-
-}
-
 void CrossAndroid::sendMail()
 {
 	JniMethodInfo info;
@@ -48,6 +29,17 @@ void CrossAndroid::sendMail()
 	if(ret)
 	{
 		CCLog("Invoke sendMail");
+		info.env->CallStaticVoidMethod(info.classID, info.methodID);
+	}
+}
+
+void CrossAndroid::askForExit()
+{
+	JniMethodInfo info;
+	bool ret = JniHelper::getStaticMethodInfo(info, "org/cocos2dx/cpp/AppActivity", "askForExit", "()V");
+	if(ret)
+	{
+		CCLog("Invoke askForExit");
 		info.env->CallStaticVoidMethod(info.classID, info.methodID);
 	}
 }

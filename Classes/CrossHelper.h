@@ -11,6 +11,7 @@ public:
     virtual void showInterstitialAd();
     virtual void reportScore(int score);
     virtual void sendMail();
+    virtual void askForExit();
 
     virtual ~CrossHelper();
 };

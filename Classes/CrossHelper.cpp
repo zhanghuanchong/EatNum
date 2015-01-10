@@ -33,3 +33,8 @@ void CrossHelper::sendMail()
 {
 	CCLog("CrossHelper::sendMail");
 }
+
+void CrossHelper::askForExit()
+{
+	CCLog("CrossHelper::askForExit");
+}

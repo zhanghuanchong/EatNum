@@ -18,5 +18,6 @@ private:
 	ScalableSprite *m_share;
 	ScalableSprite *m_about;
     ScalableSprite *m_gamecenter;
+    ScalableSprite *m_exit;
 };
 

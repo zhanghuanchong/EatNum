@@ -74,6 +74,19 @@ bool HomeScene::init()
 	m_about->setPosition(170, 10);
 	m_about->setAnchorPoint(Vec2(0, 0));
 	this->addChild(m_about, 1000);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	m_share->setVisible(false);
+	m_gamecenter->setVisible(false);
+	m_about->setPosition(10, 10);
+
+	m_exit = ScalableSprite::create("exit.png", [this](){
+		Util::crossHelper->askForExit();
+	});
+	m_exit->setPosition(90, 10);
+	m_exit->setAnchorPoint(Vec2(0, 0));
+	this->addChild(m_exit, 1000);
+#endif
     
     return true;
 }
