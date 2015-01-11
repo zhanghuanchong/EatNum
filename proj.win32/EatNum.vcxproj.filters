@@ -72,6 +72,9 @@
     <ClCompile Include="..\Classes\About\AboutScene.cpp">
       <Filter>Classes\About</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CrossHelper.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\About\AboutScene.h">
       <Filter>Classes\About</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CrossHelper.h">
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

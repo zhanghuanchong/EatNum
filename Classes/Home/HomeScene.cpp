@@ -75,7 +75,7 @@ bool HomeScene::init()
 	m_about->setAnchorPoint(Vec2(0, 0));
 	this->addChild(m_about, 1000);
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	m_gamecenter->setVisible(false);
 	m_about->setPosition(90, 10);
 

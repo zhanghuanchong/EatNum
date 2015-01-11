@@ -141,6 +141,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Common\Block.cpp" />
     <ClCompile Include="..\Classes\Common\DraggableBlock.cpp" />
     <ClCompile Include="..\Classes\Common\ScalableSprite.cpp" />
+    <ClCompile Include="..\Classes\CrossHelper.cpp" />
     <ClCompile Include="..\Classes\Game\GameScene.cpp" />
     <ClCompile Include="..\Classes\Game\LevelLayer.cpp" />
     <ClCompile Include="..\Classes\Home\HomeScene.cpp" />
@@ -157,6 +158,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Common\Block.h" />
     <ClInclude Include="..\Classes\Common\DraggableBlock.h" />
     <ClInclude Include="..\Classes\Common\ScalableSprite.h" />
+    <ClInclude Include="..\Classes\CrossHelper.h" />
     <ClInclude Include="..\Classes\Game\GameScene.h" />
     <ClInclude Include="..\Classes\Game\LevelLayer.h" />
     <ClInclude Include="..\Classes\Global.h" />

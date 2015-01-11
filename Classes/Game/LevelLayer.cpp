@@ -79,7 +79,7 @@ void LevelLayer::onEnter()
 
 	int heightDelta = 60;
 
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		m_btnLeft->setPositionY(U::cy);
 		m_btnRight->setPositionY(U::cy);
 		heightDelta = 0;
@@ -92,7 +92,7 @@ void LevelLayer::onEnter()
         m_btnRight->runAction(EaseSineOut::create(MoveTo::create(0.2f, Vec2(U::cx + 90, U::cy + heightDelta))));
 	}), DelayTime::create(0.2), CallFunc::create([this](){
 
-		#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)
+		#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID && CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
 			Spawn *spawn = Spawn::createWithTwoActions(
 				EaseSineOut::create(FadeIn::create(0.3f)),
 				EaseBackOut::create(MoveBy::create(0.3f, Vec2(0, 60))));

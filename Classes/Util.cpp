@@ -60,12 +60,12 @@ void Util::init()
     
     stringstream s;
     s << "i18n/";
-    LanguageType languageType = Application::getInstance()->getCurrentLanguage();
-    if (languageType == LanguageType::CHINESE) {
-        s << "zh-CN";
-    } else {
-        s << "en-US";
-    }
+	LanguageType languageType = Application::getInstance()->getCurrentLanguage();
+	if (languageType == LanguageType::CHINESE) {
+		s << "zh-CN";
+	} else {
+		s << "en-US";
+	}
     s << ".plist";
 
 	Util::lang = Util::fileUtils->getValueMapFromFile(s.str());
