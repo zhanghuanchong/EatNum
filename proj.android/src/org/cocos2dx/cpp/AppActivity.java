@@ -45,30 +45,26 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+import cn.domob.android.ads.AdView;
+import cn.domob.android.ads.InterstitialAd;
+import cn.domob.android.ads.InterstitialAdListener;
+import cn.domob.android.ads.AdManager.ErrorCode;
 
 
 public class AppActivity extends Cocos2dxActivity {
 	private AdView adView;
-	private static InterstitialAd interstitial;
-	private static boolean bShowAd = false;
+	private static InterstitialAd mInterstitialAd;
 	private static Context context;
-	private static String apkURL = "http://goo.gl/dLCKQO"; // http://wuruihong.com/eatnum_google_play.apk 
+	private static String publisherID = "56OJwNvIuN5x24uPR1";
+	private static boolean bShowAd = false;
+	private static String apkURL = "http://t.cn/RZX66pv"; // http://wuruihong.com/eatnum.apk 
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = this;
 
-		// 创建adView。
-		adView = new AdView(this);
-		adView.setAdUnitId("ca-app-pub-5072970286349933/3457682424");
-		adView.setAdSize(AdSize.BANNER);
-		
+		adView = new AdView(this, publisherID, "16TLuu_oApZpHNUOizHZOQ5s");		
         FrameLayout fl = (FrameLayout) ((ViewGroup)this.findViewById(android.R.id.content)).getChildAt(0);
         
         final LinearLayout layout = new LinearLayout(getContext());
@@ -120,17 +116,52 @@ public class AppActivity extends Cocos2dxActivity {
         	layout.addView(adView, param2);
         }
 
-		// 启动一般性请求。
-		AdRequest adRequest = new AdRequest.Builder().build();
+        mInterstitialAd = new InterstitialAd(this, publisherID, "16TLuu_oApZpHNUOi8KQzBTk");
+		mInterstitialAd.setInterstitialAdListener(new InterstitialAdListener() {
+			@Override
+			public void onInterstitialAdReady() {
+				Log.i("DomobSDKDemo", "onAdReady");
+			}
 
-		// 在adView中加载广告请求。
-		adView.loadAd(adRequest);
-		
-	    interstitial = new InterstitialAd(this);
-	    interstitial.setAdUnitId("ca-app-pub-5072970286349933/4934415623");
-	    
-	    adRequest = new AdRequest.Builder().build();
-	    interstitial.loadAd(adRequest);
+			@Override
+			public void onLandingPageOpen() {
+				Log.i("DomobSDKDemo", "onLandingPageOpen");
+			}
+
+			@Override
+			public void onLandingPageClose() {
+				Log.i("DomobSDKDemo", "onLandingPageClose");
+			}
+
+			@Override
+			public void onInterstitialAdPresent() {
+				Log.i("DomobSDKDemo", "onInterstitialAdPresent");
+			}
+
+			@Override
+			public void onInterstitialAdDismiss() {
+				// Request new ad when the previous interstitial ad was closed.
+				mInterstitialAd.loadInterstitialAd();
+				Log.i("DomobSDKDemo", "onInterstitialAdDismiss");
+			}
+
+			@Override
+			public void onInterstitialAdFailed(ErrorCode arg0) {
+				Log.i("DomobSDKDemo", "onInterstitialAdFailed");				
+			}
+
+			@Override
+			public void onInterstitialAdLeaveApplication() {
+				Log.i("DomobSDKDemo", "onInterstitialAdLeaveApplication");
+				
+			}
+
+			@Override
+			public void onInterstitialAdClicked(InterstitialAd arg0) {
+				Log.i("DomobSDKDemo", "onInterstitialAdClicked");
+			}
+		});
+		mInterstitialAd.loadInterstitialAd();
 	}
 
 	public static void showInterstitialAd() {
@@ -139,13 +170,11 @@ public class AppActivity extends Cocos2dxActivity {
 			c.runOnUiThread(new Runnable() {
 			    @Override
 			    public void run() {
-					if (interstitial.isLoaded()) {
-						Log.i("AdMob", "Should show Ad now");
-						interstitial.show();
+					if (mInterstitialAd.isInterstitialAdReady()){
+						mInterstitialAd.showInterstitialAd(context);
 					} else {
-						Log.e("AdMob", "Ad is not loaded yet. Reload now");
-						AdRequest adRequest = new AdRequest.Builder().build();
-					    interstitial.loadAd(adRequest);
+						Log.i("DomobSDKDemo", "Interstitial Ad is not ready");
+						mInterstitialAd.loadInterstitialAd();
 					}
 			    }
 			});
@@ -204,23 +233,5 @@ public class AppActivity extends Cocos2dxActivity {
 		    	c.startActivity(sendIntent);
 		    }
 		});
-	}
-	
-	@Override
-	public void onPause() {
-		adView.pause();
-		super.onPause();
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		adView.resume();
-	}
-
-	@Override
-	public void onDestroy() {
-		adView.destroy();
-		super.onDestroy();
 	}
 }

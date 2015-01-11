@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="libcocos2d"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="libs/domob_android_sdk.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
