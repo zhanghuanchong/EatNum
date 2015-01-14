@@ -38,17 +38,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import cn.domob.android.ads.AdManager.ErrorCode;
 import cn.domob.android.ads.AdView;
 import cn.domob.android.ads.InterstitialAd;
 import cn.domob.android.ads.InterstitialAdListener;
-import cn.domob.android.ads.AdManager.ErrorCode;
 
 
 public class AppActivity extends Cocos2dxActivity {
@@ -58,6 +60,7 @@ public class AppActivity extends Cocos2dxActivity {
 	private static String publisherID = "56OJwNvIuN5x24uPR1";
 	private static boolean bShowAd = false;
 	private static String apkURL = "http://t.cn/RZX66pv"; // http://wuruihong.com/eatnum.apk 
+	private static boolean bShowingExit = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -85,8 +88,8 @@ public class AppActivity extends Cocos2dxActivity {
         HttpURLConnection connection = null;
         InputStreamReader in = null;
         try {
-            url = new URL("http://wuruihong.com/eatnum.php");
-//            url = new URL("http://wuruihong.com/eatnum.php?s=xiaomi");
+//            url = new URL("http://wuruihong.com/eatnum.php");
+            url = new URL("http://wuruihong.com/eatnum.php?s=xiaomi");
 //            url = new URL("http://wuruihong.com/eatnum.php?s=360");
             connection = (HttpURLConnection) url.openConnection();
             in = new InputStreamReader(connection.getInputStream());
@@ -199,24 +202,7 @@ public class AppActivity extends Cocos2dxActivity {
 		c.runOnUiThread(new Runnable() {
 		    @Override
 		    public void run() {
-				AlertDialog.Builder build = new AlertDialog.Builder(c);
-				build.setTitle(c.getString(com.app4cn.eatnum.R.string.quit))
-					  .setMessage(c.getString(com.app4cn.eatnum.R.string.quit_string))
-					  .setPositiveButton(c.getString(com.app4cn.eatnum.R.string.yes), new DialogInterface.OnClickListener() {
-
-						  @Override
-						  public void onClick(DialogInterface dialog, int which) {
-							  System.exit(0);
-						  }
-					  })
-					  .setNegativeButton(c.getString(com.app4cn.eatnum.R.string.no), new DialogInterface.OnClickListener() {
-
-						  @Override
-						  public void onClick(DialogInterface dialog, int which) {
-							  dialog.dismiss();
-						  }
-					  })
-					  .show();
+				AppActivity.doAskForExit();
 		    }
 		});
 	}
@@ -233,5 +219,48 @@ public class AppActivity extends Cocos2dxActivity {
 		    	c.startActivity(sendIntent);
 		    }
 		});
+	}
+	
+	public static void doAskForExit() {
+		AppActivity.bShowingExit = true; 
+		final Activity c = (Activity)context;
+		AlertDialog.Builder build = new AlertDialog.Builder(c);
+		build.setTitle(c.getString(com.app4cn.eatnum.R.string.quit))
+			  .setMessage(c.getString(com.app4cn.eatnum.R.string.quit_string))
+			  .setPositiveButton(c.getString(com.app4cn.eatnum.R.string.yes), new DialogInterface.OnClickListener() {
+
+				  @Override
+				  public void onClick(DialogInterface dialog, int which) {
+					  System.exit(0);
+				  }
+			  })
+			  .setNegativeButton(c.getString(com.app4cn.eatnum.R.string.no), new DialogInterface.OnClickListener() {
+
+				  @Override
+				  public void onClick(DialogInterface dialog, int which) {
+					  AppActivity.bShowingExit = false;
+					  dialog.dismiss();
+				  }
+			  })
+			  .setOnCancelListener(new OnCancelListener(){
+
+					@Override
+					public void onCancel(DialogInterface arg0) {
+						AppActivity.bShowingExit = false;
+					}
+				  
+			  })
+			  .show();
+	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		Log.e("Hans", "dispatchKeyEvent: " + event.getKeyCode());
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+			if (!AppActivity.bShowingExit) {
+				AppActivity.doAskForExit();
+			}
+		}
+		return super.dispatchKeyEvent(event);
 	}
 }
