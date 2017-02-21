@@ -26,8 +26,8 @@
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
 #import <MessageUI/MessageUI.h>
-#import "GADBannerView.h"
-#import "GADInterstitial.h"
+#import <GoogleMobileAds/GADBannerView.h>
+#import <GoogleMobileAds/GADInterstitial.h>
 
 @interface RootViewController : UIViewController<GKGameCenterControllerDelegate, GADInterstitialDelegate, MFMailComposeViewControllerDelegate> {
     GADBannerView *bannerView_;
