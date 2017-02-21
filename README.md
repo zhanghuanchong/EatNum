@@ -2,7 +2,7 @@
 
 Developed with Cocos2d-x v3.2, by Hans Zhang (ezburg@gmail.com).
 
-### [Download and play](http://wuruihong.com/?p=46)
+### [Download and play](http://www.wandoujia.com/apps/com.app4cn.eatnum)
 
 ## C++11 feature: Lambda
 
