@@ -13,7 +13,7 @@ bool AboutScene::init()
 
 	auto m_pLogo = Sprite::create("logoMobile.png");
 	m_pLogo->setScale(0.8f);
-	m_pLogo->setPosition(U::cx, U::height * .8);
+	m_pLogo->setPosition(U::cx, U::height * .8f);
 	this->addChild(m_pLogo);
 
 	auto label = U::label("ABOUT_ME", 35, 1);

@@ -4,6 +4,19 @@ Developed with Cocos2d-x v3.2, by Hans Zhang (ezburg@gmail.com).
 
 ### [Download and play](http://www.wandoujia.com/apps/com.app4cn.eatnum)
 
+## Screenshots
+
+![Home](https://raw.github.com/zhanghuanchong/EatNum/master/Assets/screenshots/1.jpg)
+
+![Chapters](https://raw.github.com/zhanghuanchong/EatNum/master/Assets/screenshots/2.jpg)
+
+![Levels](https://raw.github.com/zhanghuanchong/EatNum/master/Assets/screenshots/3.jpg)
+
+![Game scene](https://raw.github.com/zhanghuanchong/EatNum/master/Assets/screenshots/4.jpg)
+
+![Pass](https://raw.github.com/zhanghuanchong/EatNum/master/Assets/screenshots/5.jpg)
+
+
 ## C++11 feature: Lambda
 
 ###
